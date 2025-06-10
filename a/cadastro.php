@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  $fone = $_POST['fone'];
  $email = $_POST['email'];
  $senha = $_POST['senha'];
- $usuario->criar($nome, $sexo, $fone, $email, $senha);
+ $Usuario->criar($nome, $sexo, $fone, $email, $senha);
  header('Location: portal.php');
  exit();
 }
