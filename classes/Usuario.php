@@ -3,7 +3,7 @@ class Usuario {
  private $conn;
  private $table_name = "usuarios";
  public function __construct($db) {
-  $this->conn = $db;
+  $this->conn = $db; 
  }
  public function registrar($nome, $sexo, $fone, $email, $senha) {
     $query = "INSERT INTO " . $this->table_name . " (nome, sexo,

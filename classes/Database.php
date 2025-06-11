@@ -1,7 +1,7 @@
 <?php
 class Database {
  private $host = "localhost";
- private $db_name = "bdcrud";
+ private $db_name = "projeto_final";
 private $username = "root";
 private $password = "";
 public $conn;
