@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 }
 include_once './config/config.php';
-include_once './classes/Usuario.php';
+include_once './classes/Noticia.php';
 $usuario = new Usuario($db);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  $id = $_POST['id'];

@@ -20,7 +20,7 @@
         </div>
 
         <div class="logo">
-        <img src="img/logo.png" alt="">
+        <img src="img/logo.png" alt="" >
         <div class="titulo">
         <h1>Caiu o <span>Servidor</span></h1>
         <h2>notícias do mundo do games </h2>

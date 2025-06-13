@@ -2,6 +2,7 @@
 session_start();
 include_once './config/config.php';
 include_once './classes/Usuario.php';
+require_once './header.php';
 // Verificar se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
  header('Location: index.php');
@@ -40,6 +41,7 @@ function saudacao() {
  <title>Portal</title>
 </head>
 <body>
+    <a href="nova_noticia.php">nova noticia</a>
  <h1><?php echo saudacao() . ", " . $nome_usuario; ?>!</h1>
  <a href="registrar.php">Adicionar Usuário</a>
  <a href="logout.php">Logout</a>
