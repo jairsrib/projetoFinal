@@ -1,0 +1,201 @@
+ body{
+    background-image: url('../img/fundo_login.png');
+    background-size:  cover;
+    background-position: center;
+  }
+.div-form{
+    display: flex;
+    justify-content: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+  background-color: #171717;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  font-family: DM Sans, sans-serif;
+  height: 570px;
+}
+
+.title {
+  font-family: DM Sans, sans-serif;
+  font-size: 28px;
+  color: white;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title::before,.title::after {
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: royalblue;
+}
+
+.title::before {
+  width: 18px;
+  height: 18px;
+  background-color: royalblue;
+}
+
+.title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.message, .signin {
+  color: rgba(88, 87, 87, 0.822);
+  font-size: 14px;
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a {
+  color: white;
+  text-decoration: none;
+}
+
+.signin a:hover {
+    color: #FF084B;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label .input {
+  width: 90%;
+  padding: 10px 10px 20px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  background-color: #171717;
+}
+
+.form label .input + span {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 15px;
+  font-size: 0.9em;
+}
+.form:hover {
+  transform: scale(1.01);
+  border: 1px solid black;
+}
+
+.form label .input:focus + span,.form label .input:valid + span {
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.form label .input:valid + span {
+  color: green;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  background-color: #252525;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+}
+
+.submit:hover {
+  background-color: #FF084B;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+.radio-container {
+  max-width: 300px;
+  margin-top: 10px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.radio-wrapper {
+  margin-bottom: 20px;
+}
+
+.radio-button {
+  display: flex;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding-inline: 10px;
+}
+
+.radio-button:hover {
+  transform: translateY(-2px);
+}
+
+.radio-button input[type="radio"] {
+  display: none;
+}
+
+.radio-checkmark {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  border: 2px solid #333;
+  border-radius: 50%;
+}
+
+.radio-checkmark:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #FF084B;
+  transition: all 0.2s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked ~ .radio-checkmark:before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radio-label {
+  font-size: 0.9em;
+  font-family: DM Sans, sans-serif;
+}
