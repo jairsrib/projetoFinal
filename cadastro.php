@@ -16,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <link rel="stylesheet" href="assets/form_cadastro.css">
  <meta charset="UTF-8">
  <title>Adicionar Usuário</title>
 </head>
 <body>
- <h1>Adicionar Usuário</h1>
- <form method="POST">
+ <!-- <form method="POST">
 
   <label for="nome">Nome:</label>
   <input type="text" name="nome" required>
@@ -46,6 +46,64 @@ required> Feminino
   <input type="password" name="senha" required>
   <br><br>
   <input type="submit" value="Adicionar">
- </form>
+ </form> -->
+<div class="div-form">
+<form class="form" method="POST">
+    <p class="title">Cadastrar</p>
+    <p class="message">Cadastre-se para divulgar suas notícias </p>
+        <label>
+            <input class="input" type="text" placeholder="" required="" name="nome">
+            <span>Nome</span>
+        </label>
+            
+    <label>
+        <input class="input" type="email" placeholder="" required="" name="email">
+        <span>Email</span>
+    </label> 
+
+    <label>
+        <input class="input" type="number" placeholder="" required="" name="fone">
+        <span>Telefone</span>
+    </label>     
+
+    <label>
+        <input class="input" type="password" placeholder="" required="" name="senha">
+        <span>Senha</span>
+    </label>
+    <label>
+        <input class="input" type="password" placeholder="" required="">
+        <span>Confirmar a senha</span>
+    </label>
+
+    <div class="radio-container">
+  <div class="radio-wrapper">
+    <label class="radio-button">
+      <input id="option1" name="radio-group" type="radio" value="M">
+      <span class="radio-checkmark"></span>
+      <span class="radio-label">Masculino</span>
+    </label>
+  </div>
+
+  <div class="radio-wrapper">
+    <label class="radio-button">
+      <input id="option2" name="radio-group" type="radio" value="F">
+      <span class="radio-checkmark"></span>
+      <span class="radio-label">Feminino</span>
+    </label>
+  </div>
+
+  <div class="radio-wrapper">
+    <label class="radio-button">
+      <input id="option3" name="radio-group" type="radio" value="O">
+      <span class="radio-checkmark"></span>
+      <span class="radio-label">Outro</span>
+    </label>
+  </div>
+</div>
+    <button class="submit">Cadastrar</button>
+    <p class="signin">Você já tem uma conta? <a href="login.php">Login</a> </p>
+</form>
+</div>
+</select>
 </body>
 </html>
