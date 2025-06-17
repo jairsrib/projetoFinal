@@ -22,9 +22,9 @@
         <div class="titulo-home">
         <h1>Ultimas Noticias</h1>
         </div>
-        <section class="container my-5">
+  <section class="container my-5">
   <div class="row g-4">
-    <div class="col-md-6">
+    <div class="col-md-6" style="width: 400px; height: 500px;">
       <a href="#" class="news-card text-white text-decoration-none">
         <div class="news-image" style="background-image: url('./img/noticia3.jpg'); height: 100%; min-height: 350px;">
           <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
@@ -39,7 +39,7 @@
 
         <div class="col-12">
           <a href="#" class="news-card text-white text-decoration-none">
-            <div class="news-image" style="background-image: url('./img/noticia2.jpg'); height: 160px;">
+            <div class="news-image" style="background-image: url('./img/noticia2.jpg'); height: 260px;">
               <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
                 <h5>Capcom Fighters</h5>
                 <p class="small">Street Fighter 6 Rouba a cena</p>
@@ -50,7 +50,7 @@
 
         <div class="col-12">
           <a href="#" class="news-card text-white text-decoration-none">
-            <div class="news-image" style="background-image: url('./img/noticia.jpg'); height: 160px;">
+            <div class="news-image" style="background-image: url('./img/noticia.jpg'); height: 200px;">
               <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
                 <h5>GTA VI</h5>
                 <p class="small">Jogo mais Esperado Do Ano</p>
@@ -160,7 +160,7 @@ body {
 
 .banner {
   width: 100%;
-  height: auto;
+  height: 300px;
   object-fit: cover;
   transition: transform 0.3s ease;
   display: block;
@@ -177,9 +177,6 @@ body {
     display: flex;
     justify-content: center;
 }
-
-
-
 
 .carousel {
     position: relative;
