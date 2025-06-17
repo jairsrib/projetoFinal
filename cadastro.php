@@ -21,32 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <title>Adicionar Usuário</title>
 </head>
 <body>
- <!-- <form method="POST">
-
-  <label for="nome">Nome:</label>
-  <input type="text" name="nome" required>
-  <br><br>
-  <label>Sexo:</label>
-  <label for="masculino">
-   <input type="radio" id="masculino" name="sexo" value="M"
-required> Masculino
-  </label>
-  <label for="feminino">
-   <input type="radio" id="feminino" name="sexo" value="F"
-required> Feminino
-  </label>
-  <br><br>
-  <label for="fone">Fone:</label>
-  <input type="text" name="fone" required>
-  <br><br>
-  <label for="email">Email:</label>
-  <input type="email" name="email" required>
-  <br><br>
-  <label for="senha">Senha:</label>
-  <input type="password" name="senha" required>
-  <br><br>
-  <input type="submit" value="Adicionar">
- </form> -->
+  
 <div class="div-form">
 <form class="form" method="POST">
     <p class="title">Cadastrar</p>
