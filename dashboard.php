@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/dist/css/bootstrap-grid.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Dashboard</title>
 </head>
 <body>
@@ -13,100 +14,105 @@
         ?>
     </header>
     <div class="container-fluid">
-        <div class="row">
-            <img class="banner" src="./img/banner.png" alt="" width="100%" height="400px">
+        <div class="banner-container">
+            <img class="banner" src="./img/banner.png" alt="Banner principal">
         </div>
         </div>
     <div class="container-fluid">
         <div class="titulo-home">
         <h1>Ultimas Noticias</h1>
         </div>
+        <section class="container my-5">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <a href="#" class="news-card text-white text-decoration-none">
+        <div class="news-image" style="background-image: url('./img/noticia3.jpg'); height: 100%; min-height: 350px;">
+          <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
+            <h2 class="fw-bold">Teste</h2>
+            <p class="small">Testando</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6">
+      <div class="row g-4">
+
+        <div class="col-12">
+          <a href="#" class="news-card text-white text-decoration-none">
+            <div class="news-image" style="background-image: url('./img/noticia2.jpg'); height: 160px;">
+              <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
+                <h5>Capcom Fighters</h5>
+                <p class="small">Street Fighter 6 Rouba a cena</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-12">
+          <a href="#" class="news-card text-white text-decoration-none">
+            <div class="news-image" style="background-image: url('./img/noticia.jpg'); height: 160px;">
+              <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
+                <h5>GTA VI</h5>
+                <p class="small">Jogo mais Esperado Do Ano</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
         <div class="row-3">
         <div class="col-12">
-            <section>
+<section>
     <div class="container">
-        <div class="carousel">
-            <input type="radio" name="slides" checked="checked" id="slide-1">
-            <input type="radio" name="slides" id="slide-2">
-            <input type="radio" name="slides" id="slide-3">
-            <input type="radio" name="slides" id="slide-4">
-            <input type="radio" name="slides" id="slide-5">
-            <input type="radio" name="slides" id="slide-6">
-            <ul class="carousel__slides">
-                <li class="carousel__slide">
-                    <figure>
-                        <div>
+        <div class="carousel-wrapper">
+            <div class="carousel" id="carousel">
+                <div class="carousel__slides" id="slides">
+                    <div class="carousel__slide">
+                        <figure>
                             <img src="img/SobreE-Sports.png" alt="">
-                        </div>
-                        <figcaption>
-                            <span class="credit">Sobre E-Sports</span>
-                        </figcaption>
-                    </figure>
-                </li>
-                <li class="carousel__slide">
-                    <figure>
-                        <div>
+                            <figcaption><span class="credit"></span></figcaption>
+                        </figure>
+                    </div>
+                    <div class="carousel__slide">
+                        <figure>
                             <img src="img/profissionalismo.png" alt="">
-                        </div>
-                        <figcaption>
-                            <span class="credit">Profissionalismo</span>                            
-                        </figcaption>
-                    </figure>
-                </li>
-                <li class="carousel__slide">
-                    <figure>
-                        <div>
+                            <figcaption><span class="credit"></span></figcaption>
+                        </figure>
+                    </div>
+                    <div class="carousel__slide">
+                        <figure>
                             <img src="img/olimpiadas.png" alt="">
-                        </div>
-                        <figcaption>
-                            
-                            <span class="credit">Olimpiadas</span>                            
-                        </figcaption>
-                    </figure>
-                </li>
-                <li class="carousel__slide">
-                    <figure>
-                        <div>
+                            <figcaption><span class="credit"></span></figcaption>
+                        </figure>
+                    </div>
+                    <div class="carousel__slide">
+                        <figure>
                             <img src="img/lucrativo.png" alt="">
-                        </div>
-                        <figcaption>
-                            
-                            <span class="credit">Lucrativo</span>                            
-                        </figcaption>
-                    </figure>
-                </li>
-                <li class="carousel__slide">
-                    <figure>
-                        <div>
+                            <figcaption><span class="credit"></span></figcaption>
+                        </figure>
+                    </div>
+                    <div class="carousel__slide">
+                        <figure>
                             <img src="img/competitivo.png" alt="">
-                        </div>
-                        <figcaption>
-                            
-                            <span class="credit">Competitivo</span>                            
-                        </figcaption>
-                    </figure>
-                </li>
-            </ul>    
-            <ul class="carousel__thumbnails">
-                <li>
-                    <label for="slide-1"><img src="img/SobreE-Sports.png" alt=""></label>
-                </li>
-                <li>
-                    <label for="slide-2"><img src="img/profissionalismo.png" alt=""></label>
-                </li>
-                <li>
-                    <label for="slide-3"><img src="img/olimpiadas.png" alt=""></label>
-                </li>
-                <li>
-                    <label for="slide-4"><img src="img/lucrativo.png" alt=""></label>
-                </li>
-                <li>
-                    <label for="slide-5"><img src="img/competitivo.png" alt=""></label>
-                </li>
-            </ul>
+                            <figcaption><span class="credit"></span></figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <ul class="carousel__thumbnails" id="thumbnails">
+                    <li data-index="0"><img src="img/SobreE-Sports.png" alt=""></li>
+                    <li data-index="1"><img src="img/profissionalismo.png" alt=""></li>
+                    <li data-index="2"><img src="img/olimpiadas.png" alt=""></li>
+                    <li data-index="3"><img src="img/lucrativo.png" alt=""></li>
+                    <li data-index="4"><img src="img/competitivo.png" alt=""></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
+
         </div>
         </div>
     </div>
@@ -117,6 +123,7 @@
 </footer>
 </body>
 </html>
+
 
 <style>
 body {
@@ -142,11 +149,27 @@ body {
     );
   background-size: var(--gap) var(--gap);
 }
-.banner:hover{
-    transform: scale(1.00);
-    border: 1px solid black;
-    border-radius: 20px;
+.banner-container {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
+
+.banner {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.banner:hover {
+  transform: scale(1.02);
+}
+
 .titulo-home{
     color: #FF084B;
     font-family: DM Sans, sans-serif;
@@ -158,140 +181,119 @@ body {
 
 
 
-section {
-    padding: 50px 0;
-}
-
-.container {
-    max-width: 1044px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
 .carousel {
     position: relative;
-    width: 100%;
+    overflow: hidden;
     max-width: 600px;
-    margin: 0 auto 22px auto;
-}
-
-.carousel input[type="radio"] {
-    display: none;
+    margin: 0 auto;
+    border-radius: 10px;
 }
 
 .carousel__slides {
     display: flex;
     width: 500%;
-    transition: margin-left 0.5s ease;
-    margin-left: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-    border-radius: 10px;
-    background: #171717;
+    transition: margin-left 0.6s ease-in-out;
 }
 
 .carousel__slide {
     width: 100%;
-    flex: 0 0 100%;
-    box-sizing: border-box;
-    color: #fff;
-    text-align: center;
-    position: relative;
+    height: 750px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-}
-
-.carousel__slide figure {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    background-color: #171717;
 }
 
 .carousel__slide img {
-    width: 100%;
-    max-width: 450px;
-    height: 300px;
-    object-fit: cover;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
     border-radius: 10px;
-    margin: 0 auto;
 }
 
-.carousel__slide figcaption {
-    margin-top: 15px;
-    font-size: 1em;
-    color: #fff;
-}
 
-.carousel__slide .credit {
-    color: #aaa;
-    font-size: 0.9em;
-}
 
 .carousel__thumbnails {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 20px;
-    list-style: none;
+    margin-top: 15px;
     padding: 0;
+    list-style: none;
 }
 
 .carousel__thumbnails li {
+    cursor: pointer;
+    border: 2px solid transparent;
     border-radius: 5px;
     overflow: hidden;
-    border: 2px solid transparent;
     transition: border 0.3s;
+}
+
+.carousel__thumbnails li.active {
+    border-color: #FF084B;
 }
 
 .carousel__thumbnails img {
     width: 80px;
     height: 60px;
     object-fit: cover;
-    cursor: pointer;
     border-radius: 5px;
-    transition: box-shadow 0.3s;
-}
-
-.carousel input#slide-1:checked ~ .carousel__slides {
-    margin-left: 0%;
-}
-.carousel input#slide-2:checked ~ .carousel__slides {
-    margin-left: -100%;
-}
-.carousel input#slide-3:checked ~ .carousel__slides {
-    margin-left: -200%;
-}
-.carousel input#slide-4:checked ~ .carousel__slides {
-    margin-left: -300%;
-}
-.carousel input#slide-5:checked ~ .carousel__slides {
-    margin-left: -400%;
-}
-
-.carousel input#slide-1:checked ~ .carousel__thumbnails li:nth-child(1),
-.carousel input#slide-2:checked ~ .carousel__thumbnails li:nth-child(2),
-.carousel input#slide-3:checked ~ .carousel__thumbnails li:nth-child(3),
-.carousel input#slide-4:checked ~ .carousel__thumbnails li:nth-child(4),
-.carousel input#slide-5:checked ~ .carousel__thumbnails li:nth-child(5) {
-    border: 2px solid #FF084B;
 }
 
 @media (max-width: 700px) {
-    .carousel {
-        max-width: 100%;
-    }
     .carousel__slide img {
-        max-width: 100%;
         height: 180px;
     }
     .carousel__thumbnails img {
-        width: 50px;
-        height: 35px;
+        width: 60px;
+        height: 45px;
     }
 }
+.news-card .news-image {
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-image {
+  transform: scale(1.02);
+}
+
+.news-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+  border-radius: 10px;
+  color: #fff;
+}
+
 
 </style>
+
+<script>
+let currentIndex = 0;
+const slides = document.getElementById("slides");
+const thumbnails = document.querySelectorAll("#thumbnails li");
+const totalSlides = thumbnails.length;
+
+function showSlide(index) {
+    currentIndex = index;
+    slides.style.marginLeft = `-${index * 100}%`;
+    thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle("active", i === index);
+    });
+}
+
+thumbnails.forEach((thumb, index) => {
+    thumb.addEventListener("click", () => {
+        showSlide(index);
+    });
+});
+
+setInterval(() => {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    showSlide(currentIndex);
+}, 5000);
+
+showSlide(0);
+</script>
