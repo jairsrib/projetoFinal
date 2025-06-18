@@ -17,7 +17,7 @@
             <div class="row g-3">
                 <div class="col-6 col-md-4">
                     <div class="card">
-                        <h1>Teste</h1>
+                        <h1>Informações do Usuario</h1>
                         <h1>Testando</h1>
                     </div>
                 </div>
@@ -64,7 +64,8 @@
         display: flex;
         flex-direction: row;
         color: #FF084B;
-        justify-content: center;
+        flex-wrap: nowrap;
+        justify-content: start;
     }
     </style>
 </style>
