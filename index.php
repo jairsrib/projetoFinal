@@ -27,20 +27,6 @@ function saudacao() {
  }
 }
 ?>
-
-<?php
-// Conexão com o banco
-$conn = new mysqli("localhost", "root", "", "projeto_final");
-
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-
-// Consulta
-$sql = "SELECT * FROM noticias";
-$result = $conn->query($sql);
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -49,16 +35,7 @@ $result = $conn->query($sql);
 </head>
 <body>
     <div class="container">
-    <a href="nova_noticia.php">no va noticia</a>
-
-     <?php while ($row = $result->fetch_assoc()) { ?>
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <h2><?php echo $row['titulo']; ?></h2>
-            <p><?php echo $row['texto']; ?></p>
-            <p><strong>Data:</strong> <?php echo $row['data']; ?></p>
-            <img src="<?php echo $row['imagem']; ?>" alt="Imagem da notícia" style="max-width: 400px;">
-        </div>
-    <?php } ?>
+    <a href="nova_noticia.php">nova noticia</a>
  <h1><?php echo saudacao() . ", " . $nome_usuario; ?>!</h1>
  <a href="registrar.php">Adicionar Usuário</a>
  <a href="logout.php">Logout</a>
@@ -96,7 +73,17 @@ $result = $conn->query($sql);
 </html>
 
 <style>
-  
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  backdrop-filter: hue-rotate(90deg);
+  mask: linear-gradient(45deg, #171717, #FF084B);
+  animation: rotaty 5s linear infinite;
+  transform-origin: center;
+}
+
 body {
   position: absolute;
   background-image: radial-gradient(

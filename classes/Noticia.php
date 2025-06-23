@@ -6,24 +6,18 @@ class Noticia {
  public function __construct($db) {
   $this->conn = $db; 
  }
-
- public function registrar($titulo, $texto, $data, $autor_id, $categoria, $imagem) {
+ 
+ public function registrar($titulo, $texto, $data, $autor_id, $imagem) {
     $query = "INSERT INTO " . $this->table_name . " (titulo,
-    texto, data, autor_id, categoria, imagem) VALUES ( ?, ?, ?, ?, ?, ?)";
+    texto, data, autor_id, imagem) VALUES ( ?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($query);
-    $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem]);
+    $stmt->execute([$titulo, $texto, $data, $autor_id, $imagem]);
     return $stmt;
  }
  
- public function buscarTodasOrdenadas() {
-    $query = "SELECT * FROM noticias ORDER BY data DESC";
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
- public function criar($titulo, $texto, $data, $autor_id, $categoria, $imagem) {
-    return $this->registrar($titulo, $texto, $data, $autor_id, $categoria, $imagem);
+ public function criar($titulo, $texto, $data, $autor_id, $imagem) {
+    return $this->registrar($titulo, $texto, $data, $autor_id, $imagem);
  }
  public function ler() {
     $query = "SELECT * FROM " . $this->table_name;

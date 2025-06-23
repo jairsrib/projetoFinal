@@ -11,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $senha = $_POST['senha'];
     if ($dados_usuario = $usuario->login($email, $senha)) {
       $_SESSION['usuario_id'] = $dados_usuario['id'];
-      header('Location: index.php'); // Redireciona para a pagina de testes no momento
-      // header('Location: dashboard.php'); // Redireciona para o dashboard
+      header('Location: portal.php');
       exit();
     } else {
       $mensagem_erro = 'Credenciais inválidas!';
