@@ -45,46 +45,6 @@ $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
           </div>
         <?php endforeach; ?>
       </div>
-      <section class="container my-5">
-      <div class="row g-4">
-
-        <div class="col-12">
-          <a href="#" class="news-card text-white text-decoration-none">
-            <div class="news-image" style="background-image: url('./img/noticia2.jpg'); height: 260px;">
-              <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
-                <h5>Capcom Fighters</h5>
-                <p class="small">Street Fighter 6 Rouba a cena</p>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-12">
-          <a href="#" class="news-card text-white text-decoration-none">
-            <div class="news-image" style="background-image: url('./img/noticia.jpg'); height: 200px;">
-              <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
-                <h5>GTA VI</h5>
-                <p class="small">Jogo mais Esperado Do Ano</p>
-        <?php foreach ($noticias as $index => $n): ?>
-          <div class="col-md-<?= $index === 0 ? '6' : '12' ?>">
-            <a href="noticia.php?id=<?= $n['id'] ?>" class="news-card text-white text-decoration-none">
-              <div class="news-image" style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '350px' : '160px' ?>;">
-                <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
-                  <h<?= $index === 0 ? 2 : 5 ?> class="fw-bold"><?= htmlspecialchars($n['titulo']) ?></h<?= $index === 0 ? 2 : 5 ?>>
-                  <p class="small"><?= htmlspecialchars(substr($n['texto'], 0, 80)) ?>...</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-            </a>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </div>
-</section>
     </section>
     <div class="row-3">
       <div class="col-12">

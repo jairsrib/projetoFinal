@@ -1,9 +1,17 @@
- function abrirModal() {
+ function abrirModalCadastrar() {
     document.getElementById('modalNoticia').style.display = 'flex';
   }
 
-  function fecharModal() {
+  function fecharModalCadastrar() {
     document.getElementById('modalNoticia').style.display = 'none';
+  }
+
+   function abrirModalEditar() {
+    document.getElementById('modalEditar').style.display = 'flex';
+  }
+
+  function fecharModalEditar() {
+    document.getElementById('modalEditar').style.display = 'none';
   }
 
   const input = document.getElementById('profileInput');
