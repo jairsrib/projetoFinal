@@ -8,22 +8,8 @@
         flex-direction: column;
         align-items: center;
         padding: 10px 20px;
-        margin-top: -25px;
     }
-    nav li {
-        display: inline-block;
-        margin: 0 15px;
-    }
-    nav a {
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: bold;
-        font-family: DM Sans, sans-serif;
-    }
-    nav a:hover {
-        color: #FF084B;
-    }
+    
     header img {
         width: 170px;
         height: 170px;
@@ -86,3 +72,55 @@
     .btn-hamburger svg {
         display: block;
     }
+    .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: white;
+            padding: 20px;
+            transition: left 0.3s ease;
+            z-index: 9;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 60px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+
+        .sidebar ul li a:hover {
+            color: #FF084B;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            z-index: 8;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .overlay.active {
+            display: block;
+        }
