@@ -115,12 +115,11 @@
     justify-content: center;
 }
 .custum-file-upload {
-  height: 50px;
-  width: 100px;
+  height: 100px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: space-between;
-  gap: 20px;
   cursor: pointer;
   align-items: center;
   justify-content: center;

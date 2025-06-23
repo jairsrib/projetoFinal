@@ -23,7 +23,7 @@
 <header>
   <div class="container">
     <div class="btn-menu">
-      <button class="btn-hamburger" onclick="toggleSidebar()" aria-label="Abrir Menu">
+      <button class="btn-hamburger" id="btn-hamburguer" onclick="toggleSidebar()" aria-label="Abrir Menu">
         <svg width="32" height="32" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M1 14.9H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
