@@ -60,7 +60,7 @@ $result = $conn->query($sql);
         </div>
     <?php } ?>
  <h1><?php echo saudacao() . ", " . $nome_usuario; ?>!</h1>
- <a href="registrar.php">Adicionar Usuário</a>
+ <a href="cadastro.php">Adicionar Usuário</a>
  <a href="logout.php">Logout</a>
  <a href="dashboard.php">Dashboard</a>
 <br>
