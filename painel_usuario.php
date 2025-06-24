@@ -122,6 +122,7 @@ if (isset($_SESSION['usuario_id'])) {
         </div>
       </div>
     </div>
+
   </div>
 
   <!------ Modal De Cadastrar Noticia ------>

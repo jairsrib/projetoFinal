@@ -30,56 +30,56 @@ $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
     <div class="titulo-home">
       <h1>Ultimas Noticias</h1>
     </div>
+
     <section class="container my-5">
-      <div class="row g-4">
-
-        <div class="col-12">
-          <a href="#" class="news-card text-white text-decoration-none">
-            <div class="news-image" style="background-image: url('./img/noticia2.jpg'); height: 260px;">
-              <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
-                <h5>Capcom Fighters</h5>
-                <p class="small">Street Fighter 6 Rouba a cena</p>
-              </div>
+  <div class="row g-4">
+    <?php foreach ($noticias as $index => $n): ?>
+      <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>">
+        <a href="noticia.php?id=<?= $n['id'] ?>" class="news-card text-white text-decoration-none h-100 d-block">
+          <div class="news-image position-relative d-flex flex-column justify-content-end" 
+               style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '350px' : '230px' ?>;">
+            <div class="news-overlay p-3">
+              <?php if ($index === 0): ?>
+                <div class="badge bg-success mb-2">🕒 SIGA EM TEMPO REAL</div>
+              <?php endif; ?>
+              <h5 class="fw-bold mb-1"><?= htmlspecialchars($n['titulo']) ?></h5>
+              <p class="small m-0"><?= htmlspecialchars(substr($n['texto'], 0, 80)) ?>...</p>
             </div>
-          </a>
-        </div>
-
-        <div class="col-12">
-          <a href="#" class="news-card text-white text-decoration-none">
-            <div class="news-image" style="background-image: url('./img/noticia.jpg'); height: 200px;">
-              <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
-                <h5>GTA VI</h5>
-                <p class="small">Jogo mais Esperado Do Ano</p>
-        <?php foreach ($noticias as $index => $n): ?>
-          <div class="col-md-<?= $index === 0 ? '6' : '12' ?>">
-            <a href="noticia.php?id=<?= $n['id'] ?>" class="news-card text-white text-decoration-none">
-              <div class="news-image" style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '350px' : '160px' ?>;">
-                <div class="news-overlay p-3 d-flex flex-column justify-content-end h-100">
-                  <h<?= $index === 0 ? 2 : 5 ?> class="fw-bold"><?= htmlspecialchars($n['titulo']) ?></h<?= $index === 0 ? 2 : 5 ?>>
-                  <p class="small"><?= htmlspecialchars(substr($n['texto'], 0, 80)) ?>...</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-            </a>
           </div>
-        <?php endforeach; ?>
+        </a>
       </div>
-    </div>
+    <?php endforeach; ?>
   </div>
 </section>
-<section>
-  <div class="container-lg">
-    <div class="col-12">
-      <div class="row-3"> 
-      <img src="img/banner.png" alt="" width="400px" height="200px">
-      <label for="" style="color: white; font-size: 3em;">Cheguei AQUI</label>
+
+
+<section class="container-fluid my-5 px-5">
+  <h2 class="text-white mb-4">Mais Notícias</h2>
+
+  <?php foreach ($noticias as $n): ?>
+    <div class="row g-3 align-items-center mb-5 ms-0">
+      <!-- Imagem -->
+      <div class="col-md-4">
+        <a href="noticia.php?id=<?= $n['id'] ?>">
+          <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" class="img-fluid rounded shadow">
+        </a>
+      </div>
+
+      <!-- Texto -->
+      <div class="col-md-8 text-light">
+        <small class="text-uppercase text-muted">Categoria</small>
+        <h4 class="fw-bold">
+          <a href="noticia.php?id=<?= $n['id'] ?>" class="text-decoration-none text-success">
+            <?= htmlspecialchars($n['titulo']) ?>
+          </a>
+        </h4>
+        <p><?= htmlspecialchars(substr($n['texto'], 0, 120)) ?>...</p>
+        <small class="text-muted">Há <?= rand(1, 12) ?> horas — em <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
       </div>
     </div>
-  </div>
+  <?php endforeach; ?>
 </section>
+
     <div class="row-3">
       <div class="col-12">
         <section>
