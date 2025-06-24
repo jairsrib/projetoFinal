@@ -39,15 +39,15 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-  <?php include_once './header.php' ?>
-  <div class="container-fluid d-flex align-items-center" style="min-height: 100vh;">
-    <div class="d-flex flex-column align-items-center me-4" style="min-width: 220px;">
-      <input type="file" id="profileInput" accept="image/*" style="display: none;">
-      <label for="profileInput">
-        <img src="img/usuarioTeste.png" id="profilePic" alt="Foto de Perfil" class="profile-img mb-3">
-      </label>
-      <h5>Usuário Teste</h5>
-    </div>
+<?php include_once './header.php'?>
+<div class="container-fluid d-flex align-items-center" style="min-height: 100vh;">
+  <div class="d-flex flex-column align-items-center me-4" style="min-width: 220px;">
+    <input type="file" id="profileInput" accept="image/*" style="display: none;">
+    <label for="profileInput">
+      <img src="img/usuarioTeste.png" id="profilePic" alt="Foto de Perfil" class="profile-img mb-3">
+    </label>
+    <h5 style="color: white;">Usuário Teste</h5>
+  </div>
 
     <div class="container">
       <div class="card card-custom">
@@ -87,6 +87,20 @@ if ($conn->connect_error) {
           </div>
           <div class="tab-pane fade" id="Noticias">
             <h4 style="color: white">Minhas Noticias</h4>
+            <table>
+            <thead>
+              <th style="color: white;">Noticia</th>
+              <th style="color: white;">Selecione a noticia</th>
+            </thead>
+          <tbody>
+              <tr>
+              <td style="color: white;">Exibir o Titulo da noticia</td>
+             <td><label class="check">
+            <input checked="checked" type="checkbox">
+            <div class="checkmark"></div>
+            </label></td>
+            </tr>
+          </tbody>
             <button class="btn btn-outline-light mt-2" onclick="abrirModalEditar()">Editar Notícia</button>
             <button class="btn btn-outline-light mt-2">Excluir Noticia</button>
           </div>
