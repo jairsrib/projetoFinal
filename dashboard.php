@@ -25,7 +25,7 @@ $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
       <img class="banner" src="./img/banner.png" alt="Banner principal">
     </div>
   </div>
-  <a href="index.php">Voltar para o Início</a> <!-- pagina de testes -->
+  <a href="portal.php">Voltar para o Início</a> <!-- pagina de testes -->
   <div class="container-fluid">
     <div class="titulo-home">
       <h1>Ultimas Noticias</h1>
