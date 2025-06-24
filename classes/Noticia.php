@@ -31,17 +31,17 @@ class Noticia {
     $stmt->execute();
     return $stmt;
  }
- public function lerPorId($id) {
+ public function lerPorIdNot($id) {
     $query = "SELECT * FROM " . $this->table_name . " WHERE id = ?";
     $stmt = $this->conn->prepare($query);
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
  }
- public function atualizar($id, $nome, $sexo, $fone, $email) {
-    $query = "UPDATE " . $this->table_name . " SET nome = ?, sexo =
-    ?, fone = ?, email = ? WHERE id = ?";
+ public function atualizar($titulo, $texto, $data, $autor_id, $categoria, $imagem) {
+    $query = "UPDATE " . $this->table_name . " SET titulo = ?, texto =
+    ?, data = ?, autor_id = ?, imagem = ? WHERE id = ?";
     $stmt = $this->conn->prepare($query);
-    $stmt->execute([$nome, $sexo, $fone, $email, $id]);
+    $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem]);
     return $stmt;
  }
  public function deletar($id) {
