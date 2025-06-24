@@ -9,14 +9,14 @@ class Noticia
       $this->conn = $db;
    }
 
-   public function registrar($titulo, $texto, $data, $autor_id, $categoria_id, $imagem)
+   public function registrar($titulo, $texto, $data, $autor_id, $categoria, $imagem)
    {
       $query = "INSERT INTO " . $this->table_name . " (
-      titulo, texto, data, autor_id, categoria_id, imagem
+      titulo, texto, data, autor_id, categoria, imagem
    ) VALUES (?, ?, ?, ?, ?, ?)";
 
       $stmt = $this->conn->prepare($query);
-      $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria_id, $imagem]);
+      $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem]);
       return $stmt;
    }
 

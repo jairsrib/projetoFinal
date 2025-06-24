@@ -79,7 +79,7 @@ try {
                 <select name="categoria" required>
                     <option value="">Selecione a categoria</option>
                     <?php foreach ($categorias as $cat): ?>
-                        <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['nome']) ?></option>
+                        <option value="<?= $cat['nome'] ?>"><?= htmlspecialchars($cat['nome']) ?></option>
                         <?= htmlspecialchars($cat['nome']) ?>
                         </option>
                     <?php endforeach; ?>
