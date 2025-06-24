@@ -40,7 +40,8 @@
         </div>
         <div class="tab-pane fade" id="Noticias">
           <h4 style="color: white;">Minhas Noticias</h4>
-          <table>
+
+          <table class="table table-dark table-sm">
             <thead>
               <th style="color: white;">Noticia</th>
               <th style="color: white;">Selecione a noticia</th>
@@ -55,6 +56,7 @@
             </tr>
           </tbody>
           </table>
+          
           <button class="btn btn-outline-light mt-2" onclick="abrirModalEditar()">Editar Notícia</button>
           <button class="btn btn-outline-light mt-2" >Excluir Noticia</button>
         </div>

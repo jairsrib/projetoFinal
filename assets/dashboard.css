@@ -79,9 +79,6 @@ body {
     object-fit: contain;
     border-radius: 10px;
 }
-
-
-
 .carousel__thumbnails {
     display: flex;
     justify-content: center;
