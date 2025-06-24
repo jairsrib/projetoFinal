@@ -31,16 +31,15 @@ $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
       <h1>Ultimas Noticias</h1>
     </div>
 
-    <section class="container my-5">
+  <section class="container my-5" >
   <div class="row g-4">
     <?php foreach ($noticias as $index => $n): ?>
-      <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>">
+      <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>" >
         <a href="noticia.php?id=<?= $n['id'] ?>" class="news-card text-white text-decoration-none h-100 d-block">
           <div class="news-image position-relative d-flex flex-column justify-content-end" 
-               style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '350px' : '230px' ?>;">
+               style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '350px' : '230px' ?>; border: 1px solid rgba(255,10,75,0.20);">
             <div class="news-overlay p-3">
               <?php if ($index === 0): ?>
-                <div class="badge bg-success mb-2">🕒 SIGA EM TEMPO REAL</div>
               <?php endif; ?>
               <h5 class="fw-bold mb-1"><?= htmlspecialchars($n['titulo']) ?></h5>
               <p class="small m-0"><?= htmlspecialchars(substr($n['texto'], 0, 80)) ?>...</p>
@@ -57,24 +56,25 @@ $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
   <h2 class="text-white mb-4">Mais Notícias</h2>
 
   <?php foreach ($noticias as $n): ?>
-    <div class="row g-3 align-items-center mb-5 ms-0">
+    <div class="row g-3 align-items-center mb-5 ms-0" style="border: 1px solid rgba(255,10,75,0.20);">
       <!-- Imagem -->
       <div class="col-md-4">
         <a href="noticia.php?id=<?= $n['id'] ?>">
-          <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" class="img-fluid rounded shadow">
+          <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" height="300px" max-height="500px" class="rounded shadow">
         </a>
       </div>
 
       <!-- Texto -->
-      <div class="col-md-8 text-light">
-        <small class="text-uppercase text-muted">Categoria</small>
-        <h4 class="fw-bold">
-          <a href="noticia.php?id=<?= $n['id'] ?>" class="text-decoration-none text-success">
-            <?= htmlspecialchars($n['titulo']) ?>
+      <div class="col-md-8 text-light d-flex flex-column justify-content-center">
+        <h2 class="fw-bold mb-2" style="font-size: 2em; line-height: 1.1;">
+          <a href="noticia.php?id=<?= $n['id'] ?>" class="text-white text-decoration-none">
+        <?= htmlspecialchars($n['titulo']) ?>
           </a>
-        </h4>
-        <p><?= htmlspecialchars(substr($n['texto'], 0, 120)) ?>...</p>
-        <small class="text-muted">Há <?= rand(1, 12) ?> horas — em <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
+        </h2>
+        <div class="mb-3" style="font-size: 1.15em; line-height: 1.5;">
+          <?= nl2br(htmlspecialchars($n['texto'])) ?>
+        </div>
+        <small class="text-secondary mt-auto">Há <?= rand(1, 12) ?> horas — em <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
       </div>
     </div>
   <?php endforeach; ?>

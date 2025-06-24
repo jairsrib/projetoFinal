@@ -1,6 +1,6 @@
  header{
         background-color: #171717;
-        height: 175px;
+        height: 120px;
      }
     .container {
         display: flex;
@@ -43,7 +43,7 @@
         margin-top: -20px;
     }
     .sidebar {
-        margin-top: 5%;
+      margin-top: 5%;
       position: fixed;
       top: 0;
       left: -280px;
@@ -101,7 +101,6 @@
       color: #FF084B;
     }
 
-    /* Overlay */
     .overlay {
       display: none;
       position: fixed;
@@ -143,4 +142,7 @@
       .sidebar {
         width: 80%;
       }
+    }
+    body li{
+      font-family: DM-Sans, sans-serif;
     }

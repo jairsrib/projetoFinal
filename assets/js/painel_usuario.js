@@ -7,6 +7,8 @@ function fecharModalCadastrar() {
 }
 
 function abrirModalEditar() {
+  // Abre o modal
+  document.getElementById('modalEditar').style.display = 'flex';
   const selecionados = document.querySelectorAll('input[name="noticias_selecionadas[]"]:checked');
 
   if (selecionados.length !== 1) {
@@ -24,8 +26,7 @@ function abrirModalEditar() {
   const categoriaSelect = document.querySelector('select[name="categoria"]');
   categoriaSelect.value = noticia.dataset.categoria;
 
-  // Abre o modal
-  document.getElementById('modalEditar').style.display = 'flex';
+  
 }
 
 function fecharModalEditar() {
