@@ -18,7 +18,7 @@
     <label for="profileInput">
       <img src="img/usuarioTeste.png" id="profilePic" alt="Foto de Perfil" class="profile-img mb-3">
     </label>
-    <h5>Usuário Teste</h5>
+    <h5 style="color: white;">Usuário Teste</h5>
   </div>
 
   <div class="container">
@@ -32,14 +32,29 @@
 
       <div class="tab-content mt-3">
         <div class="tab-pane fade show active" id="info">
-          <h4>Informações do Usuário</h4>
+          <h4 style="color: white;">Informações do Usuário</h4>
           <label for="" style="color: white;">Nome:</label><br>
           <label style="color: white;">E-mail:</label><br>
-          <label for="" style="color: white;">Telefone: </label>
-          <label>Quantida de Noticias Publicadas: </label>
+          <label for="" style="color: white;">Telefone: </label><br>
+          <label style="color: white;">Quantida de Noticias Publicadas: </label>
         </div>
         <div class="tab-pane fade" id="Noticias">
-          <h4>Minhas Noticias</h4>
+          <h4 style="color: white;">Minhas Noticias</h4>
+          <table>
+            <thead>
+              <th style="color: white;">Noticia</th>
+              <th style="color: white;">Selecione a noticia</th>
+            </thead>
+          <tbody>
+              <tr>
+              <td style="color: white;">Exibir o Titulo da noticia</td>
+             <td><label class="check">
+            <input checked="checked" type="checkbox">
+            <div class="checkmark"></div>
+            </label></td>
+            </tr>
+          </tbody>
+          </table>
           <button class="btn btn-outline-light mt-2" onclick="abrirModalEditar()">Editar Notícia</button>
           <button class="btn btn-outline-light mt-2" >Excluir Noticia</button>
         </div>
@@ -139,4 +154,7 @@
 <script src="assets/js/painel_usuario.js"></script>
 <?php include_once './footer.php'?>
 </body>
+<style>
+
+</style>
 </html>
