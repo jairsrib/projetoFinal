@@ -12,63 +12,72 @@
 </head>
 <body>
 <?php include_once './header.php'?>
-<div class="container-fluid d-flex align-items-center" style="min-height: 100vh;">
-  <div class="d-flex flex-column align-items-center me-4" style="min-width: 220px;">
-    <input type="file" id="profileInput" accept="image/*" style="display: none;">
-    <label for="profileInput">
-      <img src="img/usuarioTeste.png" id="profilePic" alt="Foto de Perfil" class="profile-img mb-3">
-    </label>
-    <h5 style="color: white;">Usuário Teste</h5>
-  </div>
+<div class="container-fluid d-flex justify-content-center align-items-center bg-dark text-white" style="min-height: 100vh;">
+  <div class="d-flex flex-column flex-lg-row align-items-start w-100" style="max-width: 1200px;">
 
-  <div class="container">
-    <div class="card card-custom">
-      <ul class="nav nav-tabs" id="userTab" role="tablist">
+    <!-- Perfil -->
+    <div class="d-flex flex-column align-items-center p-3 me-lg-4 mb-4 mb-lg-0 bg-black rounded-4 shadow profile-card">
+      <input type="file" id="profileInput" accept="image/*" style="display: none;">
+      <label for="profileInput" class="cursor-pointer">
+        <img src="img/usuarioTeste.png" id="profilePic" alt="Foto de Perfil" class="profile-img mb-3">
+      </label>
+      <h5>Usuário Teste</h5>
+    </div>
+
+    <!-- Painel com Tabs -->
+    <div class="card card-custom flex-grow-1 shadow">
+      <ul class="nav nav-tabs nav-justified" id="userTab" role="tablist">
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#info">Informações</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#Noticias">Minhas Noticias</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#Noticias">Minhas Notícias</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#config">Configurações</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#noticia">Cadastrar Notícia</button></li>
       </ul>
 
-      <div class="tab-content mt-3">
+      <div class="tab-content p-4">
         <div class="tab-pane fade show active" id="info">
-          <h4 style="color: white;">Informações do Usuário</h4>
-          <label for="" style="color: white;">Nome:</label><br>
-          <label style="color: white;">E-mail:</label><br>
-          <label for="" style="color: white;">Telefone: </label><br>
-          <label style="color: white;">Quantida de Noticias Publicadas: </label>
+          <h4>Informações do Usuário</h4>
+          <p><strong>Nome:</strong> Usuário Teste</p>
+          <p><strong>E-mail:</strong> usuario@email.com</p>
+          <p><strong>Telefone:</strong> (99) 99999-9999</p>
+          <p><strong>Notícias Publicadas:</strong> 5</p>
         </div>
-        <div class="tab-pane fade" id="Noticias">
-          <h4 style="color: white;">Minhas Noticias</h4>
 
-          <table class="table table-dark table-sm">
-            <thead>
-              <th style="color: white;">Noticia</th>
-              <th style="color: white;">Selecione a noticia</th>
-            </thead>
-          <tbody>
+        <div class="tab-pane fade" id="Noticias">
+          <h4>Minhas Notícias</h4>
+          <table class="table table-dark table-hover table-bordered mt-3">
+            <thead class="table-secondary text-dark">
               <tr>
-              <td style="color: white;">Exibir o Titulo da noticia</td>
-             <td><label class="check">
-            <input checked="checked" type="checkbox">
-            <div class="checkmark"></div>
-            </label></td>
-            </tr>
-          </tbody>
+                <th>Título</th>
+                <th>Selecionar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Exemplo de Notícia</td>
+                <td>
+                  <label class="check">
+                    <input checked="checked" type="checkbox">
+                    <div class="checkmark"></div>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
           </table>
-          
-          <button class="btn btn-outline-light mt-2" onclick="abrirModalEditar()">Editar Notícia</button>
-          <button class="btn btn-outline-light mt-2" >Excluir Noticia</button>
+          <button class="btn btn-pink mt-3 me-2" onclick="abrirModalEditar()">Editar</button>
+          <button class="btn btn-outline-light mt-3">Excluir</button>
         </div>
+
         <div class="tab-pane fade" id="config">
           <h4>Configurações</h4>
         </div>
+
         <div class="tab-pane fade" id="noticia">
           <h4>Cadastrar Notícia</h4>
-          <button class="btn btn-outline-light mt-2" onclick="abrirModalCadastrar()">Abrir Formulário</button>
+          <button class="btn btn-pink mt-3" onclick="abrirModalCadastrar()">Abrir Formulário</button>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
