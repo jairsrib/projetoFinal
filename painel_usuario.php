@@ -39,43 +39,44 @@ if (isset($_SESSION['usuario_id'])) {
 
 <body>
   <?php include_once './header.php' ?>
-  <div class="container-fluid d-flex align-items-center" style="min-height: 100vh;">
-    <div class="d-flex flex-column align-items-center me-4" style="min-width: 220px;">
+  <div class="container-fluid d-flex justify-content-center align-items-center text-white" style="min-height: 100vh;">
+  <div class="d-flex flex-column flex-lg-row align-items-start w-100" style="max-width: 1200px;">
+
+    <div class="d-flex flex-column align-items-center p-3 me-lg-4 mb-4 mb-lg-0 bg-black rounded-4 shadow profile-card">
       <input type="file" id="profileInput" accept="image/*" style="display: none;">
-      <label for="profileInput">
+      <label for="profileInput" class="cursor-pointer">
         <img src="img/usuarioTeste.png" id="profilePic" alt="Foto de Perfil" class="profile-img mb-3">
       </label>
-      <h5 style="color: white;">Usuário Teste</h5>
+      <h5><?php echo htmlspecialchars($dados_usuario['nome']); ?></h5>
     </div>
 
     <div class="container">
-      <div class="card card-custom">
-        <ul class="nav nav-tabs" id="userTab" role="tablist">
+      <div class="card card-custom flex-grow-1 shadow">
+      <ul class="nav nav-tabs nav-justified" id="userTab" role="tablist">
           <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab"
               data-bs-target="#info">Informações</button></li>
-          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#Noticias">Minhas
-              Noticias</button></li>
+           <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#Noticias">Minhas Notícias</button></li>
           <li class="nav-item"><button class="nav-link" data-bs-toggle="tab"
               data-bs-target="#config">Configurações</button></li>
           <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#noticia">Cadastrar
               Notícia</button></li>
         </ul>
 
-        <div class="tab-content mt-3">
+         <div class="tab-content p-4">
           <div class="tab-pane fade show active" id="info">
             <h4 style="color: white">Informações do Usuário</h4>
 
-            <label style="color: white;">Nome:</label><br>
-            <span style="color: white;"><?php echo htmlspecialchars($dados_usuario['nome']); ?></span><br><br>
+            <label >Nome:</label><br>
+            <span ><?php echo htmlspecialchars($dados_usuario['nome']); ?></span><br><br>
 
-            <label style="color: white;">E-mail:</label><br>
-            <span style="color: white;"><?php echo htmlspecialchars($dados_usuario['email']); ?></span><br><br>
+            <label >E-mail:</label><br>
+            <span ><?php echo htmlspecialchars($dados_usuario['email']); ?></span><br><br>
 
-            <label style="color: white;">Telefone:</label><br>
-            <span style="color: white;"><?php echo htmlspecialchars($dados_usuario['fone']); ?></span><br><br>
+            <label >Telefone:</label><br>
+            <span ><?php echo htmlspecialchars($dados_usuario['fone']); ?></span><br><br>
 
-            <label style="color: white;">Quantidade de Notícias Publicadas:</label><br>
-            <span style="color: white;">
+            <label >Quantidade de Notícias Publicadas:</label><br>
+            <span >
               <?php
               $stmtNoticias = $db->prepare("SELECT COUNT(*) FROM noticias WHERE autor_id = :id");
               $stmtNoticias->bindParam(':id', $_SESSION['usuario_id']);
@@ -85,13 +86,13 @@ if (isset($_SESSION['usuario_id'])) {
             </span>
           </div>
           <div class="tab-pane fade" id="Noticias">
-            <form class="form" method="post" action="editar_noticia.php" enctype="multipart/form-data">
-              <h4 style="color: white">Minhas Notícias</h4>
-              <table>
-                <thead>
-                  <tr>
-                    <th style="color: white;">Notícias</th>
-                  </tr>
+          <h4>Minhas Notícias</h4>
+          <table class="table table-dark table-hover table-bordered mt-3">
+            <thead class="table-secondary text-dark">
+              <tr>
+                <th>Título</th>
+                <th>Selecionar</th>
+              </tr>
                 </thead>
                 <tbody>
                   <?php foreach ($noticiasDoUsuario as $noticia): ?>
@@ -117,7 +118,7 @@ if (isset($_SESSION['usuario_id'])) {
           </div>
           <div class="tab-pane fade" id="noticia">
             <h4>Cadastrar Notícia</h4>
-            <button class="btn btn-outline-light mt-2" onclick="abrirModalCadastrar()">Abrir Formulário</button>
+            <button class="btn btn-pink mt-3" onclick="abrirModalCadastrar()">Abrir Formulário</button>
           </div>
         </div>
       </div>
@@ -131,7 +132,7 @@ if (isset($_SESSION['usuario_id'])) {
       <button class="close-modal-btn" onclick="fecharModalCadastrar()">&times;</button>
 
       <div class="form-container">
-        <form class="form">
+        <form class="form" method="post" action="noticia.php">
           <div class="form-group">
             <label for="email">Titulo</label>
             <input type="text" id="email" name="titulo" required="">
