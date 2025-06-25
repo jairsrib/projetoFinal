@@ -40,11 +40,16 @@ class Usuario {
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
  }
- public function atualizar($id, $nome, $sexo, $fone, $email) {
-    $query = "UPDATE " . $this->table_name . " SET nome = ?, sexo =
-    ?, fone = ?, email = ? WHERE id = ?";
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute([$nome, $sexo, $fone, $email, $id]);
+ public function atualizar($id, $nome, $sexo, $fone, $email, $imagem_perfil = null) {
+    if ($imagem_perfil) {
+        $query = "UPDATE " . $this->table_name . " SET nome = ?, sexo = ?, fone = ?, email = ?, imagem_perfil = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$nome, $sexo, $fone, $email, $imagem_perfil, $id]);
+    } else {
+        $query = "UPDATE " . $this->table_name . " SET nome = ?, sexo = ?, fone = ?, email = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$nome, $sexo, $fone, $email, $id]);
+    }
     return $stmt;
  }
  public function deletar($id) {
@@ -52,6 +57,12 @@ class Usuario {
     $stmt = $this->conn->prepare($query);
     $stmt->execute([$id]);
     return $stmt;
+ }
+ 
+ public function atualizarImagemPerfil($id, $imagem_perfil) {
+    $query = "UPDATE " . $this->table_name . " SET imagem_perfil = ? WHERE id = ?";
+    $stmt = $this->conn->prepare($query);
+    return $stmt->execute([$imagem_perfil, $id]);
  }
 }
 ?>

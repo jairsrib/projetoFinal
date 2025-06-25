@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sidebar Responsiva</title>
+  <title>Inicio</title>
   <link rel="stylesheet" href="assets/reset.css" />
   <link rel="stylesheet" href="assets/header.css" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -15,7 +15,7 @@
   <ul>
     <li><a href="dashboard.php"><i data-lucide="home"></i> Início</a></li>
     <li><a href="painel_usuario.php"><i data-lucide="user"></i>Painel de Usuário</a></li>
-    <li><a href="#"><i data-lucide="newspaper"></i> Notícias</a></li>
+    <li><a href="lista_usuarios.php"><i data-lucide="users"></i>Lista de Usuários</a></li>
     <li><a href="#"><i data-lucide="mail"></i> Contato</a></li>
     <li><a href="logout.php"><i data-lucide="log-out"></i> Sair</a></li>
   </ul>
