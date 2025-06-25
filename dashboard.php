@@ -6,7 +6,6 @@ include_once './classes/Noticia.php';
 $noticia = new Noticia($db);
 $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
