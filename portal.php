@@ -9,6 +9,7 @@ if (!isset($_SESSION['usuario_id'])) {
 $usuario = new Usuario($db);
 if (isset($_GET['deletar'])) {
  $id = $_GET['deletar'];
+
  $usuario->deletar($id);
  exit();
 }
@@ -28,10 +29,14 @@ function saudacao() {
 ?>
 
 <?php
+// Conexão com o banco
 $conn = new mysqli("localhost", "root", "", "projeto_final");
+
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
+
+// Consulta
 $sql = "SELECT * FROM noticias";
 $result = $conn->query($sql);
 ?>
@@ -58,6 +63,36 @@ $result = $conn->query($sql);
  <a href="cadastro.php">Adicionar Usuário</a>
  <a href="logout.php">Logout</a>
  <a href="dashboard.php">Dashboard</a>
+ <a href="painel_usuario.php">Painel de Usuario</a>
+<br>
+ <table border="1">
+  <tr>
+   <th>ID</th>
+   <th>Nome</th>
+   <th>Sexo</th>
+   <th>Fone</th>
+   <th>Email</th>
+   <th>Ações</th>
+  </tr>
+  <?php while ($row = $dados->fetch(PDO::FETCH_ASSOC)) : ?>
+   <tr>
+    <td><?php echo $row['id']; ?></td>
+    <td><?php echo $row['nome']; ?></td>
+
+    <td><?php echo ($row['sexo'] === 'M') ? 'Masculino' :
+'Feminino'; ?></td>
+    <td><?php echo $row['fone']; ?></td>
+    <td><?php echo $row['email']; ?></td>
+    <td>
+     <a href="editar.php?id=<?php echo $row['id'];
+?>">Editar</a>
+     <a href="deletar.php?id=<?php echo $row['id'];
+?>">Deletar</a>
+    </td>
+   </tr>
+  <?php endwhile; ?>
+ </table>
+    </div>
 </body>
 </html>
 
@@ -65,12 +100,7 @@ $result = $conn->query($sql);
   
 body {
   position: absolute;
-  background-image: radial-gradient(
-    circle at 50% 50%,
-    #171717,
-    #0000 2px,
-    hsl(0 0 4%) 2px
-  );
+  background-image: none;
   background-size: 8px 8px;
   width: 100%;
   height: 100%;
