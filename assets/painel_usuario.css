@@ -7,14 +7,18 @@ body {
   --line: 1px;
   --color: rgba(255, 255, 255, 0.2);
 
-  background-image: linear-gradient(-90deg,
+  background-image: linear-gradient(
+      -90deg,
       transparent calc(var(--gap) - var(--line)),
       var(--color) calc(var(--gap) - var(--line) + 1px),
-      var(--color) var(--gap)),
-    linear-gradient(0deg,
+      var(--color) var(--gap)
+    ),
+    linear-gradient(
+      0deg,
       transparent calc(var(--gap) - var(--line)),
       var(--color) calc(var(--gap) - var(--line) + 1px),
-      var(--color) var(--gap));
+      var(--color) var(--gap)
+    );
   background-size: var(--gap) var(--gap);
 }
 
@@ -51,7 +55,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.profile-img:hover+.profile-edit-overlay,
+.profile-img:hover + .profile-edit-overlay,
 .profile-edit-overlay:hover {
   opacity: 1;
 }
@@ -333,7 +337,7 @@ body {
   position: relative;
 }
 
-.check input:checked~.checkmark {
+.check input:checked ~ .checkmark {
   background: linear-gradient(145deg, #FF084B, #e00742);
   box-shadow: 0 2px 8px rgba(255, 8, 75, 0.3);
 }
@@ -351,17 +355,14 @@ body {
   transform: rotate(45deg);
 }
 
-.check input:checked~.checkmark:after {
+.check input:checked ~ .checkmark:after {
   display: block;
 }
 
 .modal-custom {
   position: fixed;
   z-index: 1055;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.8);
   display: none;
   justify-content: center;
@@ -407,20 +408,20 @@ body {
     min-width: 100%;
     margin-bottom: 2rem;
   }
-
+  
   .info-card {
     margin-bottom: 1rem;
   }
-
+  
   .config-card {
     margin-bottom: 1rem;
   }
-
+  
   .modal-content-custom {
     width: 90%;
     margin: 1rem;
   }
-
+  
   .nav-tabs .nav-link {
     padding: 12px 15px;
     font-size: 0.85rem;
@@ -462,7 +463,6 @@ body h5 {
     opacity: 0;
     transform: translateY(30px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -605,41 +605,19 @@ body h5 {
     margin: 1rem;
     padding: 1.5rem;
   }
-
+  
   .form-title {
     font-size: 1.3rem;
   }
-
+  
   .form-container .form-group input,
   .form-container .form-group select {
     padding: 0.6rem;
     font-size: 0.9rem;
   }
-
+  
   .form-container .form-submit-btn {
     padding: 0.8rem;
     font-size: 0.9rem;
   }
-
-
-.btn-nova-noticia {
-  background: linear-gradient(145deg, #FF084B, #e00742);
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 20px;
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  border: none;
-  margin-top: 1rem;
-  transition: all 0.3s ease;
-}
-
-.btn-nova-noticia:hover {
-  background: linear-gradient(145deg, #e00742, #c00638);
-  box-shadow: 0 5px 15px rgba(255, 8, 75, 0.4);
-  transform: translateY(-2px);
-}
 }
