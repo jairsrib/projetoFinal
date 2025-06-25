@@ -46,14 +46,17 @@ class Noticia
       $stmt->execute([$id]);
       return $stmt->fetch(PDO::FETCH_ASSOC);
    }
-   public function atualizar($titulo, $texto, $data, $autor_id, $categoria, $imagem)
+   public function atualizar($id, $titulo, $texto, $data, $autor_id, $categoria, $imagem)
    {
-      $query = "UPDATE " . $this->table_name . " SET titulo = ?, texto =
-    ?, data = ?, autor_id = ?, imagem = ? WHERE id = ?";
-      $stmt = $this->conn->prepare($query);
-      $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem]);
-      return $stmt;
+   $query = "UPDATE " . $this->table_name . " 
+               SET titulo = ?, texto = ?, data = ?, autor_id = ?, categoria = ?, imagem = ? 
+               WHERE id = ?";
+   $stmt = $this->conn->prepare($query);
+   $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem, $id]);
+   return $stmt;
    }
+
+
    public function deletar($id)
    {
       $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
