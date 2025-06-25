@@ -16,7 +16,8 @@ $dados_usuario = $usuario->lerPorId($_SESSION['usuario_id']);
 $noticiasDoUsuario = [];
 
 if (isset($_SESSION['usuario_id'])) {
-  $stmt = $db->prepare("SELECT id, titulo FROM noticias WHERE autor_id = :id");
+$stmt = $db->prepare("SELECT id, titulo, texto, categoria_id AS categoria FROM noticias WHERE autor_id = :id");
+
   $stmt->bindParam(':id', $_SESSION['usuario_id']);
   $stmt->execute();
   $noticiasDoUsuario = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -100,7 +101,14 @@ if (isset($_SESSION['usuario_id'])) {
                       <td style="color: white;"><?php echo htmlspecialchars($noticia['titulo']); ?></td>
                       <td>
                         <label class="check">
-                          <input type="checkbox" name="noticias_selecionadas[]" value="<?php echo $noticia['id']; ?>">
+                          <input 
+                            type="checkbox" 
+                            name="noticias_selecionadas[]" 
+                            value="<?= $noticia['id'] ?>"
+                            data-titulo="<?= htmlspecialchars($noticia['titulo'], ENT_QUOTES) ?>"
+                            data-texto="<?= htmlspecialchars($noticia['texto'], ENT_QUOTES) ?>"
+                            data-categoria="<?php echo $noticia['categoria'] ?>"
+                          >
                           <div class="checkmark"></div>
                         </label>
                       </td>
@@ -176,20 +184,21 @@ if (isset($_SESSION['usuario_id'])) {
           <input type="hidden" id="idsNoticiasSelecionadas" name="idsNoticiasSelecionadas">
 
           <div class="form-group">
-            <label for="email">Título</label>
-            <input type="text" id="email" name="titulo" required>
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" required>
           </div>
 
           <div class="form-group">
             <label for="textarea">Descrição da Notícia</label>
-            <textarea name="texto" id="textarea" rows="10" cols="50" required></textarea>
+            <textarea name="texto" id="texto" rows="10" cols="50" required></textarea>
           </div>
 
-          <select name="categoria" required>
+          <select name="categoria_id">
             <option value="">Selecione a categoria</option>
-            <option value="noticia">Notícia</option>
-            <option value="jogo">Jogo</option>
-            <option value="evento">Evento</option>
+            <option value="1">E-Sports</option>
+            <option value="2">Speed-Run</option>
+            <option value="3">Battle-Royale</option>
+            <option value="4">RPG</option>
           </select>
 
           <div class="imagem-input">
@@ -199,7 +208,7 @@ if (isset($_SESSION['usuario_id'])) {
             </label>
           </div>
 
-          <button class="form-submit-btn" type="submit">Enviar</button>
+          <button class="form-submit-btn" type="submit">Atualizar Notícia</button>
         </form>
       </div>
     </div>

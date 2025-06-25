@@ -28,9 +28,9 @@ class Noticia
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
    }
 
-   public function criar($titulo, $texto, $data, $autor_id, $categoria, $imagem)
+   public function criar($titulo, $texto, $data, $autor_id, $categoria_id, $imagem)
    {
-      return $this->registrar($titulo, $texto, $data, $autor_id, $categoria, $imagem);
+      return $this->registrar($titulo, $texto, $data, $autor_id, $categoria_id, $imagem);
    }
    public function ler()
    {
@@ -46,14 +46,17 @@ class Noticia
       $stmt->execute([$id]);
       return $stmt->fetch(PDO::FETCH_ASSOC);
    }
-   public function atualizar($titulo, $texto, $data, $autor_id, $categoria, $imagem)
+   public function atualizar($id, $titulo, $texto, $data, $autor_id, $categoria_id, $imagem)
    {
-      $query = "UPDATE " . $this->table_name . " SET titulo = ?, texto =
-    ?, data = ?, autor_id = ?, imagem = ? WHERE id = ?";
-      $stmt = $this->conn->prepare($query);
-      $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem]);
-      return $stmt;
+   $query = "UPDATE " . $this->table_name . " 
+               SET titulo = ?, texto = ?, data = ?, autor_id = ?, categoria_id = ?, imagem = ? 
+               WHERE id = ?";
+   $stmt = $this->conn->prepare($query);
+   $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria_id, $imagem, $id]);
+   return $stmt;
    }
+
+
    public function deletar($id)
    {
       $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";

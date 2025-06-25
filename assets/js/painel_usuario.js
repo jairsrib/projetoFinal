@@ -6,28 +6,27 @@ function fecharModalCadastrar() {
   document.getElementById('modalNoticia').style.display = 'none';
 }
 
+
 function abrirModalEditar() {
-  // Abre o modal
-  document.getElementById('modalEditar').style.display = 'flex';
   const selecionados = document.querySelectorAll('input[name="noticias_selecionadas[]"]:checked');
 
   if (selecionados.length !== 1) {
     alert("Selecione exatamente uma notícia para editar.");
     return;
   }
-  document.getElementById('id_noticia').value = noticia.value;
 
   const noticia = selecionados[0];
-
-  // Preenche os campos do modal com os dados da notícia
-  document.getElementById('email').value = noticia.dataset.titulo;
-  document.getElementById('textarea').value = noticia.dataset.texto;
-
-  const categoriaSelect = document.querySelector('select[name="categoria"]');
-  categoriaSelect.value = noticia.dataset.categoria;
-
   
+  document.getElementById('modalEditar').style.display = 'flex';
+  document.getElementById('idsNoticiasSelecionadas').value = noticia.value;
+  document.getElementById('titulo').value = noticia.dataset.titulo || '';
+  document.getElementById('texto').value = noticia.dataset.texto || '';
+  
+  const selectCategoria = document.querySelector('#modalEditar select[name="categoria"]');
+  selectCategoria.value = noticia.dataset.categoria.toString(); 
 }
+
+
 
 function fecharModalEditar() {
   document.getElementById('modalEditar').style.display = 'none';
