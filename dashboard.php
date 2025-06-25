@@ -6,16 +6,17 @@ include_once './classes/Noticia.php';
 $noticia = new Noticia($db);
 $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/dist/css/bootstrap-grid.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/dashboard.css">
-    <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/dist/css/bootstrap-grid.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/dashboard.css">
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -31,54 +32,74 @@ $noticias = $noticia->buscarTodasOrdenadas(); // Função personalizada abaixo
       <h1>Ultimas Noticias</h1>
     </div>
 
-  <section class="container my-5" >
-  <div class="row g-4">
-    <?php foreach ($noticias as $index => $n): ?>
-      <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>" >
-        <a href="noticia.php?id=<?= $n['id'] ?>" class="news-card text-white text-decoration-none h-100 d-block">
-          <div class="news-image position-relative d-flex flex-column justify-content-end" 
-               style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '350px' : '230px' ?>; border: 1px solid rgba(255,10,75,0.20);">
-            <div class="news-overlay p-3">
-              <?php if ($index === 0): ?>
-              <?php endif; ?>
-              <h5 class="fw-bold mb-1"><?= htmlspecialchars($n['titulo']) ?></h5>
-              <p class="small m-0"><?= htmlspecialchars(substr($n['texto'], 0, 80)) ?>...</p>
-            </div>
+    <?php
+    // Limita às 5 primeiras notícias (últimas adicionadas)
+    $ultimasNoticias = array_slice($noticias, 0, 5);
+    ?>
+
+    <section class="container my-5">
+      <div class="row g-4">
+        <?php foreach ($ultimasNoticias as $index => $n): ?>
+          <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>">
+            <a href="noticia.php?id=<?= $n['id'] ?>" class="news-card text-white text-decoration-none h-100 d-block">
+              <div class="news-image d-flex flex-column justify-content-end"
+                style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '360px' : '240px' ?>;">
+                <div class="news-overlay">
+                  <h5><?= htmlspecialchars($n['titulo']) ?></h5>
+                  <p><?= htmlspecialchars(substr($n['texto'], 0, 80)) ?>...</p>
+                </div>
+              </div>
+            </a>
           </div>
-        </a>
+        <?php endforeach; ?>
       </div>
-    <?php endforeach; ?>
-  </div>
-</section>
+    </section>
 
 
-<section class="container-fluid my-5 px-5">
-  <h2 class="text-white mb-4">Mais Notícias</h2>
+    <section class="container-fluid my-5 px-5">
+      <h2 class="text-white mb-4">Mais Notícias</h2>
 
-  <?php foreach ($noticias as $n): ?>
-    <div class="row g-3 align-items-center mb-5 ms-0" style="border: 1px solid rgba(255,10,75,0.20);">
-      <!-- Imagem -->
-      <div class="col-md-4">
-        <a href="noticia.php?id=<?= $n['id'] ?>">
-          <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" height="300px" max-height="500px" class="rounded shadow">
-        </a>
-      </div>
+      <?php foreach ($noticias as $n): ?>
+        <?php
+        // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
+        $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
+        $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+        $intervalo = $agora->diff($dataNoticia);
 
-      <!-- Texto -->
-      <div class="col-md-8 text-light d-flex flex-column justify-content-center">
-        <h2 class="fw-bold mb-2" style="font-size: 2em; line-height: 1.1;">
-          <a href="noticia.php?id=<?= $n['id'] ?>" class="text-white text-decoration-none">
-        <?= htmlspecialchars($n['titulo']) ?>
-          </a>
-        </h2>
-        <div class="mb-3" style="font-size: 1.15em; line-height: 1.5;">
-          <?= nl2br(htmlspecialchars($n['texto'])) ?>
+        // Formata o tempo decorrido
+        if ($intervalo->d >= 1) {
+          $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
+        } elseif ($intervalo->h >= 1) {
+          $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
+        } elseif ($intervalo->i >= 1) {
+          $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
+        } else {
+          $tempoFormatado = 'Agora mesmo';
+        }
+        ?>
+
+        <!-- Exibição da notícia -->
+        <div class="row noticia-bloco g-3 align-items-center mb-4 p-3 rounded">
+          <div class="col-md-4">
+            <a href="noticia.php?id=<?= $n['id'] ?>">
+              <div class="noticia-img" style="background-image: url('uploads/<?= $n['imagem'] ?>');"></div>
+            </a>
+          </div>
+          <div class="col-md-8 text-light d-flex flex-column justify-content-between">
+            <h4 class="fw-bold mb-2">
+              <a href="noticia.php?id=<?= $n['id'] ?>" class="text-white text-decoration-none">
+                <?= htmlspecialchars($n['titulo']) ?>
+              </a>
+            </h4>
+            <p class="noticia-resumo mb-2">
+              <?= htmlspecialchars(substr($n['texto'], 0, 250)) ?>...
+            </p>
+            <small class="text-secondary mt-2"><?= $tempoFormatado ?> — em <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
+          </div>
         </div>
-        <small class="text-secondary mt-auto">Há <?= rand(1, 12) ?> horas — em <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
-      </div>
-    </div>
-  <?php endforeach; ?>
-</section>
+      <?php endforeach; ?>
+    </section>
+
 
     <div class="row-3">
       <div class="col-12">
