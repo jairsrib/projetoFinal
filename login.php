@@ -6,13 +6,13 @@ $usuario = new Usuario($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['login'])) {
-    // Processar o login
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     if ($dados_usuario = $usuario->login($email, $senha)) {
       $_SESSION['usuario_id'] = $dados_usuario['id'];
-      header('Location: portal.php'); // Redireciona para a pagina de testes no momento
-      // header('Location: dashboard.php'); // Redireciona para o dashboard
+      $_SESSION['usuario_tipo'] = $dados_usuario['tipo'];
+      //header('Location: portal.php'); // Redireciona para a pagina de testes no momento
+       header('Location: dashboard.php'); // Redireciona para o dashboard
       exit();
     } else {
       $mensagem_erro = 'Credenciais inválidas!';
@@ -53,13 +53,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <button class="button1" name="login" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
           <button class="button2" type="button" onclick="window.location.href='cadastro.php'">Cadastrar</button>
         </div>
-        <button class="button3" type="button" name="esqueceu_senha">Esqueceu a Senha</button>
+        <button class="button3" type="button" name="esqueceu_senha" onclick="document.getElementById('modalEsqueci').style.display='block'">Esqueceu a Senha</button>
       </form>
       <div class="mensagem">
         <?php if (isset($mensagem_erro)) echo '<p>' .
           $mensagem_erro . '</p>'; ?>
       </div>
     </div>
+  </div>
+
+  <div id="modalEsqueci" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2rem;border-radius:12px;max-width:400px;margin:10vh auto;position:relative;">
+      <button onclick="document.getElementById('modalEsqueci').style.display='none'" style="position:absolute;top:10px;right:15px;background:none;border:none;font-size:1.5rem;">&times;</button>
+      <h2 style="color:#FF084B;">Recuperar Senha</h2>
+      <form method="post" action="esqueceu_senha.php">
+        <label for="email_rec">Digite seu e-mail cadastrado:</label>
+        <input type="email" name="email_rec" id="email_rec" class="input-field" required style="width:100%;margin:1rem 0;">
+        <button type="submit" class="button1" style="width:100%;">Recuperar Senha</button>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>

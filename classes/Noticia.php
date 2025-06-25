@@ -9,14 +9,14 @@ class Noticia
       $this->conn = $db;
    }
 
-   public function registrar($titulo, $texto, $data, $autor_id, $categoria_id, $imagem)
+   public function registrar($titulo, $texto, $data, $autor_id, $categoria, $imagem)
    {
       $query = "INSERT INTO " . $this->table_name . " (
-      titulo, texto, data, autor_id, categoria_id, imagem
+      titulo, texto, data, autor_id, categoria, imagem
    ) VALUES (?, ?, ?, ?, ?, ?)";
 
       $stmt = $this->conn->prepare($query);
-      $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria_id, $imagem]);
+      $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem]);
       return $stmt;
    }
 
@@ -28,9 +28,9 @@ class Noticia
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
    }
 
-   public function criar($titulo, $texto, $data, $autor_id, $categoria_id, $imagem)
+   public function criar($titulo, $texto, $data, $autor_id, $categoria, $imagem)
    {
-      return $this->registrar($titulo, $texto, $data, $autor_id, $categoria_id, $imagem);
+      return $this->registrar($titulo, $texto, $data, $autor_id, $categoria, $imagem);
    }
    public function ler()
    {
@@ -46,13 +46,13 @@ class Noticia
       $stmt->execute([$id]);
       return $stmt->fetch(PDO::FETCH_ASSOC);
    }
-   public function atualizar($id, $titulo, $texto, $data, $autor_id, $categoria_id, $imagem)
+   public function atualizar($id, $titulo, $texto, $data, $autor_id, $categoria, $imagem)
    {
    $query = "UPDATE " . $this->table_name . " 
-               SET titulo = ?, texto = ?, data = ?, autor_id = ?, categoria_id = ?, imagem = ? 
+               SET titulo = ?, texto = ?, data = ?, autor_id = ?, categoria = ?, imagem = ? 
                WHERE id = ?";
    $stmt = $this->conn->prepare($query);
-   $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria_id, $imagem, $id]);
+   $stmt->execute([$titulo, $texto, $data, $autor_id, $categoria, $imagem, $id]);
    return $stmt;
    }
 
