@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($dados_usuario = $usuario->login($email, $senha)) {
       $_SESSION['usuario_id'] = $dados_usuario['id'];
       $_SESSION['usuario_tipo'] = $dados_usuario['tipo'];
-      //header('Location: portal.php'); // Redireciona para a pagina de testes no momento
        header('Location: dashboard.php'); // Redireciona para o dashboard
       exit();
     } else {
