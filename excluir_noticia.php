@@ -1,8 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_id'])) {
- header('Location: index.php');
- exit();
+if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_tipo'] ?? '', ['admin', 'autor'])) {
+    $_SESSION['mensagem'] = 'Acesso restrito: apenas ADMIN ou AUTOR podem excluir notícias.';
+    $_SESSION['tipo_mensagem'] = 'danger';
+    header('Location: dashboard.php');
+    exit();
 }
 include_once './config/config.php';
 include_once './classes/Usuario.php';
