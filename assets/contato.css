@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #171717;
+  color: white;
+}
+
+.contato-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.card-autor {
+  background: linear-gradient(145deg, #1f1f1f, #141414);
+  border: 1px solid #FF084B;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(255, 8, 75, 0.15);
+}
+
+.card-autor img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #FF084B;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #FF084B;
+}
+
+.card-info p {
+  margin: 0.2rem 0;
+  color: #ccc;
+}
+
+.form-card {
+  background: linear-gradient(145deg, #1f1f1f, #141414);
+  border: 1px solid #FF084B;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(255, 8, 75, 0.1);
+}
+
+.form-card h3 {
+  color: #FF084B;
+  margin-bottom: 1rem;
+}
+
+.form-contato input,
+.form-contato textarea {
+  width: 100%;
+  background: #2a2a2a;
+  border: 1px solid rgba(255, 8, 75, 0.2);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-contato input::placeholder,
+.form-contato textarea::placeholder {
+  color: #aaa;
+}
+
+.form-contato button {
+  background: linear-gradient(145deg, #FF084B, #e00742);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-contato button:hover {
+  background: linear-gradient(145deg, #e00742, #c00638);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 8, 75, 0.4);
+}
+
+.voltar-link {
+  color: #FF084B;
+  text-align: center;
+  margin-top: 2rem;
+  display: block;
+  font-weight: bold;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.voltar-link:hover {
+  color: white;
+}
