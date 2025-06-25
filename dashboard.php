@@ -7,23 +7,7 @@ $noticia = new Noticia($db);
 $noticias = $noticia->buscarTodasOrdenadas();
 ?>
 
-<?php
-// Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
-$dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
-$agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-$intervalo = $agora->diff($dataNoticia);
 
-// Formata o tempo decorrido
-if ($intervalo->d >= 1) {
-  $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
-} elseif ($intervalo->h >= 1) {
-  $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
-} elseif ($intervalo->i >= 1) {
-  $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
-} else {
-  $tempoFormatado = 'Agora mesmo';
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -96,7 +80,10 @@ if ($intervalo->d >= 1) {
       </div>
     </div>
   </div>
-
+  <?php
+  // Limita às 5 primeiras notícias (últimas adicionadas)
+  $ultimasNoticias = array_slice($noticias, 0, 5);
+  ?>
   <section id="latest-news" class="latest-news-section">
     <div class="container">
       <div class="section-header">
@@ -110,7 +97,25 @@ if ($intervalo->d >= 1) {
       </div>
 
       <div class="row g-4">
-        <?php foreach ($noticias as $index => $n): ?>
+        <?php foreach ($ultimasNoticias as $index => $n): ?>
+          <?php
+          // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
+          $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
+          $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+          $intervalo = $agora->diff($dataNoticia);
+
+          // Formata o tempo decorrido
+          if ($intervalo->d >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
+          } elseif ($intervalo->h >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
+          } elseif ($intervalo->i >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
+          } else {
+            $tempoFormatado = 'Agora mesmo';
+          }
+          ?>
+
           <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>">
             <div class="news-card-wrapper">
               <div class="news-card text-white text-decoration-none h-100 d-block"
@@ -155,7 +160,24 @@ if ($intervalo->d >= 1) {
       </div>
 
       <div class="news-list">
-        <?php foreach ($noticias as $n): ?>
+        <?php foreach ($ultimasNoticias as $index => $n): ?>
+          <?php
+          // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
+          $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
+          $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+          $intervalo = $agora->diff($dataNoticia);
+
+          // Formata o tempo decorrido
+          if ($intervalo->d >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
+          } elseif ($intervalo->h >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
+          } elseif ($intervalo->i >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
+          } else {
+            $tempoFormatado = 'Agora mesmo';
+          }
+          ?>
           <div class="news-item">
             <div class="container">
               <div class="row g-4 align-items-center">
