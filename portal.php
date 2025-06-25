@@ -100,12 +100,7 @@ $result = $conn->query($sql);
   
 body {
   position: absolute;
-  background-image: radial-gradient(
-    circle at 50% 50%,
-    #171717,
-    #0000 2px,
-    hsl(0 0 4%) 2px
-  );
+  background-image: none;
   background-size: 8px 8px;
   width: 100%;
   height: 100%;
