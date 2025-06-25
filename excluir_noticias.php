@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit();
 }
-
+ 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['mensagem'] = 'Método inválido.';
     $_SESSION['tipo_mensagem'] = 'danger';
