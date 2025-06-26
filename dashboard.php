@@ -4,24 +4,26 @@ include_once './config/config.php';
 include_once './classes/Noticia.php';
 
 $noticia = new Noticia($db);
-$noticias = $noticia->buscarTodasOrdenadas(); 
+$noticias = $noticia->buscarTodasOrdenadas();
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/dist/css/bootstrap-grid.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Caiu o Servidor - Notícias de Games</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
-    <script src="assets/js/carrosel.js" defer></script>
-    <script src="assets/js/modal_noticia.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/dist/css/bootstrap-grid.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Caiu o Servidor - Notícias de Games</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+  <script src="assets/js/carrosel.js" defer></script>
+  <script src="assets/js/modal_noticia.js" defer></script>
 </head>
 
 <body>
@@ -78,7 +80,10 @@ $noticias = $noticia->buscarTodasOrdenadas();
       </div>
     </div>
   </div>
-
+  <?php
+  // Limita às 5 primeiras notícias (últimas adicionadas)
+  $ultimasNoticias = array_slice($noticias, 0, 5);
+  ?>
   <section id="latest-news" class="latest-news-section">
     <div class="container">
       <div class="section-header">
@@ -92,13 +97,31 @@ $noticias = $noticia->buscarTodasOrdenadas();
       </div>
 
       <div class="row g-4">
-        <?php foreach ($noticias as $index => $n): ?>
+        <?php foreach ($ultimasNoticias as $index => $n): ?>
+          <?php
+          // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
+          $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
+          $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+          $intervalo = $agora->diff($dataNoticia);
+
+          // Formata o tempo decorrido
+          if ($intervalo->d >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
+          } elseif ($intervalo->h >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
+          } elseif ($intervalo->i >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
+          } else {
+            $tempoFormatado = 'Agora mesmo';
+          }
+          ?>
+
           <div class="col-md-<?= $index === 0 ? '12' : '6' ?> col-lg-<?= $index === 0 ? '8' : '4' ?>">
             <div class="news-card-wrapper">
-              <div class="news-card text-white text-decoration-none h-100 d-block" 
-                   onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
-                <div class="news-image position-relative d-flex flex-column justify-content-end" 
-                     style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '400px' : '280px' ?>;">
+              <div class="news-card text-white text-decoration-none h-100 d-block"
+                onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
+                <div class="news-image position-relative d-flex flex-column justify-content-end"
+                  style="background-image: url('uploads/<?= $n['imagem'] ?>'); height: <?= $index === 0 ? '400px' : '280px' ?>;">
                   <div class="news-overlay p-4">
                     <div class="news-meta mb-2">
                       <span class="news-category">
@@ -107,7 +130,9 @@ $noticias = $noticia->buscarTodasOrdenadas();
                       </span>
                       <span class="news-time">
                         <i class="fas fa-clock me-1"></i>
-                        Há <?= rand(1, 12) ?> horas
+                        <small class="text-secondary mt-2">
+                          <?= $tempoFormatado ?> — em <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?>
+                        </small>
                       </span>
                     </div>
                     <h5 class="news-title fw-bold mb-2"><?= htmlspecialchars($n['titulo']) ?></h5>
@@ -135,14 +160,31 @@ $noticias = $noticia->buscarTodasOrdenadas();
       </div>
 
       <div class="news-list">
-        <?php foreach ($noticias as $n): ?>
+        <?php foreach ($ultimasNoticias as $index => $n): ?>
+          <?php
+          // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
+          $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
+          $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+          $intervalo = $agora->diff($dataNoticia);
+
+          // Formata o tempo decorrido
+          if ($intervalo->d >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
+          } elseif ($intervalo->h >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
+          } elseif ($intervalo->i >= 1) {
+            $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
+          } else {
+            $tempoFormatado = 'Agora mesmo';
+          }
+          ?>
           <div class="news-item">
             <div class="container">
               <div class="row g-4 align-items-center">
                 <div class="col-md-4">
                   <div class="news-image-container">
-                    <div class="news-item-image-wrapper" 
-                         onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
+                    <div class="news-item-image-wrapper"
+                      onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
                       <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" class="news-item-image">
                       <div class="image-overlay">
                         <i class="fas fa-play"></i>
@@ -158,24 +200,25 @@ $noticias = $noticia->buscarTodasOrdenadas();
                         <i class="fas fa-tag me-1"></i>
                         <?= htmlspecialchars($n['categoria'] ?? 'E-Sports') ?>
                       </span>
-                      <span class="news-time-badge">
+                      <span class="news-time">
                         <i class="fas fa-clock me-1"></i>
-                        Há <?= rand(1, 12) ?> horas
+                        <small class="text-secondary mt-2"><?= $tempoFormatado ?> — em
+                          <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
                       </span>
                     </div>
-                    
-                    <h3 class="news-item-title" 
-                        onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
+
+                    <h3 class="news-item-title"
+                      onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
                       <?= htmlspecialchars($n['titulo']) ?>
                     </h3>
-                    
+
                     <p class="news-item-excerpt">
                       <?= htmlspecialchars(substr($n['texto'], 0, 200)) ?>...
                     </p>
-                    
+
                     <div class="news-actions">
-                      <button class="btn-read-more" 
-                              onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
+                      <button class="btn-read-more"
+                        onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
                         <i class="fas fa-arrow-right me-2"></i>
                         Ler Mais
                       </button>
@@ -208,7 +251,7 @@ $noticias = $noticia->buscarTodasOrdenadas();
           <h2>Destaques</h2>
         </div>
       </div>
-      
+
       <div class="carousel-wrapper">
         <div class="carousel" id="carousel">
           <div class="carousel__slides" id="slides">
@@ -258,12 +301,12 @@ $noticias = $noticia->buscarTodasOrdenadas();
   <div class="modal-custom" id="modalNoticia">
     <div class="modal-content-custom modal-noticia">
       <button class="close-modal-btn" onclick="fecharModalNoticia()">&times;</button>
-      
+
       <div class="modal-noticia-content">
         <div class="modal-noticia-image">
           <img id="modalNoticiaImg" src="" alt="Imagem da notícia">
         </div>
-        
+
         <div class="modal-noticia-body">
           <div class="modal-noticia-meta">
             <span class="modal-category-badge" id="modalNoticiaCategoria">
@@ -275,11 +318,11 @@ $noticias = $noticia->buscarTodasOrdenadas();
               <span id="modalNoticiaTempoText"></span>
             </span>
           </div>
-          
+
           <h2 class="modal-noticia-title" id="modalNoticiaTitulo"></h2>
-          
+
           <div class="modal-noticia-text" id="modalNoticiaTexto"></div>
-          
+
           <div class="modal-noticia-actions">
             <div class="modal-noticia-stats">
               <span class="modal-stat">
@@ -295,7 +338,7 @@ $noticias = $noticia->buscarTodasOrdenadas();
                 <span id="modalNoticiaLikes"><?= rand(10, 200) ?></span> curtidas
               </span>
             </div>
-            
+
             <div class="modal-noticia-buttons">
               <button class="btn-share" onclick="compartilharNoticia()">
                 <i class="fas fa-share me-2"></i>
