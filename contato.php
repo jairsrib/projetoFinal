@@ -45,7 +45,7 @@ require_once './header.php';
             </form>
         </div>
 
-        <a href="dashboard.php" class="voltar-link"><i class="fas fa-arrow-left"></i> Voltar ao Dashboard</a>
+        <a href="index.php" class="voltar-link"><i class="fas fa-arrow-left"></i> Voltar ao Dashboard</a>
 
     </div>
 

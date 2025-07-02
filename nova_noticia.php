@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_tipo'] ?? '', ['admin', 'autor'])) {
     $_SESSION['mensagem'] = 'Acesso restrito: apenas ADMIN ou AUTOR podem adicionar notícias.';
     $_SESSION['tipo_mensagem'] = 'danger';
-    header('Location: dashboard.php');
+    header('Location: index.php');
     exit();
 }
 include_once './classes/Usuario.php';

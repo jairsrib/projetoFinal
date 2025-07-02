@@ -13,7 +13,7 @@
 <div class="sidebar" id="sidebar">
   <h2>Menu</h2>
   <ul>
-    <li><a href="dashboard.php"><i data-lucide="home"></i> Início</a></li>
+    <li><a href="index.php"><i data-lucide="home"></i> Início</a></li>
     <li><a href="painel_usuario.php"><i data-lucide="user"></i>Painel de Usuário</a></li>
     <li><a href="lista_usuarios.php"><i data-lucide="users"></i>Lista de Usuários</a></li>
     <li><a href="contato.php"><i data-lucide="mail"></i> Contato</a></li>

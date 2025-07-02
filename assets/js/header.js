@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function marcarPaginaAtual() {
-  const currentPage = window.location.pathname.split('/').pop() || 'dashboard.php';
+  const currentPage = window.location.pathname.split('/').pop() || 'index.php';
   const sidebarLinks = document.querySelectorAll('.sidebar ul li a');
   
   sidebarLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'dashboard.php')) {
+    if (href === currentPage || (currentPage === '' && href === 'index.php')) {
       link.classList.add('active');
     }
   });

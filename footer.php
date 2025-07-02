@@ -20,7 +20,7 @@
         <div class="footer-col">
             <h3><i class="fas fa-info-circle me-2"></i><span>Informações</span></h3>
             <ul class="social">
-                <li><a href="dashboard.php"><i class="fas fa-newspaper me-2"></i>Notícias</a></li>
+                <li><a href="index.php"><i class="fas fa-newspaper me-2"></i>Notícias</a></li>
                 <li><a href="painel_usuario.php"><i class="fas fa-users me-2"></i>Autores</a></li>
                 <li><a href="cadastro.php"><i class="fas fa-user-plus me-2"></i>Cadastrar-se</a></li>
             </ul>

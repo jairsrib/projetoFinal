@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Jun-2025 às 23:59
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Tempo de geração: 02-Jul-2025 às 02:44
+-- Versão do servidor: 10.4.25-MariaDB
+-- versão do PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,13 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `anuncio`
+--
+
+CREATE TABLE `anuncio` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `imagem` varchar(255) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `texto` varchar(100) DEFAULT NULL,
+  `ativo` tinyint(4) DEFAULT NULL,
+  `destaque` tinyint(4) DEFAULT NULL,
+  `data_cadastro` datetime DEFAULT NULL,
+  `valor_anuncio` double DEFAULT NULL,
+  `anunciante_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `categorias`
 --
 
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `categorias`
@@ -56,7 +75,7 @@ CREATE TABLE `noticias` (
   `autor_id` int(50) DEFAULT NULL,
   `categoria` varchar(255) DEFAULT NULL,
   `imagem` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `noticias`
@@ -88,7 +107,7 @@ CREATE TABLE `usuarios` (
   `senha` varchar(255) NOT NULL,
   `tipo` varchar(20) NOT NULL DEFAULT 'usuario',
   `imagem_perfil` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -103,6 +122,13 @@ INSERT INTO `usuarios` (`id`, `nome`, `sexo`, `fone`, `email`, `senha`, `tipo`, 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices para tabela `anuncio`
+--
+ALTER TABLE `anuncio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `anunciante_id` (`anunciante_id`);
 
 --
 -- Índices para tabela `categorias`
@@ -128,6 +154,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de tabela `anuncio`
+--
+ALTER TABLE `anuncio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
@@ -144,6 +176,16 @@ ALTER TABLE `noticias`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `anuncio`
+--
+ALTER TABLE `anuncio`
+  ADD CONSTRAINT `anuncio_ibfk_1` FOREIGN KEY (`anunciante_id`) REFERENCES `usuarios` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

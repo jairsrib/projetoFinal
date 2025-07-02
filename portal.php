@@ -62,7 +62,7 @@ $result = $conn->query($sql);
  <h1><?php echo saudacao() . ", " . $nome_usuario; ?>!</h1>
  <a href="cadastro.php">Adicionar Usuário</a>
  <a href="logout.php">Logout</a>
- <a href="dashboard.php">Dashboard</a>
+ <a href="index.php">Dashboard</a>
  <a href="painel_usuario.php">Painel de Usuario</a>
 <br>
  <table border="1">

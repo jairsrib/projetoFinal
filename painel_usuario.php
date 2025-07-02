@@ -193,7 +193,7 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
                   <h5 class="text-muted mt-3">Nenhuma notícia encontrada</h5>
                   <p class="text-muted">Comece criando sua primeira notícia!</p>
                   <?php if (in_array($_SESSION['usuario_tipo'] ?? '', ['admin', 'autor'])): ?>
-                    <button class="btn btn-pink" onclick="document.querySelector('[data-bs-target='#noticia']').click()">
+                    <button class="btn btn-pink" onclick="document.querySelector('[data-bs-target=\'#noticia\']').click()">
                       <i class="fas fa-plus me-2"></i>Criar Notícia
                     </button>
                   <?php endif; ?>
