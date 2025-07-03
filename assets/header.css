@@ -42,6 +42,39 @@
         font-family: DM Sans, sans-serif;
         margin-top: -20px;
     }
+    
+    /* Estilos para integração da previsão do tempo */
+    header {
+        position: relative;
+    }
+    
+    .previsao-do-tempo {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+    }
+    
+    @media (max-width: 768px) {
+        .previsao-do-tempo {
+            position: relative;
+            top: auto;
+            right: auto;
+            margin-top: 15px;
+            order: 3;
+        }
+        
+        .container {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .previsao-do-tempo {
+            margin-top: 10px;
+        }
+    }
     .sidebar {
       position: fixed;
       top: 0;
