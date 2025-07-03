@@ -1,230 +1,259 @@
+/* Estilos para a previsão do tempo no header */
+.previsao-do-tempo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
 .card-time-cloud {
   position: relative;
-  border-radius: 1em;
-  width: 17.5em;
-  height: 7.5em;
-  z-index: 2;
-  border: solid 0.1em lightgrey;
-  transition: 0.5s all ease-in-out;
-  box-shadow: 0em 0em rgb(0, 0, 0, 0.25);
+  border-radius: 16px;
+  width: 200px;
+  height: 80px;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
   overflow: hidden;
-}
-
-.card-time-cloud-front {
-  width: 20em;
-  height: 12.5em;
-  background: lightgray;
-  border-radius: 1em;
-  position: absolute;
-  z-index: 2;
-  top: 95%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: 0.5s all ease-in-out;
-}
-
-.card-time-cloud-back {
-  width: 20em;
-  height: 12.5em;
-  background: rgb(136, 135, 141);
-  border-radius: 1em;
-  position: absolute;
-  z-index: 1;
-  top: 57.5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: 0.5s all ease-in-out;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .card-time-cloud:hover {
-  margin-bottom: 1em;
-  box-shadow: 0em 1em rgb(0, 0, 0, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 8, 75, 0.3);
 }
 
-.card-time-cloud:hover .card-time-cloud-front {
-  top: 105%;
+.card-time-cloud-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  height: 100%;
 }
 
-.card-time-cloud:hover .card-time-cloud-back {
-  filter: blur(1em);
-}
-
-.card-time-cloud-back svg {
-  position: absolute;
-  z-index: 1;
-  top: -5em;
-  left: -2.5em;
-  width: 25em;
-  height: auto;
-  opacity: 50%;
-  animation: rotate-cloud 15s linear infinite;
-  filter: blur(1.5em);
-}
-
-@keyframes rotate-cloud {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.card-time-cloud-rain {
-  width: 0.15em;
-  height: 2em;
-  background: linear-gradient(lightgray, #4a4b5500);
-  z-index: 1;
-  position: absolute;
-  top: -5em;
-  transform: rotate(-20deg) translate(-2em);
-}
-
-.card-time-cloud:hover .card-time-cloud-rain {
-  animation: rain-effect 1s linear infinite;
-}
-
-@keyframes rain-effect {
-  0% {
-    top: -5em;
-    left: 0em;
-    opacity: 50%;
-  }
-  90% {
-    top: 12.5em;
-    left: 6em;
-    opacity: 0%;
-  }
-  100% {
-    top: -5em;
-    left: 0em;
-    opacity: 0%;
-  }
-}
-
-.card-time-cloud-rain:nth-child(2) {
-  transform: rotate(-20deg) translate(-0.5em);
-}
-.card-time-cloud-rain:nth-child(3) {
-  transform: rotate(-20deg) translate(1.5em);
-}
-.card-time-cloud-rain:nth-child(4) {
-  transform: rotate(-20deg) translate(3em);
-}
-.card-time-cloud-rain:nth-child(5) {
-  transform: rotate(-20deg) translate(4.5em);
-}
-.card-time-cloud-rain:nth-child(6) {
-  transform: rotate(-20deg) translate(6em);
-}
-.card-time-cloud-rain:nth-child(7) {
-  transform: rotate(-20deg) translate(8.5em);
-}
-.card-time-cloud-rain:nth-child(8) {
-  transform: rotate(-20deg) translate(10em);
-}
-.card-time-cloud-rain:nth-child(9) {
-  transform: rotate(-20deg) translate(12em);
-}
-.card-time-cloud-rain:nth-child(10) {
-  transform: rotate(-20deg) translate(14em);
-}
-
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(2),
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(6) {
-  animation: rain-effect 1s linear infinite 0.25s;
-}
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(3),
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(7) {
-  animation: rain-effect 1s linear infinite 0.45s;
-}
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(4),
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(8) {
-  animation: rain-effect 1s linear infinite 0.35s;
-}
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(5),
-.card-time-cloud:hover .card-time-cloud-rain:nth-child(9) {
-  animation: rain-effect 1s linear infinite 0.7s;
+.card-time-cloud-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .card-time-cloud-day {
-  color: rgb(136, 135, 141);
-  position: absolute;
-  z-index: 3;
-  top: 1.25em;
-  left: 0.5em;
-  font-size: 1.5em;
-  font-weight: bold;
-  transition: 0.5s all ease-in-out;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .card-time-cloud-day-number {
-  color: rgb(136, 135, 141);
-  position: absolute;
-  z-index: 3;
-  top: 3em;
-  left: 0.65em;
-  font-size: 1.25em;
-  transition: 0.5s all ease-in-out;
-  font-weight: 500;
+  color: #cccccc;
+  font-size: 12px;
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .card-time-cloud-hour {
-  color: rgb(136, 135, 141);
-  position: absolute;
-  z-index: 3;
-  top: 1.25em;
-  right: 0.5em;
-  font-size: 1.5em;
-  font-weight: bold;
-  transition: 0.5s all ease-in-out;
+  color: #FF084B;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
 }
 
-.card-time-cloud:hover {
-  height: 14em;
+.card-time-cloud-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
 }
 
-.card-time-cloud:hover .card-time-cloud-hour {
-  top: 0.5em;
-  font-size: 3em;
-}
-.card-time-cloud:hover .card-time-cloud-day,
-.card-time-cloud:hover .card-time-cloud-day-number,
-.card-time-cloud:hover .card-time-cloud-hour {
-  color: #4a4b55;
-}
 .card-time-cloud-icon svg {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.card-time-cloud-background {
   position: absolute;
-  z-index: 4;
-  top: 4em;
-  right: 0.6em;
-  transform: rotate(0deg);
-  width: 1.5em;
-  height: auto;
-  transition: 0.5s all ease-in-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  overflow: hidden;
 }
 
-.card-time-cloud:hover .card-time-cloud-icon svg {
-  top: 7.25em;
-  right: -1.75em;
-  width: 7.5em;
-  height: auto;
-  transform: rotate(-35deg);
-}
-.card-time-cloud:active {
-  transition: 0.25s all ease-in-out;
-  transform: scale(0.95);
+.card-time-cloud-background svg {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  animation: float-cloud 6s ease-in-out infinite;
 }
 
-.card-time-cloud:active .card-time-cloud-front {
-  transition: 0.25s all ease-in-out;
-  top: 120%;
-  background-color: #4a4b55;
+@keyframes float-cloud {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
 }
 
-.card-time-cloud:active .card-time-cloud-icon svg {
-  transition: 0.25s all ease-in-out;
-  top: 8em;
-  transform: rotate(-25deg);
-  stroke: #4a4b55;
+.card-time-cloud-rain-group {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-time-cloud:hover .card-time-cloud-rain-group {
+  opacity: 1;
+}
+
+.card-time-cloud-rain {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 1px;
+  animation: rain-fall 1.5s linear infinite;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-20px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px) translateX(10px);
+    opacity: 0;
+  }
+}
+
+/* Posicionamento das gotas de chuva */
+.card-time-cloud-rain:nth-child(1) { left: 10%; animation-delay: 0s; }
+.card-time-cloud-rain:nth-child(2) { left: 20%; animation-delay: 0.2s; }
+.card-time-cloud-rain:nth-child(3) { left: 30%; animation-delay: 0.4s; }
+.card-time-cloud-rain:nth-child(4) { left: 40%; animation-delay: 0.1s; }
+.card-time-cloud-rain:nth-child(5) { left: 50%; animation-delay: 0.3s; }
+.card-time-cloud-rain:nth-child(6) { left: 60%; animation-delay: 0.5s; }
+.card-time-cloud-rain:nth-child(7) { left: 70%; animation-delay: 0.2s; }
+.card-time-cloud-rain:nth-child(8) { left: 80%; animation-delay: 0.4s; }
+.card-time-cloud-rain:nth-child(9) { left: 90%; animation-delay: 0.1s; }
+.card-time-cloud-rain:nth-child(10) { left: 95%; animation-delay: 0.3s; }
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .previsao-do-tempo {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 15px;
+  }
+  
+  .card-time-cloud {
+    width: 180px;
+    height: 70px;
+  }
+  
+  .card-time-cloud-content {
+    padding: 10px 12px;
+  }
+  
+  .card-time-cloud-day {
+    font-size: 12px;
+  }
+  
+  .card-time-cloud-day-number {
+    font-size: 10px;
+  }
+  
+  .card-time-cloud-hour {
+    font-size: 14px;
+  }
+  
+  .card-time-cloud-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .card-time-cloud-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .previsao-do-tempo {
+    margin-top: 10px;
+  }
+  
+  .card-time-cloud {
+    width: 160px;
+    height: 65px;
+  }
+  
+  .card-time-cloud-content {
+    padding: 8px 10px;
+  }
+  
+  .card-time-cloud-day {
+    font-size: 11px;
+  }
+  
+  .card-time-cloud-day-number {
+    font-size: 9px;
+  }
+  
+  .card-time-cloud-hour {
+    font-size: 13px;
+  }
+  
+  .card-time-cloud-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .card-time-cloud-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Efeitos de hover aprimorados */
+.card-time-cloud:hover .card-time-cloud-background svg {
+  animation: float-cloud 3s ease-in-out infinite;
+}
+
+.card-time-cloud:hover .card-time-cloud-icon {
+  background: rgba(255, 8, 75, 0.2);
+  transform: scale(1.1);
+}
+
+.card-time-cloud:hover .card-time-cloud-hour {
+  color: #ff6b6b;
+  text-shadow: 0 0 10px rgba(255, 8, 75, 0.5);
 }
