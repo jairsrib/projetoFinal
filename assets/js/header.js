@@ -3,12 +3,12 @@ function toggleSidebar() {
   const overlay = document.getElementById("overlay");
   const btnHamburger = document.getElementById("btn-hamburguer");
   
-  sidebar.classList.toggle("active");
+  sidebar.classList.toggle("show");
   overlay.classList.toggle("active");
   
   btnHamburger.classList.toggle("active");
   
-  if (sidebar.classList.contains("active")) {
+  if (sidebar.classList.contains("show")) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && sidebar.classList.contains("active")) {
+    if (event.key === 'Escape' && sidebar.classList.contains("show")) {
       toggleSidebar();
     }
   });

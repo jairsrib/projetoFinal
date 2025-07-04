@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Sistema de Anúncios</title>
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/theme.css">
+    <link rel="stylesheet" href="assets/anuncios.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem;
+        }
+        
+        .teste-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .teste-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .teste-titulo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .teste-subtitulo {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .teste-secoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .teste-secao {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .teste-secao h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .teste-lista {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .teste-lista li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .teste-lista li:last-child {
+            border-bottom: none;
+        }
+        
+        .teste-lista li::before {
+            content: '✅';
+            font-size: 1.2rem;
+        }
+        
+        .teste-botoes {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .teste-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+        }
+        
+        .teste-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.4);
+            color: white;
+        }
+        
+        .teste-btn.secundario {
+            background: var(--bg-secondary);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            box-shadow: none;
+        }
+        
+        .teste-btn.secundario:hover {
+            background: var(--accent-color);
+            color: var(--text-color);
+        }
+        
+        .teste-info {
+            background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.1), rgba(var(--secondary-color-rgb), 0.1));
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .teste-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .teste-info p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .teste-secoes {
+                grid-template-columns: 1fr;
+            }
+            
+            .teste-botoes {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .teste-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="teste-container">
+        <div class="teste-header">
+            <h1 class="teste-titulo">Sistema de Anúncios CRUD</h1>
+            <p class="teste-subtitulo">Demonstração completa do sistema de gerenciamento de anúncios</p>
+        </div>
+        
+        <div class="teste-info">
+            <h4>📋 Sobre o Sistema</h4>
+            <p>
+                Este sistema implementa um CRUD completo para anúncios usando PHP e JSON como banco de dados. 
+                Inclui funcionalidades de destaque visual, popup promocional, categorização e painel administrativo.
+            </p>
+        </div>
+        
+        <div class="teste-secoes">
+            <div class="teste-secao">
+                <h3>🎯 Funcionalidades Implementadas</h3>
+                <ul class="teste-lista">
+                    <li>CRUD completo (Create, Read, Update, Delete)</li>
+                    <li>Armazenamento em JSON</li>
+                    <li>Sistema de destaque visual</li>
+                    <li>Popup promocional aleatório</li>
+                    <li>Categorização de anúncios</li>
+                    <li>Controle de ativo/inativo</li>
+                    <li>Sistema de prioridades</li>
+                    <li>Painel administrativo</li>
+                    <li>Design responsivo</li>
+                    <li>Integração com tema dark/light</li>
+                </ul>
+            </div>
+            
+            <div class="teste-secao">
+                <h3>🔧 Tecnologias Utilizadas</h3>
+                <ul class="teste-lista">
+                    <li>PHP 7.4+ (Backend)</li>
+                    <li>JSON (Banco de dados)</li>
+                    <li>HTML5 (Estrutura)</li>
+                    <li>CSS3 (Estilização)</li>
+                    <li>JavaScript (Interatividade)</li>
+                    <li>Responsive Design</li>
+                    <li>CSS Variables (Temas)</li>
+                    <li>CSS Animations</li>
+                    <li>REST API</li>
+                    <li>LocalStorage (Persistência)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="teste-botoes">
+            <a href="index.php" class="teste-btn">
+                🏠 Ver Anúncios na Página Principal
+            </a>
+            <a href="admin/anuncios.php" class="teste-btn">
+                ⚙️ Painel Administrativo
+            </a>
+            <a href="api/anuncios.php" class="teste-btn secundario">
+                🔌 API REST
+            </a>
+            <a href="data/anuncios.json" class="teste-btn secundario" target="_blank">
+                📄 Ver Dados JSON
+            </a>
+        </div>
+        
+        <div class="teste-info">
+            <h4>📖 Como Usar</h4>
+            <p>
+                <strong>1. Visualização:</strong> Acesse a página principal para ver os anúncios ativos com destaque visual.<br>
+                <strong>2. Popup:</strong> Um anúncio aleatório aparecerá em popup após 2-5 segundos.<br>
+                <strong>3. Administração:</strong> Use o painel admin para criar, editar e excluir anúncios.<br>
+                <strong>4. API:</strong> Consuma a API REST para integração com outros sistemas.
+            </p>
+        </div>
+        
+        <div class="teste-info">
+            <h4>🎨 Recursos Visuais</h4>
+            <p>
+                <strong>Destaque:</strong> Anúncios marcados como destaque têm animação de pulso e borda especial.<br>
+                <strong>Categorias:</strong> Cada categoria tem cores diferentes (lançamento, promoção, evento, etc.).<br>
+                <strong>Responsivo:</strong> Layout se adapta a diferentes tamanhos de tela.<br>
+                <strong>Temas:</strong> Suporte completo aos temas dark e light do projeto.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Simular carregamento da página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Sistema de Anúncios carregado com sucesso!');
+            console.log('📊 Funcionalidades disponíveis:');
+            console.log('- CRUD completo via PHP/JSON');
+            console.log('- API REST em api/anuncios.php');
+            console.log('- Painel admin em admin/anuncios.php');
+            console.log('- Renderização em includes/anuncios_render.php');
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Header</title>
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/theme.css">
+    <link rel="stylesheet" href="assets/header.css">
+    <style>
+        body {
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .teste-content {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .teste-info {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <?php include_once 'header.php'; ?>
+    
+    <div class="teste-content">
+        <div class="teste-info">
+            <h2>Teste do Header</h2>
+            <p>Se você consegue ver o header acima com o logo "Caiu o Servidor" e o menu hambúrguer, então está funcionando corretamente.</p>
+            <p>O header deve ter:</p>
+            <ul>
+                <li>Fundo escuro</li>
+                <li>Logo e título em branco</li>
+                <li>Botão hambúrguer no canto esquerdo</li>
+                <li>Previsão do tempo no canto direito</li>
+                <li>Menu lateral que abre ao clicar no hambúrguer</li>
+            </ul>
+        </div>
+        
+        <div class="teste-info">
+            <h3>Teste do Menu Lateral</h3>
+            <p>Clique no botão hambúrguer (☰) no canto esquerdo do header para abrir o menu lateral.</p>
+            <p>O menu deve conter links para:</p>
+            <ul>
+                <li>Início</li>
+                <li>Painel de Usuário</li>
+                <li>Lista de Usuários</li>
+                <li>Contato</li>
+                <li>Cadastrar Anúncio</li>
+                <li>Sair</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+</html> 

@@ -2,7 +2,7 @@
 .previsao-do-tempo {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 90px;
   z-index: 10;
 }
 
@@ -11,9 +11,9 @@
   border-radius: 16px;
   width: 200px;
   height: 80px;
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: var(--weather-bg);
+  border: 1px solid var(--weather-border);
+  box-shadow: var(--weather-shadow);
   backdrop-filter: blur(10px);
   overflow: hidden;
   transition: all 0.3s ease;
@@ -23,8 +23,8 @@
 
 .card-time-cloud:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  border-color: rgba(255, 8, 75, 0.3);
+  box-shadow: var(--shadow-secondary);
+  border-color: var(--border-accent);
 }
 
 .card-time-cloud-content {
@@ -44,7 +44,7 @@
 }
 
 .card-time-cloud-day {
-  color: #ffffff;
+  color: var(--weather-text-primary);
   font-size: 14px;
   font-weight: 600;
   margin: 0;
@@ -52,14 +52,14 @@
 }
 
 .card-time-cloud-day-number {
-  color: #cccccc;
+  color: var(--weather-text-secondary);
   font-size: 12px;
   margin: 0;
   font-family: 'DM Sans', sans-serif;
 }
 
 .card-time-cloud-hour {
-  color: #FF084B;
+  color: var(--weather-text-accent);
   font-size: 16px;
   font-weight: 700;
   margin: 0;
@@ -72,7 +72,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--weather-icon-bg);
   border-radius: 50%;
   backdrop-filter: blur(5px);
 }
@@ -172,6 +172,7 @@
     top: auto;
     right: auto;
     margin-top: 15px;
+    margin-right: 0;
   }
   
   .card-time-cloud {

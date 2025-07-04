@@ -1,8 +1,8 @@
 .footer {
-  color: white;
+  color: var(--text-white);
   padding: 60px 20px 30px;
   font-family: "DM Sans", sans-serif;
-  background: linear-gradient(180deg, #171717 0%, #0f0f0f 100%);
+  background: var(--bg-sidebar);
   position: relative;
   overflow: hidden;
 }

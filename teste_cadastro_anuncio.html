@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Sistema de Cadastro de Anúncios</title>
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/theme.css">
+    <link rel="stylesheet" href="assets/anuncios.css">
+    <link rel="stylesheet" href="assets/cadastro-anuncio.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 2vw;
+        }
+        
+        .teste-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2vw;
+        }
+        
+        .teste-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .teste-titulo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .teste-subtitulo {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .teste-secoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .teste-secao {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .teste-secao h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .teste-lista {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .teste-lista li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .teste-lista li:last-child {
+            border-bottom: none;
+        }
+        
+        .teste-lista li::before {
+            content: '✅';
+            font-size: 1.2rem;
+        }
+        
+        .teste-botoes {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .teste-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+        }
+        
+        .teste-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.4);
+            color: white;
+        }
+        
+        .teste-btn.secundario {
+            background: var(--bg-secondary);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            box-shadow: none;
+        }
+        
+        .teste-btn.secundario:hover {
+            background: var(--accent-color);
+            color: var(--text-color);
+        }
+        
+        .teste-info {
+            background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.1), rgba(var(--secondary-color-rgb), 0.1));
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .teste-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .teste-info p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .campos-demo {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .campo-demo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .campo-demo:last-child {
+            border-bottom: none;
+        }
+        
+        .campo-nome {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .campo-tipo {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .campo-obrigatorio {
+            color: #f44336;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 900px) {
+            .teste-secoes {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .teste-header {
+                margin-bottom: 1.5rem;
+            }
+            .teste-titulo {
+                font-size: 1.5rem;
+            }
+            .teste-secao {
+                padding: 1rem;
+            }
+            .teste-info {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .teste-titulo {
+                font-size: 1.1rem;
+            }
+            .teste-secao {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="teste-container">
+        <div class="teste-header">
+            <h1 class="teste-titulo">Sistema de Cadastro de Anúncios</h1>
+            <p class="teste-subtitulo">Modal de cadastro integrado ao sidebar do header</p>
+        </div>
+        
+        <div class="teste-info">
+            <h4>📋 Sobre o Sistema</h4>
+            <p>
+                Sistema completo de cadastro de anúncios via modal, integrado ao sidebar do header. 
+                Permite cadastrar anúncios com todos os campos necessários e validação em tempo real.
+            </p>
+        </div>
+        
+        <div class="teste-secoes">
+            <div class="teste-secao">
+                <h3>🎯 Funcionalidades do Modal</h3>
+                <ul class="teste-lista">
+                    <li>Formulário completo com validação</li>
+                    <li>Campos obrigatórios marcados</li>
+                    <li>Validação de URLs em tempo real</li>
+                    <li>Preview de imagem</li>
+                    <li>Envio via AJAX</li>
+                    <li>Feedback visual de sucesso/erro</li>
+                    <li>Controle de data de cadastro</li>
+                    <li>Valor do anúncio (decimal)</li>
+                    <li>Controle de ativo/destaque</li>
+                    <li>Design responsivo</li>
+                </ul>
+            </div>
+            
+            <div class="teste-secao">
+                <h3>🔧 Campos do Formulário</h3>
+                <div class="campos-demo">
+                    <div class="campo-demo">
+                        <span class="campo-nome">Nome da Empresa</span>
+                        <div>
+                            <span class="campo-tipo">texto</span>
+                            <span class="campo-obrigatorio">*</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">URL da Imagem</span>
+                        <div>
+                            <span class="campo-tipo">url</span>
+                            <span class="campo-obrigatorio">*</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">URL de Destino</span>
+                        <div>
+                            <span class="campo-tipo">url</span>
+                            <span class="campo-obrigatorio">*</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">Texto/Slogan</span>
+                        <div>
+                            <span class="campo-tipo">textarea</span>
+                            <span class="campo-obrigatorio">*</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">Data de Cadastro</span>
+                        <div>
+                            <span class="campo-tipo">datetime-local</span>
+                            <span class="campo-obrigatorio">*</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">Valor do Anúncio</span>
+                        <div>
+                            <span class="campo-tipo">number</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">Categoria</span>
+                        <div>
+                            <span class="campo-tipo">select</span>
+                        </div>
+                    </div>
+                    <div class="campo-demo">
+                        <span class="campo-nome">Ativo/Destaque</span>
+                        <div>
+                            <span class="campo-tipo">checkbox</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="teste-botoes">
+            <button class="teste-btn" onclick="abrirModalCadastroAnuncio()">
+                📢 Abrir Modal de Cadastro
+            </button>
+            <a href="index.php" class="teste-btn">
+                🏠 Ver Anúncios na Página Principal
+            </a>
+            <a href="admin/anuncios.php" class="teste-btn secundario">
+                ⚙️ Painel Administrativo
+            </a>
+            <a href="data/anuncios.json" class="teste-btn secundario" target="_blank">
+                📄 Ver Dados JSON
+            </a>
+        </div>
+        
+        <div class="teste-info">
+            <h4>📖 Como Usar</h4>
+            <p>
+                <strong>1. Abrir Modal:</strong> Clique no botão "Cadastrar Anúncio" no sidebar ou no botão acima.<br>
+                <strong>2. Preencher Formulário:</strong> Todos os campos obrigatórios estão marcados com *.<br>
+                <strong>3. Validação:</strong> URLs são validadas automaticamente e preview de imagem é exibido.<br>
+                <strong>4. Envio:</strong> Clique em "Cadastrar Anúncio" para enviar via AJAX.<br>
+                <strong>5. Feedback:</strong> Mensagem de sucesso ou erro é exibida automaticamente.
+            </p>
+        </div>
+        
+        <div class="teste-info">
+            <h4>🎨 Recursos Visuais</h4>
+            <p>
+                <strong>Modal Responsivo:</strong> Se adapta a diferentes tamanhos de tela.<br>
+                <strong>Animações:</strong> Fade-in/out e slide-up ao abrir/fechar.<br>
+                <strong>Validação Visual:</strong> Campos com erro ficam vermelhos, válidos ficam verdes.<br>
+                <strong>Loading State:</strong> Botão mostra spinner durante o envio.<br>
+                <strong>Feedback Toast:</strong> Notificações elegantes de sucesso/erro.
+            </p>
+        </div>
+        
+        <div class="teste-info">
+            <h4>🔒 Validações Implementadas</h4>
+            <p>
+                <strong>Campos Obrigatórios:</strong> Nome, imagem, link, texto, data de cadastro.<br>
+                <strong>URLs Válidas:</strong> Validação de formato de URL para imagem e destino.<br>
+                <strong>Limites de Caracteres:</strong> Nome (100), texto (200).<br>
+                <strong>Valor Positivo:</strong> Valor do anúncio deve ser número positivo.<br>
+                <strong>Data Futura:</strong> Data de cadastro pode ser futura (agendamento).
+            </p>
+        </div>
+    </div>
+    
+    <!-- Incluir o modal do header -->
+    <script>
+        // Simular carregamento da página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Sistema de Cadastro de Anúncios carregado!');
+            console.log('📊 Funcionalidades disponíveis:');
+            console.log('- Modal de cadastro integrado');
+            console.log('- Validação em tempo real');
+            console.log('- Envio via AJAX');
+            console.log('- Feedback visual');
+        });
+        
+        // Função para abrir modal (será substituída pelo header)
+        function abrirModalCadastroAnuncio() {
+            alert('Esta função será executada quando o header estiver carregado.\n\nPara testar completamente, acesse a página principal (index.php) e use o botão "Cadastrar Anúncio" no sidebar.');
+        }
+    </script>
+</body>
+</html> 
