@@ -1,23 +1,31 @@
+<?php include_once 'config/theme_config.php'; ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" <?php echo getThemeDataAttribute(); ?>>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inicio</title>
   <link rel="stylesheet" href="assets/reset.css" />
+  <link rel="stylesheet" href="assets/theme.css" />
   <link rel="stylesheet" href="assets/header.css" />
   <link rel="stylesheet" href="assets/previsao.css">
+  <link rel="stylesheet" href="assets/cadastro-anuncio.css">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/theme.js"></script>
 </head>
 <body>
 
 <div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="img/logo.png" alt="Logo">
+  </div>
   <h2>Menu</h2>
   <ul>
     <li><a href="index.php"><i data-lucide="home"></i> Início</a></li>
     <li><a href="painel_usuario.php"><i data-lucide="user"></i>Painel de Usuário</a></li>
     <li><a href="lista_usuarios.php"><i data-lucide="users"></i>Lista de Usuários</a></li>
     <li><a href="contato.php"><i data-lucide="mail"></i> Contato</a></li>
+    <li><a href="#" onclick="abrirModalCadastroAnuncio()"><i data-lucide="plus-circle"></i> Cadastrar Anúncio</a></li>
     <li><a href="logout.php"><i data-lucide="log-out"></i> Sair</a></li>
   </ul>
 </div>
@@ -73,8 +81,118 @@
 
   </div>
 </header>
+
 <script src="./assets/js/weather-config.js"></script>
 <script src="./assets/js/header.js"></script>
 <script src="./assets/js/weather.js"></script>
+
+<div id="modal-cadastro-anuncio" class="modal-cadastro-anuncio">
+  <div class="modal-cadastro-content">
+    <div class="modal-cadastro-header">
+      <h2>📢 Cadastrar Novo Anúncio</h2>
+      <button class="modal-cadastro-close" onclick="fecharModalCadastroAnuncio()">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    
+    <form id="form-cadastro-anuncio" class="form-cadastro-anuncio">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nome">Nome da Empresa *</label>
+          <input type="text" id="nome" name="nome" required maxlength="100" placeholder="Digite o nome da empresa">
+        </div>
+        
+        <div class="form-group">
+          <label for="valorAnuncio">Valor do Anúncio (R$)</label>
+          <input type="number" id="valorAnuncio" name="valorAnuncio" min="0" step="0.01" placeholder="0.00">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="imagem">Imagem/Banner do Anúncio *</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required>
+        <small>Selecione uma imagem (JPG, PNG, GIF - Máx: 2MB)</small>
+        <div class="image-preview hidden">
+          <img src="" alt="Preview da imagem">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="link">URL de Destino *</label>
+        <input type="url" id="link" name="link" required placeholder="https://exemplo.com/promocao">
+        <small>Link para onde o usuário será direcionado ao clicar</small>
+      </div>
+      
+      <div class="form-group">
+        <label for="texto">Texto/Slogan *</label>
+        <textarea id="texto" name="texto" required maxlength="200" placeholder="Digite o slogan ou mensagem do anúncio" rows="3"></textarea>
+        <small>Máximo 200 caracteres</small>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="data_cadastro">Data de Cadastro *</label>
+          <input type="datetime-local" id="data_cadastro" name="data_cadastro" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria">
+            <option value="geral">Geral</option>
+            <option value="lançamento">Lançamento</option>
+            <option value="promoção">Promoção</option>
+            <option value="evento">Evento</option>
+            <option value="sistema">Sistema</option>
+            <option value="comunidade">Comunidade</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prioridade">Prioridade</label>
+          <select id="prioridade" name="prioridade">
+            <option value="1">Alta (1)</option>
+            <option value="2">Média (2)</option>
+            <option value="3" selected>Baixa (3)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="data_expiracao">Data de Expiração</label>
+          <input type="datetime-local" id="data_expiracao" name="data_expiracao">
+        </div>
+      </div>
+      
+      <div class="form-checkboxes">
+        <div class="form-checkbox">
+          <input type="checkbox" id="ativo" name="ativo" checked>
+          <label for="ativo">Ativo</label>
+        </div>
+        
+        <div class="form-checkbox">
+          <input type="checkbox" id="destaque" name="destaque">
+          <label for="destaque">Destaque</label>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="btn-cancelar" onclick="fecharModalCadastroAnuncio()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-salvar">
+          <i data-lucide="save"></i>
+          Cadastrar Anúncio
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Feedback de Sucesso/Erro -->
+<div id="feedback-message" class="feedback-message"></div>
+
+<script src="./assets/js/header.js"></script>
+<script src="./assets/js/cadastro-anuncio.js"></script>
 </body>
 </html>

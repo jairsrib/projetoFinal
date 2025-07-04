@@ -12,7 +12,7 @@
   flex-direction: column;
   gap: 10px;
   max-width: 350px;
-  background-color: #171717;
+  background-color: var(--bg-card);
   padding: 20px;
   border-radius: 20px;
   position: relative;
@@ -23,7 +23,7 @@
 .title {
   font-family: DM Sans, sans-serif;
   font-size: 28px;
-  color: white;
+  color: var(--text-white);
   font-weight: 600;
   letter-spacing: -1px;
   position: relative;

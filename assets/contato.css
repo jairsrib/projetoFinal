@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'DM Sans', sans-serif;
-  background-color: #171717;
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-white);
 }
 
 .contato-container {

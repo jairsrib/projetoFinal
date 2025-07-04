@@ -2,6 +2,7 @@
 session_start();
 include_once "./config/config.php";
 include_once "./classes/Usuario.php";
+include_once "./config/theme_config.php";
 $usuario = new Usuario($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -22,12 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br" <?php echo getThemeDataAttribute(); ?>>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link rel="stylesheet" href="assets/theme.css">
   <link rel="stylesheet" href="assets/tela_login.css">
 </head>
 
@@ -62,17 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </div>
 
-  <div id="modalEsqueci" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
-    <div style="background:#fff;padding:2rem;border-radius:12px;max-width:400px;margin:10vh auto;position:relative;">
-      <button onclick="document.getElementById('modalEsqueci').style.display='none'" style="position:absolute;top:10px;right:15px;background:none;border:none;font-size:1.5rem;">&times;</button>
-      <h2 style="color:#FF084B;">Recuperar Senha</h2>
+  <div id="modalEsqueci" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--overlay-bg);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-card);padding:2rem;border-radius:12px;max-width:400px;margin:10vh auto;position:relative;color:var(--text-primary);">
+      <button onclick="document.getElementById('modalEsqueci').style.display='none'" style="position:absolute;top:10px;right:15px;background:none;border:none;font-size:1.5rem;color:var(--text-primary);">&times;</button>
+      <h2 style="color:var(--text-accent);">Recuperar Senha</h2>
       <form method="post" action="esqueceu_senha.php">
-        <label for="email_rec">Digite seu e-mail cadastrado:</label>
+        <label for="email_rec" style="color:var(--text-primary);">Digite seu e-mail cadastrado:</label>
         <input type="email" name="email_rec" id="email_rec" class="input-field" required style="width:100%;margin:1rem 0;">
         <button type="submit" class="button1" style="width:100%;">Recuperar Senha</button>
       </form>
     </div>
   </div>
+  
+  <script src="assets/js/theme.js"></script>
 </body>
 
 </html>

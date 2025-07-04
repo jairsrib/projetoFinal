@@ -1,0 +1,17 @@
+{
+    "anuncios": [
+        {
+            "id": 1,
+            "nome": "ABC",
+            "imagem": "uploads\/anuncios\/1751588635_image-removebg-preview (2).png",
+            "link": "https:\/\/ge.globo.com\/futebol\/times\/fluminense\/noticia\/2025\/07\/03\/renato-gaucho-eu-queria-ver-um-gringo-fazendo-o-trabalho-que-estou-fazendo-no-fluminense.ghtml",
+            "texto": "dsadasdasdasd",
+            "ativo": 1,
+            "destaque": 1,
+            "data_cadastro": "2025-07-04 00:23:00",
+            "valor_anuncio": 0.02,
+            "anunciante_id": 3
+        }
+    ],
+    "ultima_atualizacao": "2025-07-04T02:23:55+02:00"
+}
