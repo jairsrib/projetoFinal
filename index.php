@@ -350,6 +350,69 @@ $noticias = $noticia->buscarTodasOrdenadas();
               </button>
             </div>
           </div>
+
+          <!-- Seção de Comentários -->
+          <div class="modal-comments-section">
+            <h3 class="comments-title">
+              <i class="fas fa-comments me-2"></i>
+              Comentários (<span id="commentsCount">0</span>)
+            </h3>
+
+            <!-- Formulário de Comentário -->
+            <div class="comment-form-container">
+              <form id="commentForm" class="comment-form" onsubmit="enviarComentario(event)">
+                <div class="comment-input-group">
+                  <textarea 
+                    id="commentText" 
+                    name="commentText" 
+                    placeholder="Escreva seu comentário..." 
+                    required
+                    maxlength="500"
+                  ></textarea>
+                  <div class="comment-input-footer">
+                    <span class="char-count">
+                      <span id="charCount">0</span>/500
+                    </span>
+                    <button type="submit" class="btn-comment-submit">
+                      <i class="fas fa-paper-plane me-1"></i>
+                      Comentar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Lista de Comentários -->
+            <div class="comments-list" id="commentsList">
+              <!-- Comentários serão carregados dinamicamente aqui -->
+            </div>
+
+            <!-- Template de comentário (oculto) -->
+            <template id="commentTemplate">
+              <div class="comment-item">
+                <div class="comment-avatar">
+                  <img src="" alt="Avatar do usuário" class="comment-avatar-img">
+                </div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <span class="comment-author"></span>
+                    <span class="comment-time"></span>
+                  </div>
+                  <div class="comment-text"></div>
+                  <div class="comment-actions">
+                    <button class="btn-comment-like" onclick="curtirComentario(this)">
+                      <i class="fas fa-heart"></i>
+                      <span class="likes-count">0</span>
+                    </button>
+                    <button class="btn-comment-reply" onclick="responderComentario(this)">
+                      <i class="fas fa-reply"></i>
+                      Responder
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
     </div>

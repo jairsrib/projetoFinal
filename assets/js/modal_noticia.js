@@ -26,6 +26,163 @@ function testarModal() {
     }
 }
 
+// Sistema de Comentários
+let currentNoticiaId = null;
+let comments = [];
+
+// Inicializar sistema de comentários
+function initCommentsSystem() {
+  const textarea = document.getElementById('commentText');
+  const charCount = document.getElementById('charCount');
+  
+  if (textarea && charCount) {
+    textarea.addEventListener('input', function() {
+      const length = this.value.length;
+      charCount.textContent = length;
+      
+      // Desabilitar botão se muito longo
+      const submitBtn = document.querySelector('.btn-comment-submit');
+      if (submitBtn) {
+        submitBtn.disabled = length > 500 || length === 0;
+      }
+    });
+  }
+}
+
+// Enviar comentário
+function enviarComentario(event) {
+  event.preventDefault();
+  const textarea = document.getElementById('commentText');
+  const commentText = textarea.value.trim();
+  if (!commentText) return;
+
+  fetch('classes/comentarios.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      noticia_id: currentNoticiaId,
+      texto: commentText
+    })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.sucesso) {
+      comments.unshift(res.comentario);
+      adicionarComentario(res.comentario);
+      atualizarContadorComentarios();
+      textarea.value = '';
+      document.getElementById('charCount').textContent = '0';
+      document.querySelector('.btn-comment-submit').disabled = true;
+      mostrarNotificacao('Comentário enviado com sucesso!', 'success');
+    } else {
+      mostrarNotificacao(res.erro || 'Erro ao comentar', 'error');
+    }
+  });
+}
+
+// Adicionar comentário à interface
+function adicionarComentario(comment) {
+  const commentsList = document.getElementById('commentsList');
+  const template = document.getElementById('commentTemplate');
+  if (!commentsList || !template) return;
+  const commentElement = template.content.cloneNode(true);
+  // Preencher dados do comentário
+  const avatar = commentElement.querySelector('.comment-avatar-img');
+  if (avatar && comment.avatar) {
+    avatar.src = comment.avatar;
+    avatar.style.display = 'block';
+  }
+  commentElement.querySelector('.comment-author').textContent = comment.autor || comment.author || 'Anônimo';
+  commentElement.querySelector('.comment-time').textContent = formatarTempo(comment.data || comment.time);
+  commentElement.querySelector('.comment-text').textContent = comment.texto || comment.text;
+  commentElement.querySelector('.likes-count').textContent = comment.likes || 0;
+  // Adicionar ID para referência
+  const commentItem = commentElement.querySelector('.comment-item');
+  commentItem.dataset.commentId = comment.id;
+  // Inserir no início da lista
+  commentsList.insertBefore(commentElement, commentsList.firstChild);
+}
+
+// Atualizar contador de comentários
+function atualizarContadorComentarios() {
+  const countElement = document.getElementById('commentsCount');
+  if (countElement) {
+    countElement.textContent = comments.length;
+  }
+}
+
+// Curtir comentário
+function curtirComentario(button) {
+  const commentItem = button.closest('.comment-item');
+  const commentId = parseInt(commentItem.dataset.commentId);
+  const likesCount = button.querySelector('.likes-count');
+  
+  // Encontrar comentário
+  const comment = comments.find(c => c.id === commentId);
+  if (!comment) return;
+  
+  if (button.classList.contains('liked')) {
+    // Descurtir
+    button.classList.remove('liked');
+    comment.likes--;
+    mostrarNotificacao('Curtida removida', 'info');
+  } else {
+    // Curtir
+    button.classList.add('liked');
+    comment.likes++;
+    mostrarNotificacao('Comentário curtido!', 'success');
+  }
+  
+  likesCount.textContent = comment.likes;
+}
+
+// Responder comentário
+function responderComentario(button) {
+  const commentItem = button.closest('.comment-item');
+  const commentId = parseInt(commentItem.dataset.commentId);
+  const comment = comments.find(c => c.id === commentId);
+  
+  if (!comment) return;
+  
+  // Focar no textarea e adicionar referência
+  const textarea = document.getElementById('commentText');
+  textarea.focus();
+  textarea.value = `@${comment.author} `;
+  textarea.dispatchEvent(new Event('input')); // Trigger input event
+  
+  mostrarNotificacao(`Respondendo a ${comment.author}`, 'info');
+}
+
+// Formatar tempo relativo
+function formatarTempo(date) {
+  const now = new Date();
+  const diffMs = now - new Date(date);
+  const diffMin = Math.floor(diffMs / (1000 * 60));
+  const diffHoras = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  
+  if (diffMin < 1) return 'Agora mesmo';
+  if (diffMin < 60) return `Há ${diffMin} min`;
+  if (diffHoras < 24) return `Há ${diffHoras}h`;
+  if (diffDias < 7) return `Há ${diffDias} dia${diffDias > 1 ? 's' : ''}`;
+  
+  return new Date(date).toLocaleDateString('pt-BR');
+}
+
+// Carregar comentários reais do backend
+function carregarComentariosExistentes() {
+  if (!currentNoticiaId) return;
+  fetch('classes/comentarios.php?noticia_id=' + encodeURIComponent(currentNoticiaId))
+    .then(r => r.json())
+    .then(lista => {
+      comments = Array.isArray(lista) ? lista : [];
+      const commentsList = document.getElementById('commentsList');
+      if (commentsList) commentsList.innerHTML = '';
+      comments.forEach(adicionarComentario);
+      atualizarContadorComentarios();
+    });
+}
+
 function abrirModalNoticia(id, titulo, texto, categoria, imagem, data) {
     console.log('Função abrirModalNoticia chamada com:', { id, titulo, categoria, imagem, data });
     
@@ -42,6 +199,9 @@ function abrirModalNoticia(id, titulo, texto, categoria, imagem, data) {
         console.error('Modal não encontrado!');
         return;
     }
+    
+    // Salvar ID da notícia atual
+    currentNoticiaId = id;
     
     modalImg.src = 'uploads/' + imagem;
     modalTitulo.textContent = titulo;
@@ -80,6 +240,9 @@ function abrirModalNoticia(id, titulo, texto, categoria, imagem, data) {
     document.body.style.overflow = 'hidden';
     
     document.addEventListener('keydown', fecharComEsc);
+    
+    // Carregar comentários para esta notícia
+    carregarComentariosExistentes();
     
     console.log('Modal aberto com sucesso');
 }
@@ -244,5 +407,8 @@ document.addEventListener('DOMContentLoaded', function() {
     window.curtirNoticia = curtirNoticia;
     window.compartilharNoticia = compartilharNoticia;
     
-    console.log('Funções do modal configuradas globalmente');
-}); 
+        console.log('Funções do modal configuradas globalmente');
+    
+    // Inicializar sistema de comentários
+    initCommentsSystem();
+  }); 
