@@ -1,124 +1,175 @@
-/* Estilos para a previsão do tempo no header */
+/* Estilos para a previsão do tempo no header - Design moderno com glassmorphism */
 .previsao-do-tempo {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 1.5rem;
+  right: 2rem;
   z-index: 10;
 }
 
 .card-time-cloud {
   position: relative;
-  border-radius: 12px;
-  width: 200px;
+  border-radius: 16px;
+  width: 220px;
   height: 100px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border: 1px solid rgba(255, 8, 75, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card-time-cloud:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 8, 75, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 107, 157, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.card-time-cloud:active {
+  transform: translateY(-2px) scale(1.01);
 }
 
 .card-time-cloud-content {
   position: relative;
   z-index: 3;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 18px 20px;
+  padding: 20px 24px;
   height: 100%;
 }
 
 .card-time-cloud-info {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+  flex: 1;
 }
 
 .card-time-cloud-day {
-  color: #ffffff;
-  font-size: 13px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
   font-weight: 600;
   margin: 0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.3px;
 }
 
 .card-time-cloud-day-number {
-  color: #cccccc;
-  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
   margin: 0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 }
 
 .card-time-cloud-hour {
-  color: #FF084B;
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.card-time-cloud-temp {
-  color: #ffffff;
+  color: #ff6b9d;
   font-size: 16px;
   font-weight: 700;
   margin: 0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 2px 4px rgba(255, 107, 157, 0.3);
+  transition: color 0.3s ease;
+}
+
+.card-time-cloud:hover .card-time-cloud-hour {
+  color: #ff8fab;
+}
+
+.card-time-cloud-temp {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
 }
 
 .card-time-cloud-desc {
-  color: #cccccc;
-  font-size: 9px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
   margin: 0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-transform: capitalize;
-  max-width: 80px;
+  max-width: 90px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .card-time-cloud-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
-  background: rgba(255, 8, 75, 0.1);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 107, 157, 0.15);
   border-radius: 50%;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 8, 75, 0.2);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 107, 157, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-time-cloud-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.2) 0%, rgba(255, 143, 171, 0.2) 100%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .card-time-cloud:hover .card-time-cloud-icon {
-  background: rgba(255, 8, 75, 0.2);
-  border-color: rgba(255, 8, 75, 0.4);
-  transform: scale(1.05);
+  background: rgba(255, 107, 157, 0.25);
+  border-color: rgba(255, 107, 157, 0.4);
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(255, 107, 157, 0.3);
+}
+
+.card-time-cloud:hover .card-time-cloud-icon::before {
+  opacity: 1;
 }
 
 .weather-icon {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 28px;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.card-time-cloud:hover .weather-icon {
+  transform: scale(1.1);
 }
 
 .weather-icon img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease;
+}
+
+.card-time-cloud:hover .weather-icon img {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
 .card-time-cloud-background {
@@ -128,37 +179,141 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.05;
+  opacity: 0.03;
   overflow: hidden;
 }
 
 .card-time-cloud-background svg {
   position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 80px;
-  height: 80px;
-  animation: float-cloud 6s ease-in-out infinite;
+  top: -25px;
+  right: -25px;
+  width: 100px;
+  height: 100px;
+  animation: float-cloud 8s ease-in-out infinite;
+  filter: blur(1px);
 }
 
 @keyframes float-cloud {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) rotate(2deg) scale(1.02);
   }
   50% {
-    transform: translateY(-10px) rotate(5deg);
+    transform: translateY(-12px) rotate(0deg) scale(1.05);
+  }
+  75% {
+    transform: translateY(-6px) rotate(-2deg) scale(1.03);
   }
 }
 
+.card-time-cloud:hover .card-time-cloud-background svg {
+  animation-duration: 4s;
+  opacity: 0.06;
+}
 
+/* Estados específicos do clima */
+.weather-clear {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+}
 
-/* Responsividade */
+.weather-clear:hover {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 152, 0, 0.15) 100%);
+}
+
+.weather-clear .card-time-cloud-icon {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.weather-cloudy {
+  background: linear-gradient(135deg, rgba(158, 158, 158, 0.1) 0%, rgba(117, 117, 117, 0.1) 100%);
+}
+
+.weather-cloudy:hover {
+  background: linear-gradient(135deg, rgba(158, 158, 158, 0.15) 0%, rgba(117, 117, 117, 0.15) 100%);
+}
+
+.weather-cloudy .card-time-cloud-icon {
+  background: rgba(158, 158, 158, 0.2);
+  border-color: rgba(158, 158, 158, 0.3);
+}
+
+.weather-rainy {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(30, 136, 229, 0.1) 100%);
+}
+
+.weather-rainy:hover {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(30, 136, 229, 0.15) 100%);
+}
+
+.weather-rainy .card-time-cloud-icon {
+  background: rgba(33, 150, 243, 0.2);
+  border-color: rgba(33, 150, 243, 0.3);
+}
+
+.weather-stormy {
+  background: linear-gradient(135deg, rgba(103, 58, 183, 0.1) 0%, rgba(94, 53, 177, 0.1) 100%);
+}
+
+.weather-stormy:hover {
+  background: linear-gradient(135deg, rgba(103, 58, 183, 0.15) 0%, rgba(94, 53, 177, 0.15) 100%);
+}
+
+.weather-stormy .card-time-cloud-icon {
+  background: rgba(103, 58, 183, 0.2);
+  border-color: rgba(103, 58, 183, 0.3);
+}
+
+.weather-snowy {
+  background: linear-gradient(135deg, rgba(189, 189, 189, 0.1) 0%, rgba(158, 158, 158, 0.1) 100%);
+}
+
+.weather-snowy:hover {
+  background: linear-gradient(135deg, rgba(189, 189, 189, 0.15) 0%, rgba(158, 158, 158, 0.15) 100%);
+}
+
+.weather-snowy .card-time-cloud-icon {
+  background: rgba(189, 189, 189, 0.2);
+  border-color: rgba(189, 189, 189, 0.3);
+}
+
+.weather-foggy {
+  background: linear-gradient(135deg, rgba(158, 158, 158, 0.1) 0%, rgba(117, 117, 117, 0.1) 100%);
+}
+
+.weather-foggy:hover {
+  background: linear-gradient(135deg, rgba(158, 158, 158, 0.15) 0%, rgba(117, 117, 117, 0.15) 100%);
+}
+
+.weather-foggy .card-time-cloud-icon {
+  background: rgba(158, 158, 158, 0.2);
+  border-color: rgba(158, 158, 158, 0.3);
+}
+
+/* Responsividade - Design adaptativo */
+@media (max-width: 1200px) {
+  .previsao-do-tempo {
+    right: 1.5rem;
+  }
+  
+  .card-time-cloud {
+    width: 200px;
+    height: 100px;
+  }
+  
+  .card-time-cloud-content {
+    padding: 18px 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .previsao-do-tempo {
     position: relative;
     top: auto;
     right: auto;
-    margin-top: 15px;
+    margin-left: auto;
   }
   
   .card-time-cloud {
@@ -167,7 +322,54 @@
   }
   
   .card-time-cloud-content {
-    padding: 15px 18px;
+    padding: 16px 18px;
+  }
+  
+  .card-time-cloud-day {
+    font-size: 13px;
+  }
+  
+  .card-time-cloud-day-number {
+    font-size: 11px;
+  }
+  
+  .card-time-cloud-hour {
+    font-size: 15px;
+  }
+  
+  .card-time-cloud-temp {
+    font-size: 16px;
+  }
+  
+  .card-time-cloud-desc {
+    font-size: 9px;
+    max-width: 80px;
+  }
+  
+  .card-time-cloud-icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .weather-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .previsao-do-tempo {
+    margin: 0.5rem auto 0 auto;
+  }
+  
+  .card-time-cloud {
+    width: 160px;
+    height: 80px;
+  }
+  
+  .card-time-cloud-content {
+    padding: 14px 16px;
   }
   
   .card-time-cloud-day {
@@ -183,197 +385,53 @@
   }
   
   .card-time-cloud-temp {
-    font-size: 16px;
+    font-size: 15px;
   }
   
   .card-time-cloud-desc {
-    font-size: 9px;
+    font-size: 8px;
     max-width: 70px;
   }
   
   .card-time-cloud-icon {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
   
   .weather-icon {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     font-size: 20px;
   }
 }
 
-@media (max-width: 480px) {
-  .previsao-do-tempo {
-    margin-top: 10px;
-  }
-  
-  .card-time-cloud {
-    width: 160px;
-    height: 85px;
-  }
-  
-  .card-time-cloud-content {
-    padding: 12px 15px;
-  }
-  
-  .card-time-cloud-day {
-    font-size: 11px;
-  }
-  
-  .card-time-cloud-day-number {
-    font-size: 9px;
-  }
-  
-  .card-time-cloud-hour {
-    font-size: 13px;
-  }
-  
-  .card-time-cloud-temp {
-    font-size: 14px;
-  }
-  
-  .card-time-cloud-desc {
-    font-size: 8px;
-    max-width: 60px;
-  }
-  
-  .card-time-cloud-icon {
-    width: 35px;
-    height: 35px;
-  }
-  
+/* Melhorias de acessibilidade */
+.card-time-cloud:focus {
+  outline: 2px solid rgba(255, 107, 157, 0.5);
+  outline-offset: 2px;
+}
+
+/* Suporte para preferências de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .card-time-cloud,
+  .card-time-cloud-icon,
   .weather-icon {
-    width: 24px;
-    height: 24px;
-    font-size: 18px;
-  }
-}
-
-/* Efeitos de hover aprimorados */
-.card-time-cloud:hover .card-time-cloud-background svg {
-  animation: float-cloud 3s ease-in-out infinite;
-}
-
-.card-time-cloud:hover .card-time-cloud-hour {
-  color: #ff6b6b;
-  text-shadow: 0 0 10px rgba(255, 8, 75, 0.5);
-}
-
-/* Estilos específicos para diferentes tipos de clima */
-.weather-clear {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-color: rgba(255, 8, 75, 0.3);
-}
-
-.weather-clear:hover {
-  border-color: rgba(255, 8, 75, 0.5);
-}
-
-.weather-clear .card-time-cloud-icon {
-  background: rgba(255, 8, 75, 0.15);
-  border-color: rgba(255, 8, 75, 0.3);
-}
-
-.weather-cloudy {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-color: rgba(116, 185, 255, 0.3);
-}
-
-.weather-cloudy:hover {
-  border-color: rgba(116, 185, 255, 0.5);
-}
-
-.weather-cloudy .card-time-cloud-icon {
-  background: rgba(116, 185, 255, 0.15);
-  border-color: rgba(116, 185, 255, 0.3);
-}
-
-.weather-rainy {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-color: rgba(99, 110, 114, 0.3);
-}
-
-.weather-rainy:hover {
-  border-color: rgba(99, 110, 114, 0.5);
-}
-
-.weather-rainy .card-time-cloud-icon {
-  background: rgba(99, 110, 114, 0.15);
-  border-color: rgba(99, 110, 114, 0.3);
-}
-
-.weather-stormy {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-color: rgba(255, 8, 75, 0.4);
-}
-
-.weather-stormy:hover {
-  border-color: rgba(255, 8, 75, 0.6);
-}
-
-.weather-stormy .card-time-cloud-icon {
-  background: rgba(255, 8, 75, 0.2);
-  border-color: rgba(255, 8, 75, 0.4);
-}
-
-.weather-snowy {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-color: rgba(223, 230, 233, 0.3);
-}
-
-.weather-snowy:hover {
-  border-color: rgba(223, 230, 233, 0.5);
-}
-
-.weather-snowy .card-time-cloud-icon {
-  background: rgba(223, 230, 233, 0.15);
-  border-color: rgba(223, 230, 233, 0.3);
-}
-
-.weather-foggy {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-color: rgba(178, 190, 195, 0.3);
-}
-
-.weather-foggy:hover {
-  border-color: rgba(178, 190, 195, 0.5);
-}
-
-.weather-foggy .card-time-cloud-icon {
-  background: rgba(178, 190, 195, 0.15);
-  border-color: rgba(178, 190, 195, 0.3);
-}
-
-/* Responsividade para os novos elementos */
-@media (max-width: 768px) {
-  .card-time-cloud-temp {
-    font-size: 16px;
+    transition: none;
   }
   
-  .card-time-cloud-desc {
-    font-size: 9px;
-    max-width: 70px;
+  .card-time-cloud-background svg {
+    animation: none;
   }
   
-  .weather-icon {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .card-time-cloud-temp {
-    font-size: 14px;
+  .card-time-cloud:hover {
+    transform: none;
   }
   
-  .card-time-cloud-desc {
-    font-size: 8px;
-    max-width: 60px;
+  .card-time-cloud:hover .card-time-cloud-icon {
+    transform: none;
   }
   
-  .weather-icon {
-    width: 24px;
-    height: 24px;
+  .card-time-cloud:hover .weather-icon {
+    transform: none;
   }
 }

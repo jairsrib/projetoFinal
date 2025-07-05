@@ -30,11 +30,12 @@
   </ul>
 </div>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
 <header>
-  <div class="container">
+  <div class="header-flex">
     <div class="btn-menu">
       <button class="btn-hamburger" id="btn-hamburguer" onclick="toggleSidebar()" aria-label="Abrir Menu">
-        <svg width="32" height="32" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="24" height="24" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M1 14.9H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M1 8H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -42,7 +43,7 @@
       </button>
     </div>
 
-    <div class="logo">
+    <div class="logo-center">
       <img src="img/logo.png" alt="Logo">
       <div class="titulo">
         <h1>Caiu o <span>Servidor</span></h1>
@@ -50,7 +51,7 @@
       </div>
     </div>
 
-    <div class="previsao-do-tempo">
+    <div class="header-weather">
       <div class="card-time-cloud">
         <div class="card-time-cloud-content">
           <div class="card-time-cloud-info">
@@ -75,10 +76,8 @@
             ></path>
           </svg>
         </div>
-
       </div>
     </div>
-
   </div>
 </header>
 
