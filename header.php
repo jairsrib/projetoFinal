@@ -1,4 +1,7 @@
-<?php include_once 'config/theme_config.php'; ?>
+<?php 
+session_start();
+include_once 'config/theme_config.php'; 
+?>
 <!DOCTYPE html>
 <html lang="pt-br" <?php echo getThemeDataAttribute(); ?>>
 <head>
@@ -22,11 +25,16 @@
   <h2>Menu</h2>
   <ul>
     <li><a href="index.php"><i data-lucide="home"></i> Início</a></li>
-    <li><a href="painel_usuario.php"><i data-lucide="user"></i>Painel de Usuário</a></li>
-    <li><a href="lista_usuarios.php"><i data-lucide="users"></i>Lista de Usuários</a></li>
-    <li><a href="contato.php"><i data-lucide="mail"></i> Contato</a></li>
-    <li><a href="#" onclick="abrirModalCadastroAnuncio()"><i data-lucide="plus-circle"></i> Cadastrar Anúncio</a></li>
-    <li><a href="logout.php"><i data-lucide="log-out"></i> Sair</a></li>
+    <?php if (isset($_SESSION['usuario_id'])): ?>
+      <li><a href="painel_usuario.php"><i data-lucide="user"></i>Painel de Usuário</a></li>
+      <li><a href="lista_usuarios.php"><i data-lucide="users"></i>Lista de Usuários</a></li>
+      <li><a href="contato.php"><i data-lucide="mail"></i> Contato</a></li>
+      <li><a href="#" onclick="abrirModalCadastroAnuncio()"><i data-lucide="plus-circle"></i> Cadastrar Anúncio</a></li>
+      <li><a href="logout.php"><i data-lucide="log-out"></i> Sair</a></li>
+    <?php else: ?>
+      <li><a href="contato.php"><i data-lucide="mail"></i> Contato</a></li>
+      <li><a href="login.php"><i data-lucide="log-in"></i> Login</a></li>
+    <?php endif; ?>
   </ul>
 </div>
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
@@ -76,6 +84,11 @@
             ></path>
           </svg>
         </div>
+        <?php if (isset($_SESSION['usuario_id'])): ?>
+          <a href="logout.php" class="header-login-btn"><i data-lucide="log-out"></i> Sair</a>
+        <?php else: ?>
+          <a href="login.php" class="header-login-btn"><i data-lucide="log-in"></i> Login</a>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -85,6 +98,7 @@
 <script src="./assets/js/header.js"></script>
 <script src="./assets/js/weather.js"></script>
 
+<?php if (isset($_SESSION['usuario_id'])): ?>
 <div id="modal-cadastro-anuncio" class="modal-cadastro-anuncio">
   <div class="modal-cadastro-content">
     <div class="modal-cadastro-header">
@@ -190,8 +204,11 @@
 
 <!-- Feedback de Sucesso/Erro -->
 <div id="feedback-message" class="feedback-message"></div>
+<?php endif; ?>
 
 <script src="./assets/js/header.js"></script>
+<?php if (isset($_SESSION['usuario_id'])): ?>
 <script src="./assets/js/cadastro-anuncio.js"></script>
+<?php endif; ?>
 </body>
 </html>

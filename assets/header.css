@@ -658,3 +658,32 @@ header:hover {
     padding: 0.4rem 0.4rem;
   }
 }
+
+.header-login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 107, 157, 0.08);
+  border: 2px solid rgba(255, 107, 157, 0.3);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  padding: 0.5rem 1.1rem;
+  border-radius: 12px;
+  margin-left: 1.2rem;
+  text-decoration: none;
+  transition: background 0.2s, border 0.2s, color 0.2s, box-shadow 0.2s;
+  font-size: 1rem;
+}
+
+.header-login-btn:hover {
+  background: rgba(255, 107, 157, 0.18);
+  border-color: #ff6b9d;
+  color: #ff6b9d;
+  box-shadow: 0 2px 12px rgba(255, 107, 157, 0.10);
+}
+
+.header-login-btn i {
+  font-size: 1.1em;
+  vertical-align: middle;
+}
