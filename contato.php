@@ -1,5 +1,6 @@
 <?php
 require_once './header.php';
+require_once './config/formsubmit_config.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -37,10 +38,18 @@ require_once './header.php';
 
         <div class="form-card">
             <h3>Formulário de Contato</h3>
-            <form action="enviar.php" method="post" class="form-contato">
-                <input type="text" name="nome" placeholder="Seu nome" required>
+            <form action="<?php echo getFormSubmitUrl(); ?>" method="POST" class="form-contato">
+                <input type="text" name="name" placeholder="Seu nome" required>
                 <input type="email" name="email" placeholder="Seu e-mail" required>
-                <textarea name="mensagem" rows="5" placeholder="Digite sua mensagem" required></textarea>
+                <textarea name="message" rows="5" placeholder="Digite sua mensagem" required></textarea>
+                
+                <?php
+                $hiddenFields = getFormSubmitHiddenFields();
+                foreach ($hiddenFields as $name => $value) {
+                    echo '<input type="hidden" name="' . $name . '" value="' . $value . '">';
+                }
+                ?>
+                
                 <button type="submit"><i class="fas fa-paper-plane"></i> Enviar Mensagem</button>
             </form>
         </div>
