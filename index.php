@@ -3,8 +3,18 @@ require_once './header.php';
 include_once './config/config.php';
 include_once './classes/Noticia.php';
 
+// --- FORMULÁRIO DE FILTRO DE NOTÍCIAS ---
+// Captura valores do filtro (GET)
+$categoriaFiltro = isset($_GET['categoria']) ? $_GET['categoria'] : '';
+$tituloFiltro = isset($_GET['titulo']) ? $_GET['titulo'] : '';
+$dataFiltro = isset($_GET['data']) ? $_GET['data'] : '';
+
 $noticia = new Noticia($db);
-$noticias = $noticia->buscarTodasOrdenadas();
+if (!empty($categoriaFiltro) || !empty($tituloFiltro) || !empty($dataFiltro)) {
+  $noticias = $noticia->buscarComFiltro($categoriaFiltro, $tituloFiltro, $dataFiltro);
+} else {
+  $noticias = $noticia->buscarTodasOrdenadas();
+}
 ?>
 
 
@@ -164,87 +174,111 @@ $noticias = $noticia->buscarTodasOrdenadas();
           <h2>Mais Notícias</h2>
         </div>
       </div>
+      <!-- Formulário de filtro movido para cá -->
+      <div class="container mt-4 mb-4">
+        <form method="get" class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label for="categoria" class="form-label">Categoria</label>
+            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria" value="<?= htmlspecialchars($categoriaFiltro) ?>">
+          </div>
+          <div class="col-md-4">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" value="<?= htmlspecialchars($tituloFiltro) ?>">
+          </div>
+          <div class="col-md-3">
+            <label for="data" class="form-label">Data</label>
+            <input type="date" class="form-control" id="data" name="data" value="<?= htmlspecialchars($dataFiltro) ?>">
+          </div>
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+          </div>
+        </form>
+      </div>
 
       <div class="news-list">
-        <?php foreach ($ultimasNoticias as $index => $n): ?>
-          <?php
-          // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
-          $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
-          $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
-          $intervalo = $agora->diff($dataNoticia);
+        <?php if (empty($noticias)): ?>
+          <div class="alert alert-info">Nenhuma notícia encontrada para o filtro selecionado.</div>
+        <?php else: ?>
+          <?php foreach ($noticias as $index => $n): ?>
+            <?php
+            // Cria o objeto DateTime com a data da notícia e fuso horário de São Paulo
+            $dataNoticia = new DateTime($n['data'], new DateTimeZone('America/Sao_Paulo'));
+            $agora = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+            $intervalo = $agora->diff($dataNoticia);
 
-          // Formata o tempo decorrido
-          if ($intervalo->d >= 1) {
-            $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
-          } elseif ($intervalo->h >= 1) {
-            $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
-          } elseif ($intervalo->i >= 1) {
-            $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
-          } else {
-            $tempoFormatado = 'Agora mesmo';
-          }
-          ?>
-          <div class="news-item">
-            <div class="container">
-              <div class="row g-4 align-items-center">
-                <div class="col-md-4">
-                  <div class="news-image-container">
-                    <div class="news-item-image-wrapper"
-                      onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
-                      <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" class="news-item-image">
-                      <div class="image-overlay">
-                        <i class="fas fa-play"></i>
+            // Formata o tempo decorrido
+            if ($intervalo->d >= 1) {
+              $tempoFormatado = 'Há ' . $intervalo->d . ' dia' . ($intervalo->d > 1 ? 's' : '');
+            } elseif ($intervalo->h >= 1) {
+              $tempoFormatado = 'Há ' . $intervalo->h . ' hora' . ($intervalo->h > 1 ? 's' : '');
+            } elseif ($intervalo->i >= 1) {
+              $tempoFormatado = 'Há ' . $intervalo->i . ' minuto' . ($intervalo->i > 1 ? 's' : '');
+            } else {
+              $tempoFormatado = 'Agora mesmo';
+            }
+            ?>
+            <div class="news-item">
+              <div class="container">
+                <div class="row g-4 align-items-center">
+                  <div class="col-md-4">
+                    <div class="news-image-container">
+                      <div class="news-item-image-wrapper"
+                        onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
+                        <img src="uploads/<?= $n['imagem'] ?>" alt="Imagem da notícia" class="news-item-image">
+                        <div class="image-overlay">
+                          <i class="fas fa-play"></i>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="col-md-8">
-                  <div class="news-content">
-                    <div class="news-meta-top mb-3">
-                      <span class="news-category-badge">
-                        <i class="fas fa-tag me-1"></i>
-                        <?= htmlspecialchars($n['categoria'] ?? 'E-Sports') ?>
-                      </span>
-                      <span class="news-time">
-                        <i class="fas fa-clock me-1"></i>
-                        <small class="text-secondary mt-2"><?= $tempoFormatado ?> — em
-                          <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
-                      </span>
-                    </div>
+                  <div class="col-md-8">
+                    <div class="news-content">
+                      <div class="news-meta-top mb-3">
+                        <span class="news-category-badge">
+                          <i class="fas fa-tag me-1"></i>
+                          <?= htmlspecialchars($n['categoria'] ?? 'E-Sports') ?>
+                        </span>
+                        <span class="news-time">
+                          <i class="fas fa-clock me-1"></i>
+                          <small class="text-secondary mt-2"><?= $tempoFormatado ?> — em
+                            <?= htmlspecialchars($n['categoria'] ?? 'Esportes') ?></small>
+                        </span>
+                      </div>
 
-                    <h3 class="news-item-title"
-                      onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
-                      <?= htmlspecialchars($n['titulo']) ?>
-                    </h3>
-
-                    <p class="news-item-excerpt">
-                      <?= htmlspecialchars(substr($n['texto'], 0, 200)) ?>...
-                    </p>
-
-                    <div class="news-actions">
-                      <button class="btn-read-more"
+                      <h3 class="news-item-title"
                         onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
-                        <i class="fas fa-arrow-right me-2"></i>
-                        Ler Mais
-                      </button>
-                      <div class="news-stats">
-                        <span class="stat">
-                          <i class="fas fa-eye me-1"></i>
-                          <?= rand(100, 5000) ?>
-                        </span>
-                        <span class="stat">
-                          <i class="fas fa-comment me-1"></i>
-                          <?= rand(5, 50) ?>
-                        </span>
+                        <?= htmlspecialchars($n['titulo']) ?>
+                      </h3>
+
+                      <p class="news-item-excerpt">
+                        <?= htmlspecialchars(substr($n['texto'], 0, 200)) ?>...
+                      </p>
+
+                      <div class="news-actions">
+                        <button class="btn-read-more"
+                          onclick="abrirModalNoticia(<?= $n['id'] ?>, '<?= htmlspecialchars($n['titulo'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['texto'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['categoria'] ?? 'E-Sports', ENT_QUOTES) ?>', '<?= htmlspecialchars($n['imagem'], ENT_QUOTES) ?>', '<?= htmlspecialchars($n['data'], ENT_QUOTES) ?>')">
+                          <i class="fas fa-arrow-right me-2"></i>
+                          Ler Mais
+                        </button>
+                        <div class="news-stats">
+                          <span class="stat">
+                            <i class="fas fa-eye me-1"></i>
+                            <?= rand(100, 5000) ?>
+                          </span>
+                          <span class="stat">
+                            <i class="fas fa-comment me-1"></i>
+                            <?= rand(5, 50) ?>
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
   </section>

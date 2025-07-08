@@ -64,5 +64,27 @@ class Noticia
       $stmt->execute([$id]);
       return $stmt;
    }
+
+   public function buscarComFiltro($categoria = '', $titulo = '', $data = '')
+   {
+      $query = "SELECT * FROM " . $this->table_name . " WHERE 1=1";
+      $params = [];
+      if (!empty($categoria)) {
+         $query .= " AND categoria LIKE ?";
+         $params[] = "%$categoria%";
+      }
+      if (!empty($titulo)) {
+         $query .= " AND titulo LIKE ?";
+         $params[] = "%$titulo%";
+      }
+      if (!empty($data)) {
+         $query .= " AND DATE(data) = ?";
+         $params[] = $data;
+      }
+      $query .= " ORDER BY data DESC";
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute($params);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+   }
 }
 ?>
