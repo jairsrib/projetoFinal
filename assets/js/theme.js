@@ -104,13 +104,18 @@ class ThemeManager {
     this.themeToggle = toggle;
     
     // Adicionar ao header em uma posição melhor
-    const header = document.querySelector('header');
-    if (header) {
-      // Criar container para o toggle
-      const toggleContainer = document.createElement('div');
-      toggleContainer.className = 'theme-toggle-container';
-      header.appendChild(toggleContainer);
-      toggleContainer.appendChild(toggle);
+    const headerToggleContainer = document.querySelector('.theme-toggle-container');
+    if (headerToggleContainer) {
+      headerToggleContainer.appendChild(toggle);
+    } else {
+      // fallback: adiciona ao header como antes
+      const header = document.querySelector('header');
+      if (header) {
+        const toggleContainer = document.createElement('div');
+        toggleContainer.className = 'theme-toggle-container';
+        header.appendChild(toggleContainer);
+        toggleContainer.appendChild(toggle);
+      }
     }
   }
 

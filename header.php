@@ -51,14 +51,6 @@ include_once 'config/theme_config.php';
       </button>
     </div>
 
-    <div class="logo-center">
-      <img src="img/logo.png" alt="Logo">
-      <div class="titulo">
-        <h1>Caiu o <span>Servidor</span></h1>
-        <h2>notícias do mundo do games</h2>
-      </div>
-    </div>
-
     <div class="header-weather">
       <div class="card-time-cloud">
         <div class="card-time-cloud-content">
@@ -90,6 +82,18 @@ include_once 'config/theme_config.php';
           <a href="login.php" class="header-login-btn"><i data-lucide="log-in"></i> Login</a>
         <?php endif; ?>
       </div>
+    </div>
+
+    <div class="logo-center">
+      <img src="img/logo.png" alt="Logo">
+      <div class="titulo">
+        <h1>Caiu o <span>Servidor</span></h1>
+        <h2>notícias do mundo do games</h2>
+      </div>
+    </div>
+
+    <div class="theme-toggle-container">
+      <!-- O botão de alternância de tema será inserido aqui manualmente pelo JS -->
     </div>
   </div>
 </header>
