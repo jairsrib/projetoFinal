@@ -3,11 +3,16 @@ require_once 'classes/AnuncioManager.php';
 
 $anuncioManager = new AnuncioManager();
 
-// Buscar anúncios de prioridade alta para pop-up
-$anuncioPopup = $anuncioManager->getAnuncioPrioridadeAltaAleatorio();
+// Buscar anúncio aleatório para pop-up
+$anuncioPopup = $anuncioManager->getAnuncioAleatorio();
 
-// Buscar anúncios de outras prioridades para carrossel lateral
-$anunciosCarrossel = $anuncioManager->getAnunciosOutrasPrioridades();
+// Buscar todos os anúncios ativos para carrossel lateral (exceto o do popup)
+$anunciosCarrossel = array_filter(
+    $anuncioManager->getAnunciosAtivos(),
+    function($anuncio) use ($anuncioPopup) {
+        return !$anuncioPopup || $anuncio['id'] !== $anuncioPopup['id'];
+    }
+);
 
 // Função para formatar data
 function formatarData($dataString) {

@@ -48,10 +48,6 @@ try {
                     $filtros['destaque'] = $_GET['destaque'] === 'true';
                 }
                 
-                if (isset($_GET['categoria'])) {
-                    $filtros['categoria'] = $_GET['categoria'];
-                }
-                
                 $anuncios = $anuncioManager->read($filtros);
                 echo json_encode(['success' => true, 'data' => $anuncios]);
             }
@@ -103,7 +99,6 @@ try {
                 $input['ativo'] = isset($input['ativo']) && $input['ativo'] === 'true';
                 $input['destaque'] = isset($input['destaque']) && $input['destaque'] === 'true';
                 $input['valorAnuncio'] = floatval($input['valorAnuncio'] ?? 0);
-                $input['prioridade'] = intval($input['prioridade'] ?? 3);
                 
             } else {
                 // Processar JSON

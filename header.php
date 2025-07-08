@@ -76,11 +76,6 @@ include_once 'config/theme_config.php';
             ></path>
           </svg>
         </div>
-        <?php if (isset($_SESSION['usuario_id'])): ?>
-          <a href="logout.php" class="header-login-btn"><i data-lucide="log-out"></i> Sair</a>
-        <?php else: ?>
-          <a href="login.php" class="header-login-btn"><i data-lucide="log-in"></i> Login</a>
-        <?php endif; ?>
       </div>
     </div>
 

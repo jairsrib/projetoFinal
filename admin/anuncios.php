@@ -26,10 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'valorAnuncio' => (float)($_POST['valorAnuncio'] ?? 0.00),
                     'ativo' => isset($_POST['ativo']),
                     'destaque' => isset($_POST['destaque']),
-                    'categoria' => $_POST['categoria'] ?? 'geral',
-                    'prioridade' => (int)($_POST['prioridade'] ?? 3),
-                    'data_cadastro' => $_POST['data_cadastro'] ?? '',
-                    'data_expiracao' => $_POST['data_expiracao'] ?? ''
+                    'data_cadastro' => $_POST['data_cadastro'] ?? ''
                 ];
                 
                 // Processar upload de arquivo se existir
@@ -69,10 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'valorAnuncio' => (float)($_POST['valorAnuncio'] ?? 0.00),
                     'ativo' => isset($_POST['ativo']),
                     'destaque' => isset($_POST['destaque']),
-                    'categoria' => $_POST['categoria'] ?? 'geral',
-                    'prioridade' => (int)($_POST['prioridade'] ?? 3),
-                    'data_cadastro' => $_POST['data_cadastro'] ?? '',
-                    'data_expiracao' => $_POST['data_expiracao'] ?? ''
+                    'data_cadastro' => $_POST['data_cadastro'] ?? ''
                 ];
                 
                 // Processar upload de arquivo se existir
@@ -460,7 +454,6 @@ $anuncios = $anuncioManager->read();
             <div class="tabela-header">
                 <div>#</div>
                 <div>Anúncio</div>
-                <div>Categoria</div>
                 <div>Status</div>
                 <div>Destaque</div>
                 <div>Valor</div>
@@ -475,7 +468,6 @@ $anuncios = $anuncioManager->read();
                         <br>
                         <small><?php echo htmlspecialchars(substr($anuncio['texto'], 0, 50)) . '...'; ?></small>
                     </div>
-                    <div>-</div>
                     <div>
                         <span class="<?php echo $anuncio['ativo'] ? 'status-ativo' : 'status-inativo'; ?>">
                             <?php echo $anuncio['ativo'] ? 'Ativo' : 'Inativo'; ?>
@@ -537,34 +529,8 @@ $anuncios = $anuncioManager->read();
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="categoria">Categoria</label>
-                    <select id="categoria" name="categoria" class="form-select">
-                        <option value="geral">Geral</option>
-                        <option value="lançamento">Lançamento</option>
-                        <option value="promoção">Promoção</option>
-                        <option value="evento">Evento</option>
-                        <option value="sistema">Sistema</option>
-                        <option value="comunidade">Comunidade</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="prioridade">Prioridade</label>
-                    <select id="prioridade" name="prioridade" class="form-select">
-                        <option value="1">Alta (1)</option>
-                        <option value="2">Média (2)</option>
-                        <option value="3" selected>Baixa (3)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
                     <label class="form-label" for="data_cadastro">Data de Cadastro *</label>
                     <input type="datetime-local" id="data_cadastro" name="data_cadastro" class="form-input" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="data_expiracao">Data de Expiração</label>
-                    <input type="datetime-local" id="data_expiracao" name="data_expiracao" class="form-input">
                 </div>
                 
                 <div class="form-checkbox">
@@ -610,10 +576,6 @@ $anuncios = $anuncioManager->read();
             document.getElementById('imagem_url').value = anuncio.imagem;
             document.getElementById('link').value = anuncio.link;
             document.getElementById('valorAnuncio').value = anuncio.valorAnuncio || '';
-            document.getElementById('categoria').value = anuncio.categoria;
-            document.getElementById('prioridade').value = anuncio.prioridade;
-            document.getElementById('ativo').checked = anuncio.ativo;
-            document.getElementById('destaque').checked = anuncio.destaque;
             
             // Converter data de cadastro para formato local
             if (anuncio.data_cadastro) {
@@ -624,14 +586,8 @@ $anuncios = $anuncioManager->read();
                 document.getElementById('data_cadastro').value = '';
             }
             
-            // Converter data de expiração para formato local
-            if (anuncio.data_expiracao) {
-                const data = new Date(anuncio.data_expiracao);
-                const dataLocal = data.toISOString().slice(0, 16);
-                document.getElementById('data_expiracao').value = dataLocal;
-            } else {
-                document.getElementById('data_expiracao').value = '';
-            }
+            document.getElementById('ativo').checked = anuncio.ativo;
+            document.getElementById('destaque').checked = anuncio.destaque;
             
             document.getElementById('modal-anuncio').style.display = 'flex';
         }

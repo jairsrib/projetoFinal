@@ -36,7 +36,7 @@ class AnuncioManager {
         $usuario_id = $_SESSION['usuario_id'] ?? null;
         if (!$usuario_id) throw new Exception('Usuário não autenticado');
 
-        $sql = "INSERT INTO anuncio (nome, imagem, link, texto, ativo, destaque, data_cadastro, valor_anuncio, anunciante_id, prioridade, categoria, data_expiracao) VALUES (:nome, :imagem, :link, :texto, :ativo, :destaque, :data_cadastro, :valor_anuncio, :anunciante_id, :prioridade, :categoria, :data_expiracao)";
+        $sql = "INSERT INTO anuncio (nome, imagem, link, texto, ativo, destaque, data_cadastro, valor_anuncio, anunciante_id) VALUES (:nome, :imagem, :link, :texto, :ativo, :destaque, :data_cadastro, :valor_anuncio, :anunciante_id)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':nome' => $dados['nome'] ?? '',
@@ -47,10 +47,7 @@ class AnuncioManager {
             ':destaque' => !empty($dados['destaque']) ? 1 : 0,
             ':data_cadastro' => $dados['data_cadastro'] ?? date('c'),
             ':valor_anuncio' => $dados['valorAnuncio'] ?? 0.00,
-            ':anunciante_id' => $usuario_id,
-            ':prioridade' => $dados['prioridade'] ?? 3,
-            ':categoria' => $dados['categoria'] ?? 'geral',
-            ':data_expiracao' => $dados['data_expiracao'] ?? null
+            ':anunciante_id' => $usuario_id
         ]);
         $id = $this->pdo->lastInsertId();
         $anuncio = $this->readById($id);
@@ -94,7 +91,7 @@ class AnuncioManager {
         $campos = [];
         $params = [];
         foreach ([
-            'nome', 'imagem', 'link', 'texto', 'ativo', 'destaque', 'data_cadastro', 'valorAnuncio', 'prioridade', 'categoria', 'data_expiracao'
+            'nome', 'imagem', 'link', 'texto', 'ativo', 'destaque', 'data_cadastro', 'valorAnuncio'
         ] as $campo) {
             if (isset($dados[$campo])) {
                 $col = $campo === 'valorAnuncio' ? 'valor_anuncio' : $campo;
@@ -159,57 +156,6 @@ class AnuncioManager {
         });
         $base = !empty($anunciosDestaque) ? $anunciosDestaque : $anunciosAtivos;
         return $base[array_rand($base)];
-    }
-
-    /**
-     * Busca anúncios de prioridade alta (prioridade = 1) para exibição como pop-up
-     */
-    public function getAnunciosPrioridadeAlta() {
-        $agora = new DateTime();
-        $sql = 'SELECT * FROM anuncio WHERE ativo = 1 AND prioridade = 1';
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Filtrar anúncios que já podem ser exibidos (data_cadastro <= agora)
-        return array_filter($anuncios, function($anuncio) use ($agora) {
-            if (empty($anuncio['data_cadastro'])) {
-                return true;
-            }
-            $dataCadastro = new DateTime($anuncio['data_cadastro']);
-            return $dataCadastro <= $agora;
-        });
-    }
-
-    /**
-     * Busca anúncios de outras prioridades (prioridade > 1) para exibição no carrossel lateral
-     */
-    public function getAnunciosOutrasPrioridades() {
-        $agora = new DateTime();
-        $sql = 'SELECT * FROM anuncio WHERE ativo = 1 AND prioridade > 1 ORDER BY prioridade ASC, data_cadastro DESC';
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Filtrar anúncios que já podem ser exibidos (data_cadastro <= agora)
-        return array_filter($anuncios, function($anuncio) use ($agora) {
-            if (empty($anuncio['data_cadastro'])) {
-                return true;
-            }
-            $dataCadastro = new DateTime($anuncio['data_cadastro']);
-            return $dataCadastro <= $agora;
-        });
-    }
-
-    /**
-     * Seleciona um anúncio aleatório de prioridade alta para pop-up
-     */
-    public function getAnuncioPrioridadeAltaAleatorio() {
-        $anuncios = $this->getAnunciosPrioridadeAlta();
-        if (empty($anuncios)) {
-            return null;
-        }
-        return $anuncios[array_rand($anuncios)];
     }
 
     /**
