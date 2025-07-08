@@ -7,10 +7,8 @@ header {
   box-shadow: 0 4px 20px rgba(0,0,0,0.10);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0;
-  height: 100px;
+  height: 120px;
   position: relative;
-  display: flex;
-  align-items: center;
   width: 100%;
   min-height: 100px;
   z-index: 100;
@@ -23,13 +21,14 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 32px;
+  gap: 1rem;
   position: relative;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
   min-height: 100px;
+  height: 100%;
 }
 
 /* Logo e título - Design elegante */
@@ -268,7 +267,7 @@ header {
   display: flex;
   align-items: center;
   height: 100%;
-  margin-left: auto;
+  margin-left: 1rem;
   z-index: 2;
 }
 
@@ -302,7 +301,7 @@ header {
   header .container {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 1rem;
     padding: 0 1rem;
   }
@@ -638,13 +637,15 @@ header:hover {
     min-height: auto;
   }
   .logo-center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
   }
   .theme-toggle-container {
-    margin-left: auto;
+    margin-left: 0.5rem;
   }
   .header-right {
     justify-content: center;
@@ -698,7 +699,7 @@ header:hover {
   font-weight: 500;
   padding: 0.5rem 1.1rem;
   border-radius: 12px;
-  margin-left: 1.2rem;
+  margin-left: 0.5rem;
   text-decoration: none;
   transition: background 0.2s, border 0.2s, color 0.2s, box-shadow 0.2s;
   font-size: 1rem;
@@ -723,7 +724,7 @@ header:hover {
 
 .header-weather {
   flex: 0 0 auto;
-  margin-left: 32px;
+  margin-left: 0.5rem;
   min-width: 220px;
   display: flex;
   align-items: center;
@@ -734,16 +735,9 @@ header:hover {
   flex: 0 0 auto;
 }
 
-.theme-toggle-container {
-  display: flex;
-  align-items: center;
-  margin-left: 0.5rem;
-  gap: 0.5rem;
-}
 
-.header-login-btn {
-  margin-left: 0.5rem;
-}
+
+
 
 @media (max-width: 900px) {
   .header-weather {

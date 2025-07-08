@@ -107,13 +107,10 @@ body {
 
 /* Container do toggle de tema */
 .theme-toggle-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1100;
   display: flex;
   align-items: center;
   gap: 10px;
+  z-index: 1100;
 }
 
 /* Estilos para o toggle de tema */
@@ -267,10 +264,6 @@ body {
 
 /* Responsividade do toggle */
 @media (max-width: 768px) {
-  .theme-toggle-container {
-    top: 15px;
-    right: 15px;
-  }
   
   .theme-toggle {
     width: 50px;
@@ -305,10 +298,6 @@ body {
 }
 
 @media (max-width: 480px) {
-  .theme-toggle-container {
-    top: 10px;
-    right: 10px;
-  }
   
   .theme-toggle {
     width: 45px;

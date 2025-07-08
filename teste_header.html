@@ -1,64 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste do Header</title>
-    <link rel="stylesheet" href="assets/reset.css">
-    <link rel="stylesheet" href="assets/theme.css">
+    <title>Teste Header - Theme Toggle</title>
     <link rel="stylesheet" href="assets/header.css">
+    <link rel="stylesheet" href="assets/theme.css">
     <style>
         body {
-            background: #f0f0f0;
             margin: 0;
             padding: 0;
-        }
-        .teste-content {
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .teste-info {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
     </style>
 </head>
 <body>
-    <?php include_once 'header.php'; ?>
-    
-    <div class="teste-content">
-        <div class="teste-info">
-            <h2>Teste do Header</h2>
-            <p>Se você consegue ver o header acima com o logo "Caiu o Servidor" e o menu hambúrguer, então está funcionando corretamente.</p>
-            <p>O header deve ter:</p>
-            <ul>
-                <li>Fundo escuro</li>
-                <li>Logo e título em branco</li>
-                <li>Botão hambúrguer no canto esquerdo</li>
-                <li>Previsão do tempo no canto direito</li>
-                <li>Menu lateral que abre ao clicar no hambúrguer</li>
-            </ul>
+    <header>
+        <div class="header-flex">
+            <div class="btn-menu">
+                <button class="btn-hamburger" id="btn-hamburguer" aria-label="Abrir Menu">
+                    <svg width="24" height="24" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1 14.9H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1 8H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="theme-toggle-container">
+                <div class="theme-toggle">
+                    <svg class="theme-toggle-icon sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg class="theme-toggle-icon moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="theme-toggle-tooltip">Alternar tema</span>
+                </div>
+            </div>
+
+            <div class="logo-center">
+                <img src="img/logo.png" alt="Logo">
+                <div class="titulo">
+                    <h1>Caiu o <span>Servidor</span></h1>
+                    <h2>notícias do mundo do games</h2>
+                </div>
+            </div>
+
+            <a href="login.php" class="header-login-btn">Login</a>
+
+            <div class="header-weather">
+                <div class="card-time-cloud">
+                    <div class="card-time-cloud-content">
+                        <div class="card-time-cloud-info">
+                            <p class="card-time-cloud-day">Carregando...</p>
+                            <p class="card-time-cloud-day-number">--/--/----</p>
+                            <p class="card-time-cloud-hour">--:--</p>
+                            <p class="card-time-cloud-temp">--°C</p>
+                            <p class="card-time-cloud-desc">--</p>
+                        </div>
+                        <div class="card-time-cloud-icon">
+                            <div class="weather-icon" id="weather-icon">
+                                <!-- Ícone será carregado dinamicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="teste-info">
-            <h3>Teste do Menu Lateral</h3>
-            <p>Clique no botão hambúrguer (☰) no canto esquerdo do header para abrir o menu lateral.</p>
-            <p>O menu deve conter links para:</p>
-            <ul>
-                <li>Início</li>
-                <li>Painel de Usuário</li>
-                <li>Lista de Usuários</li>
-                <li>Contato</li>
-                <li>Cadastrar Anúncio</li>
-                <li>Sair</li>
-            </ul>
-        </div>
-    </div>
-    
-    <script src="assets/js/header.js"></script>
-    <script src="assets/js/theme.js"></script>
+    </header>
+
+    <script>
+        // Simular o comportamento do theme toggle
+        document.querySelector('.theme-toggle').addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+        });
+    </script>
 </body>
 </html> 
