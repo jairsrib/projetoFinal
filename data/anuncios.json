@@ -1,90 +1,29 @@
 {
-  "anuncios": [
-    {
-      "id": 1,
-      "nome": "GameStudio Pro",
-      "titulo": "Novo Jogo Lançado!",
-      "descricao": "Descubra o mais recente lançamento da temporada com gráficos incríveis e gameplay inovador.",
-      "imagem": "https://via.placeholder.com/400x200/667eea/ffffff?text=Novo+Jogo",
-      "link": "https://exemplo.com/jogo-novo",
-      "texto": "Descubra o mais recente lançamento da temporada!",
-      "ativo": true,
-      "destaque": true,
-      "data_cadastro": "2024-01-15T10:30:00Z",
-      "data_criacao": "2024-01-15T10:30:00Z",
-      "data_expiracao": "2024-12-31T23:59:59Z",
-      "categoria": "lançamento",
-      "prioridade": 1,
-      "valorAnuncio": 1500.00
-    },
-    {
-      "id": 2,
-      "nome": "GameStore Premium",
-      "titulo": "Promoção Especial - 50% OFF",
-      "descricao": "Aproveite nossa promoção especial com 50% de desconto em todos os jogos da coleção premium.",
-      "imagem": "https://via.placeholder.com/400x200/f093fb/ffffff?text=Promoção+50%25+OFF",
-      "link": "https://exemplo.com/promocao",
-      "texto": "Aproveite nossa promoção especial com 50% de desconto!",
-      "ativo": true,
-      "destaque": false,
-      "data_cadastro": "2024-01-10T14:20:00Z",
-      "data_criacao": "2024-01-10T14:20:00Z",
-      "data_expiracao": "2024-02-15T23:59:59Z",
-      "categoria": "promoção",
-      "prioridade": 2,
-      "valorAnuncio": 800.00
-    },
-    {
-      "id": 3,
-      "nome": "E-Sports Championship",
-      "titulo": "Evento de E-Sports",
-      "descricao": "Participe do maior evento de e-sports do ano com prêmios incríveis e competições emocionantes.",
-      "imagem": "https://via.placeholder.com/400x200/4facfe/ffffff?text=E-Sports+Event",
-      "link": "https://exemplo.com/esports",
-      "texto": "Participe do maior evento de e-sports do ano!",
-      "ativo": true,
-      "destaque": true,
-      "data_cadastro": "2024-01-05T09:15:00Z",
-      "data_criacao": "2024-01-05T09:15:00Z",
-      "data_expiracao": "2024-03-01T23:59:59Z",
-      "categoria": "evento",
-      "prioridade": 1,
-      "valorAnuncio": 2500.00
-    },
-    {
-      "id": 4,
-      "nome": "GameSystem Updates",
-      "titulo": "Atualização do Sistema",
-      "descricao": "Nova atualização disponível com melhorias de performance e novos recursos.",
-      "imagem": "https://via.placeholder.com/400x200/43e97b/ffffff?text=Sistema+Update",
-      "link": "https://exemplo.com/atualizacao",
-      "texto": "Nova atualização disponível com melhorias de performance!",
-      "ativo": false,
-      "destaque": false,
-      "data_cadastro": "2024-01-01T08:00:00Z",
-      "data_criacao": "2024-01-01T08:00:00Z",
-      "data_expiracao": "2024-01-31T23:59:59Z",
-      "categoria": "sistema",
-      "prioridade": 3,
-      "valorAnuncio": 500.00
-    },
-    {
-      "id": 5,
-      "nome": "Gamers Community",
-      "titulo": "Comunidade Gamers",
-      "descricao": "Junte-se à nossa comunidade de gamers e participe de discussões, torneios e eventos exclusivos.",
-      "imagem": "https://via.placeholder.com/400x200/fa709a/ffffff?text=Gamers+Community",
-      "link": "https://exemplo.com/comunidade",
-      "texto": "Junte-se à nossa comunidade de gamers!",
-      "ativo": true,
-      "destaque": false,
-      "data_cadastro": "2024-01-12T16:45:00Z",
-      "data_criacao": "2024-01-12T16:45:00Z",
-      "data_expiracao": "2024-12-31T23:59:59Z",
-      "categoria": "comunidade",
-      "prioridade": 2,
-      "valorAnuncio": 1200.00
-    }
-  ],
-  "ultima_atualizacao": "2024-01-15T10:30:00Z"
-} 
+    "anuncios": [
+        {
+            "id": 1,
+            "nome": "ABC",
+            "imagem": "uploads\/anuncios\/1752014223_Escritório, Construção, Business Imagens de fundo gratuitas, Arquitetura Cidade Moderna Edifício Background Foto PNG e vetores de fundo.jpg",
+            "link": "https:\/\/ge.globo.com\/",
+            "texto": "Anuncio de Teste",
+            "ativo": 1,
+            "destaque": 1,
+            "data_cadastro": "2025-07-08 19:54:26",
+            "valor_anuncio": 10,
+            "anunciante_id": 3
+        },
+        {
+            "id": 2,
+            "nome": "TESTE",
+            "imagem": "uploads\/anuncios\/1752016063_vinicius junior.jpg",
+            "link": "https:\/\/ge.globo.com\/futebol\/futebol-internacional\/noticia\/2024\/10\/28\/vini-jr-se-manifesta-apos-segundo-lugar-na-bola-de-ouro-farei-10-vezes-se-for-preciso.ghtml",
+            "texto": "TESTANDO",
+            "ativo": 1,
+            "destaque": 1,
+            "data_cadastro": "2025-07-08 23:07:00",
+            "valor_anuncio": 10,
+            "anunciante_id": 3
+        }
+    ],
+    "ultima_atualizacao": "2025-07-09T01:07:43+02:00"
+}

@@ -4,8 +4,9 @@
 .modal-cadastro-anuncio {
   display: none;
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.7);
+  top: 0; left: 0; width: 100vw;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(2px);
   z-index: 10000;
   justify-content: center;
   align-items: center;
@@ -15,7 +16,7 @@
   display: flex;
 }
 .modal-cadastro-content {
-  background: var(--card-bg);
+  background: var(--card-bg, #181818);
   border-radius: 18px;
   max-width: 540px;
   width: 98vw;
@@ -24,6 +25,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 .modal-cadastro-header {
   padding: 1.2rem 1.5rem;
@@ -34,14 +37,14 @@
   justify-content: space-between;
 }
 .form-cadastro-anuncio {
-  padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+  padding: 1.2rem 1.2rem 1rem 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.7rem;
 }
 .form-row {
   display: flex;
-  gap: 1.2rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 .form-group {
@@ -49,7 +52,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.15rem;
 }
 .form-group input,
 .form-group textarea,
@@ -112,8 +115,10 @@
 /* Responsividade */
 @media (max-width: 700px) {
   .modal-cadastro-content {
-    max-width: 99vw;
+    max-width: 400px;
+    width: 98vw;
     padding: 0;
+    border-radius: 10px;
   }
   .form-cadastro-anuncio {
     padding: 1rem 0.7rem 1rem 0.7rem;
@@ -125,6 +130,29 @@
   }
   .form-group {
     min-width: 0;
+    width: 100%;
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+    align-items: stretch;
+  }
+  .btn-salvar, .btn-cancelar {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7em 0.5em;
+  }
+  .form-checkboxes {
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0.5rem 0.5rem;
+    width: 100%;
+  }
+  .image-preview {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .feedback-message {
     right: 0.5rem;
@@ -151,6 +179,10 @@
     flex-direction: column;
     gap: 0.7rem;
     padding: 0.5rem 0.5rem;
+  }
+  .image-preview {
+    max-width: 100vw;
+    border-radius: 6px;
   }
 }
 

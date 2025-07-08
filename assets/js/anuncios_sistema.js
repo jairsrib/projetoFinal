@@ -149,14 +149,14 @@ class AnunciosSistema {
 
         // Pausar carrossel quando o mouse estiver sobre ele
         document.addEventListener('mouseenter', (e) => {
-            if (e.target.closest('.anuncios-carrossel')) {
+            if (e.target && typeof e.target.closest === 'function' && e.target.closest('.anuncios-carrossel')) {
                 clearInterval(this.carrosselInterval);
             }
         });
 
         // Retomar carrossel quando o mouse sair
         document.addEventListener('mouseleave', (e) => {
-            if (e.target.closest('.anuncios-carrossel')) {
+            if (e.target && typeof e.target.closest === 'function' && e.target.closest('.anuncios-carrossel')) {
                 this.carrosselInterval = setInterval(() => {
                     this.alternarAnunciosCarrossel();
                 }, 5000);

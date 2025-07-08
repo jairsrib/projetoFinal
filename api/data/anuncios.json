@@ -2,16 +2,16 @@
     "anuncios": [
         {
             "id": 1,
-            "nome": "aaaaaa",
-            "imagem": "uploads\/anuncios\/1751675183_furia.jpg",
-            "link": "https:\/\/g1.globo.com\/",
-            "texto": "abc",
+            "nome": "ABC",
+            "imagem": "uploads\/anuncios\/1752014223_Escritório, Construção, Business Imagens de fundo gratuitas, Arquitetura Cidade Moderna Edifício Background Foto PNG e vetores de fundo.jpg",
+            "link": "https:\/\/ge.globo.com\/",
+            "texto": "Anuncio de Teste",
             "ativo": 1,
-            "destaque": 0,
-            "data_cadastro": "2025-07-05 00:25:00",
-            "valor_anuncio": 0.06,
+            "destaque": 1,
+            "data_cadastro": "2025-07-08 22:36:00",
+            "valor_anuncio": 10,
             "anunciante_id": 3
         }
     ],
-    "ultima_atualizacao": "2025-07-05T02:26:23+02:00"
+    "ultima_atualizacao": "2025-07-09T00:37:03+02:00"
 }
