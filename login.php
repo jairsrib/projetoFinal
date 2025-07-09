@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <button class="button2" type="button" onclick="window.location.href='cadastro.php'">Cadastrar</button>
         </div>
         <button class="button3" type="button" name="esqueceu_senha" onclick="document.getElementById('modalEsqueci').style.display='block'">Esqueceu a Senha</button>
+        <button class="button4" type="button" onclick="window.location.href='index.php'">Voltar ao Início</button>
       </form>
       <div class="mensagem">
         <?php if (isset($mensagem_erro)) echo '<p>' .

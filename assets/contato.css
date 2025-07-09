@@ -108,3 +108,126 @@ body {
 .voltar-link:hover {
   color: white;
 }
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 768px) {
+  .contato-container {
+    margin: 1.5rem auto;
+    gap: 1.5rem;
+    padding: 0.8rem;
+  }
+  
+  .card-autor {
+    padding: 1.2rem;
+    gap: 1.2rem;
+  }
+  
+  .card-autor img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .card-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .form-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contato-container {
+    margin: 1rem auto;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .card-autor {
+    padding: 1rem;
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card-autor img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .card-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .form-card {
+    padding: 1.2rem;
+  }
+  
+  .form-contato input,
+  .form-contato textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .form-contato button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .contato-container {
+    margin: 0.8rem auto;
+    gap: 0.8rem;
+    padding: 0.3rem;
+  }
+  
+  .card-autor {
+    padding: 0.8rem;
+    gap: 0.8rem;
+    border-radius: 12px;
+  }
+  
+  .card-autor img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .card-info h3 {
+    font-size: 1.1rem;
+  }
+  
+  .card-info p {
+    font-size: 0.9rem;
+  }
+  
+  .form-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .form-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .form-contato input,
+  .form-contato textarea {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+  }
+  
+  .form-contato button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
+  }
+  
+  .voltar-link {
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+  }
+}

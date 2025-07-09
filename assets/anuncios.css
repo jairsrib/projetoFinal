@@ -459,6 +459,80 @@
   }
 }
 
+@media (max-width: 360px) {
+  .anuncios-container {
+    padding: 0 0.3rem;
+  }
+  
+  .anuncios-titulo {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .anuncios-grid {
+    gap: 0.8rem;
+  }
+  
+  .anuncio-card {
+    border-radius: 8px;
+  }
+  
+  .anuncio-texto {
+    padding: 0.6rem 0.4rem 0.8rem 0.4rem;
+  }
+  
+  .anuncio-titulo {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .anuncio-descricao {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .anuncio-meta {
+    font-size: 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  .anuncio-link {
+    font-size: 0.85rem;
+    padding: 0.5em 0.8em;
+  }
+  
+  .anuncio-badge-destaque {
+    font-size: 0.8rem;
+    padding: 0.3em 0.6em;
+  }
+  
+  .anuncio-popup {
+    width: 95%;
+    max-width: 320px;
+  }
+  
+  .anuncio-popup-content {
+    padding: 1rem;
+  }
+  
+  .anuncio-popup-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .anuncio-popup-texto h4 {
+    font-size: 1.2rem;
+  }
+  
+  .anuncio-popup-texto p {
+    font-size: 0.9rem;
+  }
+  
+  .anuncio-popup-link {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* ===== ANIMAÇÕES ADICIONAIS ===== */
 
 @keyframes slideInUp {
