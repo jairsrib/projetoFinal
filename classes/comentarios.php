@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../config/config.php';
+initSession();
 header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/Database.php';
 

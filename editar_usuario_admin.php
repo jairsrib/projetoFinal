@@ -1,6 +1,6 @@
 <?php
-session_start();
 include_once './config/config.php';
+initSession();
 include_once './classes/Usuario.php';
 
 if (!isset($_SESSION['usuario_id']) || ($_SESSION['usuario_tipo'] ?? '') !== 'admin') {

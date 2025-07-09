@@ -1,7 +1,8 @@
 <?php
-session_start();
 include_once './config/config.php';
+initSession();
 include_once './classes/Usuario.php';
+include_once './config/theme_config.php';
 
 if (!isset($_SESSION['usuario_id'])) {
   exit();
@@ -25,7 +26,7 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" <?php echo getThemeDataAttribute(); ?>>
 
 <head>
   <meta charset="UTF-8">
@@ -33,6 +34,7 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/theme.css">
   <link rel="stylesheet" href="assets/nova_noticia.css">
   <link rel="stylesheet" href="assets/painel_usuario.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -53,10 +55,10 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
     ?>
   <?php endif; ?>
   
-  <div class="container-fluid d-flex justify-content-center align-items-center text-white" style="min-height: 100vh;">
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="d-flex flex-column flex-lg-row align-items-start w-100" style="max-width: 1400px;">
 
-      <div class="d-flex flex-column align-items-center p-4 me-lg-4 mb-4 mb-lg-0 bg-black rounded-4 shadow profile-card">
+      <div class="d-flex flex-column align-items-center p-4 me-lg-4 mb-4 mb-lg-0 rounded-4 shadow profile-card">
         <div class="position-relative">
           <form id="formProfilePic" method="post" action="upload_perfil.php" enctype="multipart/form-data">
             <input type="file" id="profileInput" name="imagem_perfil" accept="image/*" style="display: none;" onchange="this.form.submit()">
@@ -214,7 +216,7 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
                     <tbody>
                       <?php foreach ($noticiasDoUsuario as $noticia): ?>
                         <tr>
-                          <td style="color: white;">#<?php echo $noticia['id']; ?></td>
+                          <td>#<?php echo $noticia['id']; ?></td>
                           <td>
                             <?php if (!empty($noticia['imagem'])): ?>
                               <img src="uploads/<?php echo htmlspecialchars($noticia['imagem']); ?>" 
@@ -224,11 +226,11 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
                               <i class="fas fa-image text-muted" style="font-size: 1.5rem;"></i>
                             <?php endif; ?>
                           </td>
-                          <td style="color: white;"><?php echo htmlspecialchars($noticia['titulo']); ?></td>
+                          <td><?php echo htmlspecialchars($noticia['titulo']); ?></td>
                           <td>
                             <span class="badge bg-primary"><?php echo htmlspecialchars($noticia['categoria']); ?></span>
                           </td>
-                          <td style="color: white;">
+                          <td>
                             <?php 
                             $data = new DateTime($noticia['data']);
                             echo $data->format('d/m/Y H:i');
@@ -455,6 +457,7 @@ $stmt = $db->prepare("SELECT id, titulo, texto, categoria, imagem, data FROM not
   </form>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/theme.js"></script>
   <script src="assets/js/painel_usuario.js"></script>
 
 </body>

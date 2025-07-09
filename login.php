@@ -1,6 +1,6 @@
 <?php
-session_start();
 include_once "./config/config.php";
+initSession();
 include_once "./classes/Usuario.php";
 include_once "./config/theme_config.php";
 $usuario = new Usuario($db);

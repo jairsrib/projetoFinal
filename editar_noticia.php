@@ -1,5 +1,6 @@
 <?php
-session_start();
+include_once './config/config.php';
+initSession();
 
 // Inclui os arquivos necessários
 require_once __DIR__ . '/classes/Database.php';

@@ -1,5 +1,6 @@
 <?php
-session_start();
+include_once '../config/config.php';
+initSession();
 
 // Verificar se o usuário está logado e é admin
 if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel'] !== 'admin') {

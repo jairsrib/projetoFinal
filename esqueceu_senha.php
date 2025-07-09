@@ -1,6 +1,6 @@
 <?php
-session_start();
 include_once './config/config.php';
+initSession();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_rec'])) {
     $email = trim($_POST['email_rec']);

@@ -1,5 +1,6 @@
 <?php
-session_start();
+include_once 'config/config.php';
+initSession();
 include_once 'config/theme_config.php';
 ?>
 <!DOCTYPE html>

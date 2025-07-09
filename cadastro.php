@@ -1,5 +1,6 @@
 <?php
 include_once './config/config.php';
+include_once './config/theme_config.php';
 include_once './classes/Usuario.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $usuario = new Usuario($db);
@@ -14,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" <?php echo getThemeDataAttribute(); ?>>
 
 <head>
+  <link rel="stylesheet" href="assets/theme.css">
   <link rel="stylesheet" href="assets/form_cadastro.css">
   <meta charset="UTF-8">
   <title>Adicionar Usuário</title>
@@ -82,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
   </div>
   </select>
+  <script src="assets/js/theme.js"></script>
 </body>
 
 </html>

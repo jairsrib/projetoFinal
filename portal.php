@@ -1,6 +1,6 @@
 <?php
-session_start();
 include_once './config/config.php';
+initSession();
 include_once './classes/Usuario.php';
 require_once './header.php';
 if (!isset($_SESSION['usuario_id'])) {
