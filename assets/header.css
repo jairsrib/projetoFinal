@@ -267,7 +267,7 @@ header {
   display: flex;
   align-items: center;
   height: 100%;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   z-index: 2;
 }
 
@@ -725,7 +725,7 @@ header:hover {
 .header-weather {
   flex: 0 0 auto;
   margin-left: 0.5rem;
-  min-width: 220px;
+  min-width: 190px;
   display: flex;
   align-items: center;
 }
