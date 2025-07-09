@@ -5,7 +5,10 @@ class AnuncioManager {
     private $jsonFile;
     private $pdo;
 
-    public function __construct($jsonFile = 'data/anuncios.json') {
+    public function __construct($jsonFile = null) {
+        if ($jsonFile === null) {
+            $jsonFile = __DIR__ . '/../data/anuncios.json';
+        }
         $this->jsonFile = $jsonFile;
         $db = new Database();
         $this->pdo = $db->getConnection();
@@ -156,6 +159,21 @@ class AnuncioManager {
         });
         $base = !empty($anunciosDestaque) ? $anunciosDestaque : $anunciosAtivos;
         return $base[array_rand($base)];
+    }
+
+    /**
+     * Busca anúncios ativos e não expirados
+     */
+    public function getAnunciosNaoExpirados() {
+        $agora = new DateTime();
+        $anuncios = $this->read(['ativo' => true]);
+        return array_filter($anuncios, function($anuncio) use ($agora) {
+            if (!empty($anuncio['data_expiracao'])) {
+                $dataExpiracao = new DateTime($anuncio['data_expiracao']);
+                return $dataExpiracao >= $agora;
+            }
+            return true; // Se não tem data de expiração, considera válido
+        });
     }
 
     /**

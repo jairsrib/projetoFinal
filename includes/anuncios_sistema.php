@@ -2,126 +2,42 @@
 require_once 'classes/AnuncioManager.php';
 
 $anuncioManager = new AnuncioManager();
+$anunciosNaoExpirados = $anuncioManager->getAnunciosNaoExpirados();
 
-// Buscar anúncio aleatório para pop-up
-$anuncioPopup = $anuncioManager->getAnuncioAleatorio();
-
-// Buscar todos os anúncios ativos para carrossel lateral (exceto o do popup)
-$anunciosCarrossel = array_filter(
-    $anuncioManager->getAnunciosAtivos(),
-    function($anuncio) use ($anuncioPopup) {
-        return !$anuncioPopup || $anuncio['id'] !== $anuncioPopup['id'];
-    }
-);
-
-// Função para formatar data
-function formatarData($dataString) {
-    $data = new DateTime($dataString);
-    return $data->format('d/m/Y H:i');
-}
-
-// Função para obter classe CSS baseada na categoria
-function getCategoriaClass($categoria) {
-    $classes = [
-        'lançamento' => 'categoria-lancamento',
-        'promoção' => 'categoria-promocao',
-        'evento' => 'categoria-evento',
-        'sistema' => 'categoria-sistema',
-        'comunidade' => 'categoria-comunidade'
-    ];
-    
-    return $classes[$categoria] ?? 'categoria-geral';
-}
+echo "<!-- JSON usado: " . realpath(__DIR__ . '/../data/anuncios.json') . " -->";
+echo "<!-- Anúncios não expirados encontrados: " . count($anunciosNaoExpirados) . " -->";
 ?>
 
-<!-- Sistema de Anúncios - Pop-up para Prioridade Alta -->
-<?php if ($anuncioPopup): ?>
-<div id="anuncio-popup" class="anuncio-popup-overlay">
-    <div class="anuncio-popup-container">
-        <div class="anuncio-popup-header">
-            <h3>🎉 Anúncio Importante!</h3>
-            <button class="anuncio-popup-close" onclick="fecharAnuncioPopup()">
-                <i data-lucide="x"></i>
-            </button>
-        </div>
-        
-        <div class="anuncio-popup-content">
-            <?php if (!empty($anuncioPopup['imagem'])): ?>
-                <div class="anuncio-popup-imagem">
-                    <img src="<?php echo (strpos($anuncioPopup['imagem'], 'uploads/') === 0 ? '' : 'uploads/anuncios/') . htmlspecialchars($anuncioPopup['imagem']); ?>" 
-                         alt="<?php echo htmlspecialchars($anuncioPopup['nome'] ?? ''); ?>"
-                         onerror="this.style.display='none'">
-                </div>
-            <?php endif; ?>
-            
-            <div class="anuncio-popup-texto">
-                <h4><?php echo htmlspecialchars($anuncioPopup['nome'] ?? ''); ?></h4>
-                <p><?php echo htmlspecialchars($anuncioPopup['texto'] ?? ''); ?></p>
-                
-                <?php if (!empty($anuncioPopup['link'])): ?>
-                    <a href="<?php echo htmlspecialchars($anuncioPopup['link']); ?>" 
-                       class="anuncio-popup-link" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        Aproveitar Agora!
-                    </a>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <div class="anuncio-popup-footer">
-            <button class="anuncio-popup-close-btn" onclick="fecharAnuncioPopup()">
-                Fechar
-            </button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-
-<!-- Sistema de Anúncios - Carrossel Lateral -->
-<?php if (!empty($anunciosCarrossel)): ?>
-<div id="anuncios-carrossel" class="anuncios-carrossel">
-    <div class="anuncios-carrossel-container">
-        <?php foreach ($anunciosCarrossel as $index => $anuncio): ?>
-            <div class="anuncio-carrossel-item <?php echo $index === 0 ? 'ativo' : ''; ?>" 
-                 data-index="<?php echo $index; ?>">
-                <div class="anuncio-carrossel-content">
+<?php if (!empty($anunciosNaoExpirados)): ?>
+<div id="anuncios-carrossel-lateral" class="anuncios-carrossel-lateral">
+    <div class="anuncios-carrossel-lateral-container">
+        <?php foreach ($anunciosNaoExpirados as $index => $anuncio): ?>
+            <div class="anuncio-carrossel-lateral-item <?php echo $index === 0 ? 'ativo' : ''; ?>" data-index="<?php echo $index; ?>">
+                <div class="anuncio-carrossel-lateral-content">
                     <?php if (!empty($anuncio['imagem'])): ?>
-                        <div class="anuncio-carrossel-imagem">
+                        <div class="anuncio-carrossel-lateral-imagem">
                             <img src="<?php echo (strpos($anuncio['imagem'], 'uploads/') === 0 ? '' : 'uploads/anuncios/') . htmlspecialchars($anuncio['imagem']); ?>"
                                  alt="<?php echo htmlspecialchars($anuncio['nome'] ?? ''); ?>"
                                  onerror="this.style.display='none'">
                         </div>
                     <?php endif; ?>
-                    
-                    <div class="anuncio-carrossel-texto">
+                    <div class="anuncio-carrossel-lateral-texto">
                         <h5><?php echo htmlspecialchars($anuncio['nome'] ?? ''); ?></h5>
                         <p><?php echo htmlspecialchars($anuncio['texto'] ?? ''); ?></p>
-                        
                         <?php if (!empty($anuncio['link'])): ?>
-                            <a href="<?php echo htmlspecialchars($anuncio['link']); ?>" 
-                               class="anuncio-carrossel-link" 
-                               target="_blank" 
-                               rel="noopener noreferrer">
+                            <a href="<?php echo htmlspecialchars($anuncio['link']); ?>" class="anuncio-carrossel-lateral-link" target="_blank" rel="noopener noreferrer">
                                 Ver Mais
                             </a>
                         <?php endif; ?>
                     </div>
                 </div>
-                
-                <button class="anuncio-carrossel-close" onclick="fecharAnuncioCarrossel(<?php echo $index; ?>)">
-                    <i data-lucide="x"></i>
-                </button>
             </div>
         <?php endforeach; ?>
     </div>
-    
-    <!-- Indicadores do carrossel -->
-    <div class="anuncios-carrossel-indicadores">
-        <?php foreach ($anunciosCarrossel as $index => $anuncio): ?>
-            <button class="anuncio-indicador <?php echo $index === 0 ? 'ativo' : ''; ?>" 
-                    onclick="mostrarAnuncioCarrossel(<?php echo $index; ?>)">
-                <span class="anuncio-indicador-dot"></span>
+    <div class="anuncios-carrossel-lateral-indicadores">
+        <?php foreach ($anunciosNaoExpirados as $index => $anuncio): ?>
+            <button class="anuncio-indicador-lateral <?php echo $index === 0 ? 'ativo' : ''; ?>" onclick="mostrarAnuncioCarrosselLateral(<?php echo $index; ?>)">
+                <span class="anuncio-indicador-dot-lateral"></span>
             </button>
         <?php endforeach; ?>
     </div>
@@ -129,447 +45,172 @@ function getCategoriaClass($categoria) {
 <?php endif; ?>
 
 <style>
-/* Estilos para o Pop-up de Anúncios de Prioridade Alta */
-.anuncio-popup-overlay {
+.anuncios-carrossel-lateral {
     position: fixed;
-    top: 0;
+    top: 80px;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    backdrop-filter: blur(8px);
-}
-
-.anuncio-popup-container {
-    background: var(--card-bg);
-    border-radius: 20px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 80vh;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: popupSlideIn 0.4s ease-out;
-}
-
-@keyframes popupSlideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-.anuncio-popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.anuncio-popup-header h3 {
-    margin: 0;
-    color: var(--text-color);
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-.anuncio-popup-close {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background 0.2s;
-}
-
-.anuncio-popup-close:hover {
-    background: var(--hover-bg);
-}
-
-.anuncio-popup-content {
-    padding: 1.5rem 2rem;
-}
-
-.anuncio-popup-imagem {
-    margin-bottom: 1rem;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.anuncio-popup-imagem img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.anuncio-popup-texto h4 {
-    margin: 0 0 0.5rem 0;
-    color: var(--text-color);
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.anuncio-popup-texto p {
-    margin: 0 0 1rem 0;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.anuncio-popup-link {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.anuncio-popup-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(var(--primary-color-rgb), 0.4);
-}
-
-.anuncio-popup-footer {
-    padding: 1rem 2rem 1.5rem;
-    text-align: center;
-}
-
-.anuncio-popup-close-btn {
-    background: var(--card-bg);
-    border: 2px solid var(--border-color);
-    color: var(--text-color);
-    padding: 0.6rem 1.2rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-
-.anuncio-popup-close-btn:hover {
-    background: var(--hover-bg);
-    border-color: var(--primary-color);
-}
-
-/* Estilos para o Carrossel Lateral */
-.anuncios-carrossel {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 300px;
-    max-height: 400px;
+    width: 340px;
+    max-width: 95vw;
     z-index: 9999;
-}
-
-.anuncios-carrossel-container {
-    position: relative;
-    background: var(--card-bg);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.anuncio-carrossel-item {
-    display: none;
-    padding: 1rem;
-    animation: carrosselSlideIn 0.5s ease-out;
-}
-
-.anuncio-carrossel-item.ativo {
-    display: block;
-}
-
-@keyframes carrosselSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.anuncio-carrossel-content {
-    position: relative;
-}
-
-.anuncio-carrossel-imagem {
-    margin-bottom: 0.8rem;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.anuncio-carrossel-imagem img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-}
-
-.anuncio-carrossel-texto h5 {
-    margin: 0 0 0.5rem 0;
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.3;
-}
-
-.anuncio-carrossel-texto p {
-    margin: 0 0 0.8rem 0;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-.anuncio-carrossel-link {
-    display: inline-block;
-    background: var(--primary-color);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 15px;
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 500;
-    transition: background 0.2s;
-}
-
-.anuncio-carrossel-link:hover {
-    background: var(--secondary-color);
-}
-
-.anuncio-carrossel-close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
+    background: var(--card-bg, #23272f);
+    border-radius: 0 18px 18px 0;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.22);
+    padding: 0.7rem 0.7rem 0.7rem 0.2rem;
     display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    animation: slideInLeft 0.4s cubic-bezier(.4,1.4,.6,1) forwards;
+    border-left: 4px solid var(--primary-color, #ff9800);
+    backdrop-filter: blur(2px);
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.anuncios-carrossel-lateral-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.anuncio-carrossel-lateral-item {
+    background: var(--bg-secondary, #23272f);
+    border-radius: 14px;
+    padding: 0.9rem 0.8rem;
+    display: flex;
+    gap: 0.9rem;
     align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    transition: background 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    opacity: 0.93;
 }
-
-.anuncio-carrossel-close:hover {
-    background: rgba(0, 0, 0, 0.7);
+.anuncio-carrossel-lateral-item.ativo,
+.anuncio-carrossel-lateral-item:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    border-color: var(--primary-color, #ff9800);
+    transform: scale(1.03);
+    opacity: 1;
+    background: var(--card-bg, #23272f);
 }
-
-.anuncios-carrossel-indicadores {
+.anuncio-carrossel-lateral-imagem img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color, #ff9800);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.anuncio-carrossel-lateral-texto {
+    flex: 1;
+    min-width: 0;
+}
+.anuncio-carrossel-lateral-texto h5 {
+    margin: 0 0 0.18rem 0;
+    font-size: 1.08rem;
+    color: var(--primary-color, #ff9800);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.anuncio-carrossel-lateral-texto p {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.97rem;
+    color: var(--text-secondary, #e0e0e0);
+    line-height: 1.3;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.anuncio-carrossel-lateral-link {
+    color: var(--primary-color, #ff9800);
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 0.97rem;
+    transition: color 0.2s;
+}
+.anuncio-carrossel-lateral-link:hover {
+    color: #fff;
+    background: var(--primary-color, #ff9800);
+    border-radius: 8px;
+    padding: 0.1em 0.5em;
+    text-decoration: none;
+}
+.anuncios-carrossel-lateral-indicadores {
     display: flex;
+    gap: 0.4rem;
     justify-content: center;
-    gap: 0.3rem;
-    margin-top: 0.8rem;
+    margin-top: 0.5rem;
 }
-
-.anuncio-indicador {
+.anuncio-indicador-lateral {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.2rem;
+    outline: none;
 }
-
-.anuncio-indicador-dot {
+.anuncio-indicador-dot-lateral {
     display: block;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: var(--border-color);
-    transition: background 0.3s;
+    background: var(--border-color, #888);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    transition: background 0.3s, transform 0.2s;
 }
-
-.anuncio-indicador.ativo .anuncio-indicador-dot {
-    background: var(--primary-color);
+.anuncio-indicador-lateral.ativo .anuncio-indicador-dot-lateral,
+.anuncio-indicador-lateral:hover .anuncio-indicador-dot-lateral {
+    background: var(--primary-color, #ff9800);
+    transform: scale(1.2);
 }
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .anuncios-carrossel {
-        right: 10px;
-        width: 250px;
-        max-height: 350px;
+@media (max-width: 700px) {
+    .anuncios-carrossel-lateral {
+        width: 98vw;
+        left: 0;
+        right: 0;
+        border-radius: 0 0 18px 18px;
+        top: auto;
+        bottom: 0;
+        max-width: 100vw;
+        flex-direction: row;
+        gap: 0.2rem;
+        padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+        border-left: none;
+        border-top: 4px solid var(--primary-color, #ff9800);
+        box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
     }
-    
-    .anuncio-popup-container {
-        width: 95%;
-        max-width: 400px;
+    .anuncios-carrossel-lateral-container {
+        flex-direction: row;
+        gap: 0.2rem;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color, #ff9800) #23272f;
     }
-    
-    .anuncio-popup-header,
-    .anuncio-popup-content,
-    .anuncio-popup-footer {
-        padding-left: 1rem;
-        padding-right: 1rem;
+    .anuncio-carrossel-lateral-item {
+        min-width: 220px;
+        max-width: 260px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.5rem;
     }
-}
-
-@media (max-width: 480px) {
-    .anuncios-carrossel {
-        right: 5px;
-        width: 200px;
-        max-height: 300px;
-    }
-    
-    .anuncio-carrossel-texto h5 {
-        font-size: 0.9rem;
-    }
-    
-    .anuncio-carrossel-texto p {
-        font-size: 0.8rem;
+    .anuncio-carrossel-lateral-imagem img {
+        width: 100%;
+        height: 60px;
     }
 }
 </style>
-
 <script>
-// Dados dos anúncios para JavaScript
-const anuncioPopupData = <?php echo $anuncioPopup ? json_encode($anuncioPopup) : 'null'; ?>;
-const anunciosCarrosselData = <?php echo !empty($anunciosCarrossel) ? json_encode($anunciosCarrossel) : '[]'; ?>;
-
-// Variáveis para controle do carrossel
-let carrosselIndex = 0;
-let carrosselInterval;
-let anunciosFechados = new Set();
-
-// Função para fechar o popup de prioridade alta
-function fecharAnuncioPopup() {
-    const popup = document.getElementById('anuncio-popup');
-    if (popup) {
-        popup.style.display = 'none';
-        // Salvar no localStorage para não mostrar novamente na sessão
-        localStorage.setItem('anuncio_popup_fechado', 'true');
-    }
-}
-
-// Função para mostrar o popup com delay
-function mostrarAnuncioPopup() {
-    if (!anuncioPopupData) return;
-    
-    // Verificar se já foi fechado nesta sessão
-    if (localStorage.getItem('anuncio_popup_fechado') === 'true') return;
-    
-    const popup = document.getElementById('anuncio-popup');
-    if (popup) {
-        // Delay aleatório entre 2 e 5 segundos
-        const delay = Math.random() * 3000 + 2000;
-        
-        setTimeout(() => {
-            popup.style.display = 'flex';
-        }, delay);
-    }
-}
-
-// Função para mostrar anúncio específico no carrossel
-function mostrarAnuncioCarrossel(index) {
-    if (anunciosCarrosselData.length === 0) return;
-    
-    // Esconder todos os anúncios
-    const items = document.querySelectorAll('.anuncio-carrossel-item');
-    const indicadores = document.querySelectorAll('.anuncio-indicador');
-    
+function mostrarAnuncioCarrosselLateral(index) {
+    const items = document.querySelectorAll('.anuncio-carrossel-lateral-item');
+    const indicadores = document.querySelectorAll('.anuncio-indicador-lateral');
     items.forEach(item => item.classList.remove('ativo'));
     indicadores.forEach(ind => ind.classList.remove('ativo'));
-    
-    // Mostrar o anúncio selecionado
-    if (items[index]) {
-        items[index].classList.add('ativo');
-    }
-    if (indicadores[index]) {
-        indicadores[index].classList.add('ativo');
-    }
-    
-    carrosselIndex = index;
+    if (items[index]) items[index].classList.add('ativo');
+    if (indicadores[index]) indicadores[index].classList.add('ativo');
 }
-
-// Função para fechar anúncio específico do carrossel
-function fecharAnuncioCarrossel(index) {
-    anunciosFechados.add(index);
-    
-    // Se todos os anúncios foram fechados, esconder o carrossel
-    if (anunciosFechados.size >= anunciosCarrosselData.length) {
-        const carrossel = document.getElementById('anuncios-carrossel');
-        if (carrossel) {
-            carrossel.style.display = 'none';
-        }
-        return;
-    }
-    
-    // Encontrar próximo anúncio disponível
-    let proximoIndex = (index + 1) % anunciosCarrosselData.length;
-    while (anunciosFechados.has(proximoIndex)) {
-        proximoIndex = (proximoIndex + 1) % anunciosCarrosselData.length;
-    }
-    
-    mostrarAnuncioCarrossel(proximoIndex);
-}
-
-// Função para alternar anúncios automaticamente
-function alternarAnunciosCarrossel() {
-    if (anunciosCarrosselData.length === 0) return;
-    
-    // Encontrar próximo anúncio não fechado
-    let proximoIndex = (carrosselIndex + 1) % anunciosCarrosselData.length;
-    while (anunciosFechados.has(proximoIndex)) {
-        proximoIndex = (proximoIndex + 1) % anunciosCarrosselData.length;
-    }
-    
-    // Se todos foram fechados, parar o intervalo
-    if (anunciosFechados.size >= anunciosCarrosselData.length) {
-        clearInterval(carrosselInterval);
-        return;
-    }
-    
-    mostrarAnuncioCarrossel(proximoIndex);
-}
-
-// Inicializar sistema de anúncios
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar popup
-    mostrarAnuncioPopup();
-    
-    // Inicializar carrossel se houver anúncios
-    if (anunciosCarrosselData.length > 0) {
-        mostrarAnuncioCarrossel(0);
-        
-        // Iniciar alternância automática a cada 5 segundos
-        carrosselInterval = setInterval(alternarAnunciosCarrossel, 5000);
-    }
-});
-
-// Fechar popup ao clicar fora dele
-document.addEventListener('click', function(e) {
-    const popup = document.getElementById('anuncio-popup');
-    if (popup && e.target === popup) {
-        fecharAnuncioPopup();
-    }
-});
-
-// Pausar carrossel quando o mouse estiver sobre ele
-document.addEventListener('mouseenter', function(e) {
-    if (e.target.closest('.anuncios-carrossel')) {
-        clearInterval(carrosselInterval);
-    }
-});
-
-// Retomar carrossel quando o mouse sair
-document.addEventListener('mouseleave', function(e) {
-    if (e.target.closest('.anuncios-carrossel')) {
-        carrosselInterval = setInterval(alternarAnunciosCarrossel, 5000);
-    }
-});
 </script> 
